@@ -21,7 +21,7 @@ import type { Song, Playlist } from "../types";
 export const songs: Song[] = [
  
   {
-  id: "Jana Nayagan Tamil",          // unique slug
+  id: "s1",          // unique slug
   title: "Raavana Mavandaa song tamil",        // display title
   artist: "Anirudh Ravichander",
   album: "",        // optional
@@ -32,7 +32,7 @@ export const songs: Song[] = [
   color: "#8b5cf6"            // accent color (hex)
  },
 {
-  id: "Jana Nayagan Tamil ",          // unique slug
+  id: "s2",          // unique slug
   title: "Thalapathy Kacheri",        // display title
   artist: "Anirudh Ravichander, Vijay",
   album: "",        // optional
@@ -45,7 +45,7 @@ export const songs: Song[] = [
  },
  
 {
-  id: "Jana Nayagan Tamil ",          // unique slug
+  id: "s3",          // unique slug
   title: "Chella Magale",        // display title
   artist: "Anirudh Ravichander, Vijay",
   album: "",        // optional
@@ -58,15 +58,15 @@ export const songs: Song[] = [
 },
 
  {
-  id: "my-new-song",          // unique slug
-  title: "Song Title",        // display title
-  artist: "Artist Name",
-  album: "Album Name",        // optional
-  duration: "3:45",           // optional
-  audioUrl: "https://.../song.mp3",   // 🔗 SONG LINK
+  id: "s4",          // unique slug
+  title: " Oru Pere Varalaaru",        // display title
+  artist: "",
+  album: "",        // optional
+  duration: "3:55",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/41982/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
   coverUrl: "https://.../cover.jpg",  // 🖼️ THUMBNAIL LINK
-  genre: "Pop",
-  year: 2024,
+  genre: "",
+  year: 2026,
   color: "#8b5cf6"            // accent color (hex)
 },
  
@@ -76,63 +76,7 @@ export const songs: Song[] = [
  *  Playlists group songs by id. Add as many as you like.
  */
 export const playlists: Playlist[] = [
-  {
-    id: "today-top-hits",
-    name: "Today's Top Hits",
-    description: "The hottest tracks right now. Updated weekly.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=600&fit=crop",
-    songIds: [
-      "neon-midnight",
-      "golden-hour",
-      "urban-pulse",
-      "sugar-rush",
-      "crimson-sky",
-      "velvet-dreams",
-    ],
-    color: "#1db954",
-  },
-  {
-    id: "chill-vibes",
-    name: "Chill Vibes",
-    description: "Kick back and relax with mellow tunes.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop",
-    songIds: ["ocean-breeze", "forest-whispers", "cosmic-drift", "polar-lights"],
-    color: "#24c6dc",
-  },
-  {
-    id: "late-night",
-    name: "Late Night Drive",
-    description: "Synthwave and slow grooves for the midnight hour.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=600&fit=crop",
-    songIds: [
-      "neon-midnight",
-      "velvet-dreams",
-      "electric-soul",
-      "cosmic-drift",
-    ],
-    color: "#9b5de5",
-  },
-  {
-    id: "energy-boost",
-    name: "Energy Boost",
-    description: "Turn it up. Workout and party anthems.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=600&fit=crop",
-    songIds: ["urban-pulse", "electric-soul", "sugar-rush", "crimson-sky"],
-    color: "#ef4444",
-  },
-  {
-    id: "focus-flow",
-    name: "Focus Flow",
-    description: "Instrumental tracks to help you concentrate.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=600&h=600&fit=crop",
-    songIds: ["cosmic-drift", "polar-lights", "desert-mirage", "forest-whispers"],
-    color: "#06b6d4",
-  },
+
   {
     id: "all-songs",
     name: "All Songs",
