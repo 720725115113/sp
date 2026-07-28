@@ -77,6 +77,15 @@ export const songs: Song[] = [
  */
 export const playlists: Playlist[] = [
 
+ {
+  id: "p1",
+  name: "Jana Nayagan Tamil songs ",
+  description: " Thalapathy Kacheri, Chella Magale, Raavana Mavandaa, Adiye En Poonthene, The True Leader, Uravu, Oru Pere Varalaaru, Ulla Olicha Uyire, Thalapathy Vetri Kondan ",
+  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+  songIds: ["s1", "s2", "s3", "s4"],
+  color: "#1db954"
+},
+
   {
     id: "all-songs",
     name: "All Songs",
