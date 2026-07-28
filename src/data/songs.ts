@@ -209,6 +209,19 @@ export const songs: Song[] = [
 },
 
  {
+  id: "s23",          // unique slug
+  title: "Neelothi",        // display title
+  artist: "Sooraj Santhosh, Chinmayi Sripada, Justin Prabhakaran, Sarathi",
+  album: "Sirai Tamil ",        // optional
+  duration: "4:34",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/fa9UhbMS8VGH_uhZJJqnww/1785340028/d128_cdn/42771/MjQwOTo0MGY0OjM1OjIzZTg6ODAwMDo6",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/FBNbLK11ou6yEffElmmirurOPu6PDClQifNpz-_Vdps/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/c2lyYWktcmV2aWV3/LW1lZ2F0aHJlYWQt/djAtc2E1NHkzOGZu/YzlnMS5qcGVnP3dp/ZHRoPTY0MCZjcm9w/PXNtYXJ0JmF1dG89/d2VicCZzPTMzNzcy/MjUxMjM4MjQzOThl/YzMwYTk3OTM1MWU1/ZmEzZmM0MWRmNzk",
+  genre: "",
+  year: 2025,
+  color: "#8b5cf6"            // accent color (hex)
+},
+
+ {
   id: "s12",          // unique slug
   title: "Sambavakaari",        // display title
   artist: " Sean Roldan, Saindhavi",
