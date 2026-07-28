@@ -94,6 +94,59 @@ export const songs: Song[] = [
   year: 1999,
   color: "#812716"            // accent color (hex)
 },
+
+ {
+  id: "s7",          // unique slug
+  title: "Dhandiya",        // display title
+  artist: "Unnimenon, Sree Kumar, Kavitha Krishnamoorthy",
+  album: "Kadhalar Dhinam Tamil",        // optional
+  duration: "7:48",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8379/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 1999,
+  color: "#812716"            // accent color (hex)
+},
+
+ {
+  id: "s8",          // unique slug
+  title: "Enna Vilai Azhagae",        // display title
+  artist: "Unnimenon",
+  album: "Kadhalar Dhinam Tamil",        // optional
+  duration: "5:55",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8378/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 1999,
+  color: "#812716"            // accent color (hex)
+},
+
+ {
+  id: "s9",          // unique slug
+  title: "Kaathalenum Thervezhuthi",        // display title
+  artist: "S.P.Bala, Swarnalatha",
+  album: "Kadhalar Dhinam Tamil",        // optional
+  duration: "6:43",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8376/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 1999,
+  color: "#812716"            // accent color (hex)
+},
+{
+  id: "s10",          // unique slug
+  title: "Nenichapadi Nenichapadi song",        // display title
+  artist: "Sree Kumar, Srinivas",
+  album: "Kadhalar Dhinam Tamil ",        // optional
+  duration: "7:45",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8380/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 1999,
+  color: "#812716"            // accent color (hex)
+},
+
+ 
  
 ];
 
@@ -109,6 +162,15 @@ export const playlists: Playlist[] = [
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
   songIds: ["s1", "s2", "s3", "s4", "s5"],
   color: "#1db954"
+},
+
+ {
+  id: "p2",
+  name: "Kadhalar Dhinam Tamil songs",
+  description: "",
+  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",
+  songIds: ["s6", "s7", "s8", "s9", "s10"],
+  color: "#812716"
 },
 
   {
