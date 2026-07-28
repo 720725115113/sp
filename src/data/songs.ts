@@ -221,14 +221,14 @@ export const songs: Song[] = [
 
 {
   id: "s17",          // unique slug
-  title: "Naanga Naalu Peru",        // display title
-  artist: "Sai Abhyankkar, Silambarasan Tr",
-  album: "Karuppu Tamil",        // optional
-  duration: "3:17",           // optional
-  audioUrl: "",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
+  title: "Nadhiye Nadhiye",        // display title
+  artist: "Unni Menon",
+  album: "Rhythm Tamil ",        // optional
+  duration: "6:51",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/C5rhSIZh7wbLee-ntq5zJQ/1785336033/d128_cdn/8875/MjQwOTo0MGYyOjEwNDk6NGJjNDo3OGM4OmRlZmY6ZmUxMDozOTky",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/JCKduBd5V7fK60jLjMhaC_fZGdtzdrQtx1P9seai5HU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8w/MjIvUmh5dGhtLVRh/bWlsLTIwMDAtNTAw/eDUwMC5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
-  year: 2026,
+  year: 2000,
   color: "#ffffff"            // accent color (hex)
 },
   
