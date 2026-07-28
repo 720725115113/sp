@@ -145,6 +145,18 @@ export const songs: Song[] = [
   year: 1999,
   color: "#812716"            // accent color (hex)
 },
+{
+  id: "s11",          // unique slug
+  title: "Kannamma",        // display title
+  artist: "Pradeep Kumar, Dhee, Ananthu",
+  album: "Kaala ",        // optional
+  duration: "4:49",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/_4tRtDblqZcnvRoGLaebHA/1785311908/d128_cdn/18588/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/62v2BGQS_-yA4KhY90Zo8a40gfAomVTXX0HewyhS9i8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvNDI2/NTY4OS5qcGc",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2018,
+  color: "#8b5cf6"            // accent color (hex)
+},
 
  
  
