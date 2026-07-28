@@ -158,6 +158,19 @@ export const songs: Song[] = [
   color: "#8b5cf6"            // accent color (hex)
 },
 
+ {
+  id: "s12",          // unique slug
+  title: "Sambavakaari",        // display title
+  artist: " Sean Roldan, Saindhavi",
+  album: "Gatta Kusthi 2",        // optional
+  duration: "3:59",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/uMrUmnOy8nHywOrFQAko4g/1785326130/d128_cdn/44632/MjQwMTo0OTAwOjkyNDE6YzYwZjo5ZGM4OmEyMjY6OGYxYTo4OTBh",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/1qzfCA3cePmuz380Bh5dwchaScJlL3ddN081VCbpSzs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/Z2F0dGEta3VzdGhp/LTItZXQwMDUwMjgw/Mi0xNzg0MjgzNzA5/LmpwZw",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#0096ac"            // accent color (hex)
+},
+
  
  
 ];
