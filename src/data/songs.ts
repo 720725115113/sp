@@ -69,6 +69,18 @@ export const songs: Song[] = [
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
 },
+ {
+  id: "s5",          // unique slug
+  title: " Ulla Olicha Uyire",        // display title
+  artist: "Anirudh Ravichander",
+   album: "Jana Nayagan Tamil",        // optional
+  duration: "3:48",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/45007/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#8b5cf6"            // accent color (hex)
+},
  
 ];
 
@@ -82,7 +94,7 @@ export const playlists: Playlist[] = [
   name: "Jana Nayagan Tamil songs ",
   description: " Thalapathy Kacheri, Chella Magale, Raavana Mavandaa, Adiye En Poonthene, The True Leader, Uravu, Oru Pere Varalaaru, Ulla Olicha Uyire, Thalapathy Vetri Kondan ",
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
-  songIds: ["s1", "s2", "s3", "s4"],
+  songIds: ["s1", "s2", "s3", "s4", "s5"],
   color: "#1db954"
 },
 
