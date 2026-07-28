@@ -24,7 +24,7 @@ export const songs: Song[] = [
   id: "s1",          // unique slug
   title: "Raavana Mavandaa song tamil",        // display title
   artist: "Anirudh Ravichander",
-  album: "",        // optional
+  album: "Jana Nayagan Tamil",        // optional
   duration: "1:47",           // optional
   audioUrl: "https://www.masstamilan.dev/downloader/Ra8Y12VUM6vOuq2FHO3Q0g/1785233487/d320_cdn/42769/MjQwOTo0MGY0OjEwZmY6MTgzYzo4MDAwOjo=",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg", 
@@ -35,7 +35,7 @@ export const songs: Song[] = [
   id: "s2",          // unique slug
   title: "Thalapathy Kacheri",        // display title
   artist: "Anirudh Ravichander, Vijay",
-  album: "",        // optional
+  album: "Jana Nayagan Tamil",        // optional
   duration: "3:17",           // optional
   audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/40846/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
@@ -48,7 +48,7 @@ export const songs: Song[] = [
   id: "s3",          // unique slug
   title: "Chella Magale",        // display title
   artist: "Anirudh Ravichander, Vijay",
-  album: "",        // optional
+  album: "Jana Nayagan Tamil",        // optional
   duration: "3:52",           // optional
   audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/42421/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
@@ -60,11 +60,11 @@ export const songs: Song[] = [
  {
   id: "s4",          // unique slug
   title: " Oru Pere Varalaaru",        // display title
-  artist: "",
-  album: "",        // optional
+  artist: "Anirudh Ravichander, Vishal",
+  album: "Jana Nayagan Tamil",        // optional
   duration: "3:55",           // optional
   audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/41982/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
-  coverUrl: "https://.../cover.jpg",  // 🖼️ THUMBNAIL LINK
+  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
