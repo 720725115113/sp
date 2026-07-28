@@ -1,0 +1,188 @@
+import { songs, playlists } from "../data/songs";
+import { SongCard } from "../components/SongList";
+import type { Song } from "../types";
+
+interface Props {
+  onNavigate: (view: string, id?: string) => void;
+}
+
+export default function Home({ onNavigate }: Props) {
+  // Greet based on local time
+  const hour = new Date().getHours();
+  const greet =
+    hour < 5 ? "Good night" : hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
+  const featured = playlists[0];
+  const featuredSongs = featured.songIds
+    .map((id) => songs.find((s) => s.id === id))
+    .filter(Boolean) as Song[];
+
+  const recent = songs.slice(0, 6);
+  const trending = [...songs].sort(() => 0.5 - Math.random()).slice(0, 8);
+  const madeForYou = playlists.slice(1, 5);
+
+  return (
+    <div className="fade-in px-4 md:px-8 py-6 md:py-8 space-y-10">
+      {/* Hero / greeting */}
+      <section>
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight text-gradient">
+          {greet}
+        </h1>
+        <p className="text-white/60 mt-2 text-sm md:text-base">
+          Discover hand-picked tracks. No login, no ads — just music.
+        </p>
+
+        {/* Quick access grid */}
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {madeForYou.map((pl) => (
+            <button
+              key={pl.id}
+              onClick={() => onNavigate("playlist", pl.id)}
+              className="group flex items-center gap-4 bg-white/5 hover:bg-white/10 rounded-lg overflow-hidden transition-colors"
+            >
+              <img
+                src={pl.coverUrl}
+                alt=""
+                className="h-16 w-16 object-cover shrink-0"
+              />
+              <div className="min-w-0 pr-3">
+                <div className="font-semibold text-sm truncate">{pl.name}</div>
+                <div className="text-xs text-white/50 truncate">
+                  {pl.songIds.length} songs
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured playlist */}
+      <section
+        className="relative overflow-hidden rounded-2xl p-6 md:p-10 glow"
+        style={{
+          background: `linear-gradient(135deg, ${featured.color ?? "#1db954"} 0%, #0b0b12 80%)`,
+        }}
+      >
+        <div className="flex flex-col md:flex-row items-start md:items-end gap-6">
+          <img
+            src={featured.coverUrl}
+            alt=""
+            className="h-40 w-40 md:h-52 md:w-52 rounded-xl object-cover shadow-2xl"
+          />
+          <div className="flex-1">
+            <div className="text-xs uppercase tracking-widest text-white/70">
+              Featured Playlist
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black mt-1 tracking-tight">
+              {featured.name}
+            </h2>
+            <p className="text-white/80 mt-2 max-w-lg">{featured.description}</p>
+            <div className="mt-5 flex gap-3">
+              <button
+                onClick={() => onNavigate("playlist", featured.id)}
+                className="px-6 py-2.5 rounded-full bg-white text-black font-semibold hover:scale-105 transition-transform"
+              >
+                Play
+              </button>
+              <button
+                onClick={() => onNavigate("playlist", featured.id)}
+                className="px-6 py-2.5 rounded-full bg-black/30 text-white font-semibold border border-white/20 hover:bg-black/50"
+              >
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Section title="Jump back in">
+        <ScrollRow>
+          {recent.map((s) => (
+            <SongCard key={s.id} song={s} queue={songs} />
+          ))}
+        </ScrollRow>
+      </Section>
+
+      <Section title="Trending now">
+        <ScrollRow>
+          {trending.map((s) => (
+            <SongCard key={s.id} song={s} queue={trending} />
+          ))}
+        </ScrollRow>
+      </Section>
+
+      <Section title="Made for you">
+        <ScrollRow>
+          {playlists.slice(0, 5).map((pl) => {
+            const cover = songs.find((s) => s.id === pl.songIds[0]);
+            return (
+              <button
+                key={pl.id}
+                onClick={() => onNavigate("playlist", pl.id)}
+                className="group relative text-left w-44 shrink-0 rounded-xl p-3 transition-colors hover:bg-white/5"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
+                }}
+              >
+                <div className="relative overflow-hidden rounded-lg aspect-square shadow-lg">
+                  <img
+                    src={pl.coverUrl || cover?.coverUrl || ""}
+                    alt=""
+                    loading="lazy"
+                    className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
+                <div className="mt-3">
+                  <div className="font-semibold text-sm text-white truncate">
+                    {pl.name}
+                  </div>
+                  <div className="text-xs text-white/60 truncate mt-0.5">
+                    {pl.songIds.length} songs
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </ScrollRow>
+      </Section>
+
+      <Section title="Featured songs">
+        <ScrollRow>
+          {featuredSongs.map((s) => (
+            <SongCard key={s.id} song={s} queue={featuredSongs} />
+          ))}
+        </ScrollRow>
+      </Section>
+
+      <footer className="text-xs text-white/40 pt-6 border-t border-white/5">
+        Wavelength · A streaming demo. Songs load from links provided by the admin.
+      </footer>
+    </div>
+  );
+}
+
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-3">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+
+function ScrollRow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 snap-x">
+      {children}
+    </div>
+  );
+}
