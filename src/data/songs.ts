@@ -178,9 +178,9 @@ export const songs: Song[] = [
   artist: "A.R.Rahman, Charulatha Mani",
   album: "Thug Life Tamil",
   duration: "04:37",
-  audioUrl: "",
+  audioUrl: "https://www.masstamilan.dev/downloader/ioZTtkrP0CrtzZcWer68aw/1785350069/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
   coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
-  genre: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  genre: "",
   year: 2025,
   color: "#d20219"
 },
