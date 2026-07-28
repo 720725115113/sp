@@ -55,7 +55,20 @@ export const songs: Song[] = [
   genre: "",
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
-}
+},
+
+ {
+  id: "my-new-song",          // unique slug
+  title: "Song Title",        // display title
+  artist: "Artist Name",
+  album: "Album Name",        // optional
+  duration: "3:45",           // optional
+  audioUrl: "https://.../song.mp3",   // 🔗 SONG LINK
+  coverUrl: "https://.../cover.jpg",  // 🖼️ THUMBNAIL LINK
+  genre: "Pop",
+  year: 2024,
+  color: "#8b5cf6"            // accent color (hex)
+},
  
 ];
 
