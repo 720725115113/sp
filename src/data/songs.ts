@@ -94,6 +94,72 @@ export const songs: Song[] = [
   color: "#8b5cf6"            // accent color (hex)
 },
  {
+  id: "s26",
+  title: "Adi One Inch",
+  artist: " S. P. Balasubrahmanyam, Sujatha Mohan",
+  album: "Youth 2002 tamil",
+  duration: "04:41",
+  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8860/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2002,
+  color: "#d6964e"
+},
+
+{
+  id: "s27",
+  title: "All Thotta Boopathi",
+  artist: "Shankar Mahadevan",
+  album: "Youth 2002 tamil",
+  duration: "04:52",
+  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8862/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2002,
+  color: "#d6964e"
+},
+
+{
+  id: "s28",
+  title: "Sakhiye Sakhiye",
+  artist: " Harini, Hariharan",
+  album: "Youth 2002 tamil",
+  duration: "05:42",
+  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8857/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2002,
+  color: "#d6964e"
+},
+
+{
+  id: "s29",
+  title: "Sakkarai Nilave",
+  artist: "Harish Ragavendra",
+  album: "Youth 2002 tamil",
+  duration: "05:41",
+  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8861/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2002,
+  color: "#d6964e"
+},
+
+{
+  id: "s30",
+  title: "Santhosam Santhosam",
+  artist: " S. P. Balasubrahmanyam",
+  album: "Youth 2002 tamil",
+  duration: "04:24",
+  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8858/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2002,
+  color: "#d6964e"
+},
+
+
+ {
   id: "s5",          // unique slug
   title: " Ulla Olicha Uyire",        // display title
   artist: "Anirudh Ravichander",
