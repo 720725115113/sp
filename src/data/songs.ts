@@ -195,6 +195,31 @@ export const songs: Song[] = [
   year: 1999,
   color: "#812716"            // accent color (hex)
 },
+ {
+  id: "s24",
+  title: "Kaattumalli",
+  artist: "Ilaiyaraaja, Ananya Bhat",
+  album: "Viduthalai Tamil",
+  duration: " 05:06",
+  audioUrl: "https://www.masstamilan.dev/downloader/XN46BzTVR35n_3cUfGCagw/1785345579/d128_cdn/23806/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/q89nY0n5wW4L6wOFbuf_GW-EEzzbXbJcTj_bQjPB6h8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk16UTNZVEl3/TmpJdE56QmxaaTAw/T0dJMExUbGpZVEV0/WldWbFlUQTJZamd6/TldNNFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2023,
+  color: "#b1b6b6"
+},
+
+{
+  id: "s25",
+  title: "Onnoda Nadandhaa",
+  artist: " Ilaiyaraaja, Dhanush, Ananya Bhat",
+  album: "Viduthalai Tamil ",
+  duration: "05:15",
+  audioUrl: "https://www.masstamilan.dev/downloader/JcDrTLsumGagoqSqEa0U_w/1785345920/d128_cdn/23807/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/q89nY0n5wW4L6wOFbuf_GW-EEzzbXbJcTj_bQjPB6h8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk16UTNZVEl3/TmpJdE56QmxaaTAw/T0dJMExUbGpZVEV0/WldWbFlUQTJZamd6/TldNNFhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2023,
+  color: "#b1b6b6"
+},
 {
   id: "s11",          // unique slug
   title: "Kannamma",        // display title
