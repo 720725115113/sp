@@ -30,6 +30,18 @@ export const songs: Song[] = [
   genre: "",
   year: 2018,
   color: "#8b5cf6"            // accent color (hex)
+ },
+  {
+  id: "s18",          // unique slug
+  title: "Kadhalikathey",        // display title
+  artist: "Hiphop Tamizha, Kaushik Krish",
+  album: "Imaikkaa Nodigal Tamil",        // optional
+  duration: "3:22",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16762/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2018,
+  color: "#8b5cf6"            // accent color (hex)
 },
  
   {
