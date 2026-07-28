@@ -197,6 +197,59 @@ export const songs: Song[] = [
   year: 2025,
   color: "#d20219"
 },
+ {
+  id: "s36",
+  title: " Aalaala Kandaa",
+  artist: "Hariharan & MS.Viswanathan",
+  album: "Sangamam 1999 tamil",
+  duration: "02:18",
+  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d320_cdn/10614/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
+  genre: "",
+  year: 1999,
+  color: "#2279d7"
+},
+
+{
+  id: "s37",
+  title: "Margazhi Thingal",
+  artist: "Unnikrishnan & S.Janaki",
+  album: "Sangamam 1999 tamil",
+  duration: "06:56",
+  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10613/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
+  genre: "",
+  year: 1999,
+  color: "#2279d7"
+},
+
+{
+  id: "s38",
+  title: " Mazhaithuli Mazhaithuli Mannil",
+  artist: "Hariharan & MS.Viswanathan",
+  album: "Sangamam 1999 tamil",
+  duration: "06:50",
+  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
+  genre: "",
+  year: 1999,
+  color: "#2279d7"
+},
+
+{
+  id: "s39",
+  title: "Varaha Nadikkarai Oram",
+  artist: "Shankar Mahadevan",
+  album: "Sangamam 1999 tamil",
+  duration: "06:18",
+  audioUrl: "https://www.masstamilan.dev/downloader/9tT_KTfsmH_auF5V7mlzRA/1785349593/d128_cdn/10616/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
+  genre: "",
+  year: 1999,
+  color: "#2279d7"
+},
+
+
 
 {
   id: "s33",
