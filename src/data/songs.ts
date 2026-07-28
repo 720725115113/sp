@@ -292,6 +292,15 @@ export const songs: Song[] = [
  *  Playlists group songs by id. Add as many as you like.
  */
 export const playlists: Playlist[] = [
+  {
+    id: "all-songs",
+    name: "All Songs",
+    description: "Every track in the library, in one place.",
+    coverUrl:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
+    songIds: songs.map((s) => s.id),
+    color: "#8b5cf6",
+  },
 
  {
   id: "p1",
@@ -311,13 +320,5 @@ export const playlists: Playlist[] = [
   color: "#812716"
 },
 
-  {
-    id: "all-songs",
-    name: "All Songs",
-    description: "Every track in the library, in one place.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
-    songIds: songs.map((s) => s.id),
-    color: "#8b5cf6",
-  },
+
 ];
