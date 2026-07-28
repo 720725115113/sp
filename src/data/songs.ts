@@ -172,6 +172,73 @@ export const songs: Song[] = [
   color: "#8b5cf6"            // accent color (hex)
 },
 
+ {
+  id: "s31",
+  title: "Anju Vanna Poove",
+  artist: "A.R.Rahman, Charulatha Mani",
+  album: "Thug Life Tamil",
+  duration: "04:37",
+  audioUrl: "",
+  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+  genre: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  year: 2025,
+  color: "#d20219"
+},
+
+{
+  id: "s32",
+  title: "Anju Vanna Poove (Reprise)",
+  artist: "A.R.Rahman",
+  album: "Thug Life Tamil",
+  duration: "04:15",
+  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d320_cdn/39506/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+  genre: "",
+  year: 2025,
+  color: "#d20219"
+},
+
+{
+  id: "s33",
+  title: "Jinguchaa song",
+  artist: "A.R.Rahman, Vaishali Samant, Shakthisree Gopalan, Adithya RK",
+  album: "Thug Life Tamil",
+  duration: "04:20",
+  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39322/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+  genre: "",
+  year: 2025,
+  color: "#d20219"
+},
+
+{
+  id: "s34",
+  title: " Muththa Mazhai",
+  artist: "A.R.Rahman, Dhee",
+  album: "Thug Life Tamil",
+  duration: "04:01",
+  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39509/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+  genre: "",
+  year: 2025,
+  color: "#d20219"
+},
+
+{
+  id: "s35",
+  title: " Muththa Mazhai (Chinmayi Version)",
+  artist: "A.R.Rahman, Chinmayi Sripada",
+  album: "Thug Life Tamil",
+  duration: " 03:46",
+  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+  genre: "",
+  year: 2025,
+  color: "#d20219"
+},
+
+
+
 {
   id: "s20",          // unique slug
   title: "Neeyum Naanum Anbe",        // display title
