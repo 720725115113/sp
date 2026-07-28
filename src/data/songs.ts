@@ -219,6 +219,19 @@ export const songs: Song[] = [
   year: 2026,
   color: "#ffffff"            // accent color (hex)
 },
+
+ {
+  id: "s21",          // unique slug
+  title: "Vilambara Idaiveli",        // display title
+  artist: "Christopher Stanley, Sudharshan Ashok, Srinisha Jayaseelan, Hiphop Tamizhaj",
+  album: "Imaikkaa Nodigal Tamil",        // optional
+  duration: "4:33",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/KHn18eOXuCMYGUobnT4UmA/1785338041/d128_cdn/16760/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2018,
+  color: "#8b5cf6"            // accent color (hex)
+},
  {
   id: "s14",          // unique slug
   title: "Raathu Raasan",        // display title
