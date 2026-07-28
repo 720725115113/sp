@@ -170,6 +170,69 @@ export const songs: Song[] = [
   year: 2026,
   color: "#0096ac"            // accent color (hex)
 },
+{
+  id: "s13",          // unique slug
+  title: "God Mode",        // display title
+  artist: "Sai Abhyankkar, Gana Muthu",
+  album: "Karuppu Tamil",        // optional
+  duration: "4:00",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/40686/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/yTdhNN2onaiYgobc_gt3rq0TVJKrsWJ6spGPEj-uZPE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vq/UUZGWEtXOVFFSlNL/a2h5S05WM3NzaVhp/UmJsM0ZWdHd5UE5K/MlI4Q2FSemg1WmNw/NjVvUjZ0a0dTM2dp/YWpZZ2QzSDRRMk9U/dHpfejY5c1ptSmJZ/LU5SeTI2Ym9xOTdP/MXVCbGk0Uy03MjZr/UEJVVllCcTVUNV9V/SDRlRWl3Z2ZGNE9i/ZzV3Vkk0MjZWUGtR/S2E1Sm5Pdy1JUl9K/RUZDZ0dyQjF2bTZp/eENXWDk4WUxCZ2R4/TUtFcUxSN2E1L3Mx/NTAwL0thcnVwcHUw/MDUuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#ffffff"            // accent color (hex)
+},
+ {
+  id: "s14",          // unique slug
+  title: "Raathu Raasan",        // display title
+  artist: "Sai Abhyankkar, V.M. Mahalingam, Paal Dabba",
+  album: "Karuppu Tamil",        // optional
+  duration: "3:15",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44419/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#ffffff"            // accent color (hex)
+},
+  {
+  id: "s15",          // unique slug
+  title: "Naanga Naalu Peru",        // display title
+  artist: "Sai Abhyankkar, Silambarasan Tr",
+  album: "Karuppu Tamil",        // optional
+  duration: "3:17",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44263/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#ffffff"            // accent color (hex)
+},
+  {
+  id: "s16",          // unique slug
+  title: "Karuppa Kooda Va",        // display title
+  artist: " Sai Abhyankkar, V.M. Mahalingam",
+  album: "Karuppu Tamil",        // optional
+  duration: "4:10",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44500/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#ffffff"            // accent color (hex)
+},
+
+{
+  id: "s17",          // unique slug
+  title: "Naanga Naalu Peru",        // display title
+  artist: "Sai Abhyankkar, Silambarasan Tr",
+  album: "Karuppu Tamil",        // optional
+  duration: "3:17",           // optional
+  audioUrl: "",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#ffffff"            // accent color (hex)
+},
+  
+  
 
  
  
