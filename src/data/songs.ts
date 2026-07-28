@@ -21,8 +21,8 @@ import type { Song, Playlist } from "../types";
 export const songs: Song[] = [
  
   {
-  id: "Jana Nayagan",          // unique slug
-  title: "Raavana Mavandaa",        // display title
+  id: "Jana Nayagan Tamil",          // unique slug
+  title: "Raavana Mavandaa song tamil",        // display title
   artist: "Anirudh Ravichander",
   album: "",        // optional
   duration: "1:47",           // optional
@@ -31,149 +31,31 @@ export const songs: Song[] = [
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
  },
- {
-    id: "cosmic-drift",
-    title: "Cosmic Drift",
-    artist: "Stellar Voyage",
-    album: "Orbit",
-    duration: "7:15",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=600&h=600&fit=crop",
-    genre: "Ambient",
-    year: 2023,
-    color: "#5b7cff",
-  },
-  {
-    id: "golden-hour",
-    title: "Golden Hour",
-    artist: "The Sunset Club",
-    album: "Horizon",
-    duration: "5:41",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=600&fit=crop",
-    genre: "Indie",
-    year: 2024,
-    color: "#f5a524",
-  },
-  {
-    id: "ocean-breeze",
-    title: "Ocean Breeze",
-    artist: "Tidal Wave",
-    album: "Blue Lagoon",
-    duration: "8:22",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop",
-    genre: "Chill",
-    year: 2022,
-    color: "#24c6dc",
-  },
-  {
-    id: "urban-pulse",
-    title: "Urban Pulse",
-    artist: "Metro Beats",
-    album: "Street Sound",
-    duration: "6:54",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
-    genre: "Hip-Hop",
-    year: 2024,
-    color: "#9b5de5",
-  },
-  {
-    id: "velvet-dreams",
-    title: "Velvet Dreams",
-    artist: "Luna Rose",
-    album: "Midnight Bloom",
-    duration: "5:18",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop",
-    genre: "R&B",
-    year: 2023,
-    color: "#d946ef",
-  },
-  {
-    id: "electric-soul",
-    title: "Electric Soul",
-    artist: "Voltage",
-    album: "Current",
-    duration: "7:03",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=600&fit=crop",
-    genre: "House",
-    year: 2024,
-    color: "#00f5d4",
-  },
-  {
-    id: "forest-whispers",
-    title: "Forest Whispers",
-    artist: "Moss & Fern",
-    album: "Wilderness",
-    duration: "6:29",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=600&fit=crop",
-    genre: "Folk",
-    year: 2022,
-    color: "#4ade80",
-  },
-  {
-    id: "crimson-sky",
-    title: "Crimson Sky",
-    artist: "Red Horizon",
-    album: "Dusk",
-    duration: "5:52",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=600&fit=crop",
-    genre: "Rock",
-    year: 2024,
-    color: "#ef4444",
-  },
-  {
-    id: "polar-lights",
-    title: "Polar Lights",
-    artist: "Arctic Echo",
-    album: "North",
-    duration: "7:41",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=600&h=600&fit=crop",
-    genre: "Ambient",
-    year: 2023,
-    color: "#06b6d4",
-  },
-  {
-    id: "sugar-rush",
-    title: "Sugar Rush",
-    artist: "Candy Pop",
-    album: "Sweet Nothing",
-    duration: "3:44",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=600&h=600&fit=crop",
-    genre: "Pop",
-    year: 2024,
-    color: "#ec4899",
-  },
-  {
-    id: "desert-mirage",
-    title: "Desert Mirage",
-    artist: "Sahara Sound",
-    album: "Dunes",
-    duration: "6:12",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
-    coverUrl:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&h=600&fit=crop",
-    genre: "World",
-    year: 2022,
-    color: "#f59e0b",
-  },
+{
+  id: "Jana Nayagan Tamil ",          // unique slug
+  title: "Thalapathy Kacheri",        // display title
+  artist: "Anirudh Ravichander, Vijay",
+  album: "",        // optional
+  duration: "3:17",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/40846/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#8b5cf6"            // accent color (hex)
+},
+{
+  id: "Jana Nayagan Tamil ",          // unique slug
+  title: "Chella Magale",        // display title
+  artist: "Anirudh Ravichander, Vijay",
+  album: "",        // optional
+  duration: "3:52",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/42421/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2026,
+  color: "#8b5cf6"            // accent color (hex)
+},
+ 
 ];
 
 /**
