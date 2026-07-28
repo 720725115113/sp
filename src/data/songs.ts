@@ -81,6 +81,19 @@ export const songs: Song[] = [
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
 },
+
+ {
+  id: "s6",          // unique slug
+  title: "Roja Roja",        // display title
+  artist: " Unnikrishnan",
+  album: "Kadhalar Dhinam Tamil",        // optional
+  duration: "5:47",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8377/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 1999,
+  color: "#812716"            // accent color (hex)
+},
  
 ];
 
