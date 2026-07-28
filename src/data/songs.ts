@@ -133,6 +133,19 @@ export const songs: Song[] = [
 },
 
  {
+  id: "s22",          // unique slug
+  title: "Uyir Uruvaatha Song",        // display title
+  artist: "D. Sathyaprakash, Chinmayi",
+  album: "Iravukku Aayiram Kangal Tamil",        // optional
+  duration: "4:13",           // optional
+  audioUrl: "https://www.masstamilan.dev/downloader/HbwQs2NPpXIetfPIwowNMg/1785339602/d128_cdn/16577/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",   // 🔗 SONG LINK
+  coverUrl: "https://imgs.search.brave.com/UyspsZcpR6IoC26ureRo82R71n48WMQrquAjsk2nRds/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/c3R1ZGlvZmxpY2tz/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAyNi8wMy8wMjE3/MzAyNi9JcmF2dWtr/dS1BYXlpcmFtLUth/bmdhbC5qcGc",  // 🖼️ THUMBNAIL LINK
+  genre: "",
+  year: 2018,
+  color: "#8b5cf6"            // accent color (hex)
+},
+
+ {
   id: "s7",          // unique slug
   title: "Dhandiya",        // display title
   artist: "Unnimenon, Sree Kumar, Kavitha Krishnamoorthy",
