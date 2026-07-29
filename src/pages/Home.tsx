@@ -140,8 +140,8 @@ export default function Home({ onNavigate }: Props) {
         </section>
       )}
 
-      {/* WINDOWS THIS PC / DETAILS VIEW FOR ALL SONGS ON HOME SCREEN */}
-      <Section title="All Songs (Details View)">
+      {/* WINDOWS THIS PC / DETAILS VIEW FOR TOP 6 SONGS ON HOME SCREEN */}
+      <Section title="Top Tracks">
         <div className="glass-card-premium rounded-3xl overflow-hidden p-2 border border-white/10 shadow-xl">
           {/* Header Row */}
           <div className="grid grid-cols-[28px_minmax(0,3fr)_minmax(0,1.5fr)_auto] md:grid-cols-[36px_minmax(0,4fr)_minmax(0,2.5fr)_minmax(0,1fr)_auto_auto] gap-3 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-white/40 border-b border-white/10">
@@ -153,10 +153,10 @@ export default function Home({ onNavigate }: Props) {
             <div className="w-7"></div>
           </div>
 
-          {/* Details List */}
+          {/* Details List (Top 6 Songs) */}
           <div className="divide-y divide-white/5">
-            {songs.map((song, index) => (
-              <SongRow key={song.id} song={song} index={index} queue={songs} />
+            {songs.slice(0, 6).map((song, index) => (
+              <SongRow key={song.id} song={song} index={index} queue={songs.slice(0, 6)} />
             ))}
           </div>
         </div>
