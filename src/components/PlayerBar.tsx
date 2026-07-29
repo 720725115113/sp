@@ -42,10 +42,11 @@ export default function PlayerBar({
             onClick={p.toggleShuffle}
             active={p.shuffle}
             label="Shuffle"
+            forceWhite={true}
           >
             <path d="M17 3 21 7l-4 4M3 17l4 4 4-4M3 7h3l3 3 3-3 3-3h3M3 17h3l3-3 3 3 3 3h3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
           </IconBtn>
-          <IconBtn onClick={p.prev} label="Previous">
+          <IconBtn onClick={p.prev} label="Previous" forceWhite={true}>
             <path d="M6 6h2v12H6zM20 6v12L9 12z" />
           </IconBtn>
           <button
@@ -63,10 +64,10 @@ export default function PlayerBar({
               </svg>
             )}
           </button>
-          <IconBtn onClick={p.next} label="Next">
+          <IconBtn onClick={p.next} label="Next" forceWhite={true}>
             <path d="M16 6h2v12h-2zM4 6v12l11-6z" />
           </IconBtn>
-          <IconBtn onClick={p.cycleRepeat} active={p.repeat !== "off"} label="Repeat">
+          <IconBtn onClick={p.cycleRepeat} active={p.repeat !== "off"} label="Repeat" forceWhite={true}>
             {p.repeat === "one" ? (
               <>
                 <path d="M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -82,12 +83,12 @@ export default function PlayerBar({
 
       {/* Right: volume */}
       <div className="hidden sm:flex items-center justify-end gap-2">
-        <button onClick={() => p.toggleLike(song)} className={`h-8 w-8 grid place-items-center rounded-full ${p.likedSongIds.includes(song.id) ? "text-rose-400" : "text-white/70 hover:text-white"}`} aria-label="Like">
+        <button onClick={() => p.toggleLike(song)} className={`h-8 w-8 grid place-items-center rounded-full ${p.likedSongIds.includes(song.id) ? "text-rose-400" : "text-white hover:text-white"}`} aria-label="Like">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill={p.likedSongIds.includes(song.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8">
             <path d="M12 20s-6.5-4.2-8.5-8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 5.6C18.5 15.8 12 20 12 20Z" />
           </svg>
         </button>
-        <button onClick={() => p.setPlaybackSpeed(p.playbackSpeed === 1 ? 1.25 : p.playbackSpeed === 1.25 ? 1.5 : 1)} className="rounded-full border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-white/70 hover:text-white" aria-label="Playback speed">
+        <button onClick={() => p.setPlaybackSpeed(p.playbackSpeed === 1 ? 1.25 : p.playbackSpeed === 1.25 ? 1.5 : 1)} className="rounded-full border border-white/20 px-2.5 py-1 text-[11px] font-semibold text-white hover:text-white" aria-label="Playback speed">
           {p.playbackSpeed.toFixed(2).replace(/\.00$/, "") + "x"}
         </button>
         <IconBtn onClick={() => p.setVolume(p.volume > 0 ? 0 : 0.8)} label="Mute">
@@ -110,18 +111,20 @@ function IconBtn({
   onClick,
   active,
   label,
+  forceWhite = false,
 }: {
   children: React.ReactNode;
   onClick: () => void;
   active?: boolean;
   label: string;
+  forceWhite?: boolean;
 }) {
   return (
     <button
       aria-label={label}
       onClick={onClick}
       className={`h-8 w-8 grid place-items-center rounded-full transition-colors flex-shrink-0 ${
-        active ? "text-emerald-400" : "text-white/70 hover:text-white"
+        active ? "text-emerald-400" : forceWhite ? "text-white hover:text-white" : "text-white/70 hover:text-white"
       }`}
     >
       <svg viewBox="0 0 24 24" className="h-4 w-4">
