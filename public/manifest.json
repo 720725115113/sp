@@ -1,17 +1,56 @@
 {
+  "id": "https://sp.720725115113.workers.dev/",
   "name": "Wavelength — Feel Every Beat",
   "short_name": "Wavelength",
   "description": "Next-Generation Music Streaming Experience with Hi-Fi Audio & Dynamic Ambient Design.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#09090B",
   "theme_color": "#09090B",
+  "categories": [
+    "music",
+    "entertainment",
+    "audio"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "iarc_rating_id": "e58c1741-b68c-444a-a73a-44675712f5a6",
   "icons": [
     {
-      "src": "/app_icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "/app_icon.jpeg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/app_icon.png",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/app_icon.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/app_icon.jpeg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Wavelength Music Player Mobile View"
+    },
+    {
+      "src": "/app_icon.jpeg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Wavelength Music Player Desktop View"
     }
   ]
 }
