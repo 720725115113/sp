@@ -56,67 +56,69 @@ export function SongCard({
   return (
     <div
       onClick={handlePrimaryClick}
-      className={`group relative text-left ${dim} shrink-0 glass-card p-3 cursor-pointer select-none`}
+      className={`group relative text-left ${dim} shrink-0 glass-card-premium p-3 cursor-pointer select-none`}
     >
-      <div className="relative overflow-hidden rounded-xl aspect-square shadow-lg bg-black/40">
+      <div className="relative overflow-hidden rounded-2xl aspect-square shadow-2xl bg-black/60 border border-white/10">
         <img
           src={song.coverUrl}
           alt={song.title}
           loading="lazy"
-          className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).src =
-              "https.images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80";
+              "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80";
           }}
         />
 
-        {/* Hover overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Dynamic Glow Overlay on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Play Button Overlay */}
+        {/* Floating Glowing Play Button */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             playSong(song, queue);
           }}
           type="button"
-          className="absolute right-2.5 bottom-2.5 h-11 w-11 rounded-full btn-glow-primary grid place-items-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shrink-0"
+          className="absolute right-3 bottom-3 h-12 w-12 rounded-full btn-glow-primary grid place-items-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out shadow-2xl shrink-0 icon-btn-smooth"
           aria-label="Play track"
         >
           {isThisPlaying ? (
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-black" fill="currentColor">
               <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
             </svg>
           ) : (
-            <svg viewBox="0 0 24 24" className="h-5 w-5 translate-x-[1px]" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-black translate-x-[1.5px]" fill="currentColor">
               <path d="M8 5v14l11-7z" />
             </svg>
           )}
         </button>
 
-        {/* Equalizer animation when active */}
+        {/* Equalizer Visualizer Badge */}
         {isThisPlaying && (
-          <div className="absolute left-3 bottom-3 flex items-end gap-0.5 h-4 px-2 py-1 rounded-md bg-black/60 backdrop-blur-md">
-            <span className="equalizer-bar" />
-            <span className="equalizer-bar" />
-            <span className="equalizer-bar" />
-            <span className="equalizer-bar" />
+          <div className="absolute left-3 bottom-3 px-2.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-[#18E29A]/40 flex items-center gap-1.5 shadow-lg">
+            <div className="eq-container">
+              <span className="eq-bar-smooth" />
+              <span className="eq-bar-smooth" />
+              <span className="eq-bar-smooth" />
+              <span className="eq-bar-smooth" />
+            </div>
           </div>
         )}
 
-        {/* Favorite Heart Button */}
+        {/* Smooth Heart Button */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             toggleLike(song);
           }}
-          className={`absolute top-2.5 left-2.5 h-8 w-8 rounded-full bg-black/40 backdrop-blur-md grid place-items-center transition-all opacity-0 group-hover:opacity-100 ${
-            isLiked ? "text-rose-500 opacity-100" : "text-white/80 hover:text-white"
+          className={`absolute top-2.5 left-2.5 h-8 w-8 rounded-full bg-black/50 backdrop-blur-md grid place-items-center icon-btn-smooth transition-all opacity-0 group-hover:opacity-100 ${
+            isLiked ? "text-rose-500 opacity-100 bg-rose-500/20 border border-rose-500/30" : "text-white/80 hover:text-white"
           }`}
           aria-label="Like track"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
         </button>
 
@@ -127,7 +129,7 @@ export function SongCard({
               e.stopPropagation();
               setShowMenu(!showMenu);
             }}
-            className="h-8 w-8 rounded-full bg-black/40 backdrop-blur-md grid place-items-center text-white/80 hover:text-white opacity-0 group-hover:opacity-100 transition-all"
+            className="h-8 w-8 rounded-full bg-black/50 backdrop-blur-md grid place-items-center text-white/80 hover:text-white icon-btn-smooth opacity-0 group-hover:opacity-100 transition-all"
             aria-label="Track options"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
@@ -135,18 +137,18 @@ export function SongCard({
             </svg>
           </button>
 
-          {/* Context Dropdown */}
+          {/* Smooth Dropdown Menu */}
           {showMenu && (
-            <div className="absolute right-0 top-9 w-44 bg-[#141418] border border-white/10 rounded-xl p-1.5 shadow-2xl z-50 flex flex-col gap-1 text-xs">
+            <div className="absolute right-0 top-9 w-44 bg-[#141418] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 flex flex-col gap-1 text-xs backdrop-blur-2xl">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   playNext(song);
                   setShowMenu(false);
                 }}
-                className="w-full px-3 py-1.5 rounded-lg text-left hover:bg-white/10 text-white flex items-center gap-2"
+                className="w-full px-3 py-2 rounded-xl text-left hover:bg-white/10 text-white flex items-center gap-2 font-medium"
               >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 Play Next
               </button>
 
@@ -156,9 +158,9 @@ export function SongCard({
                   playLast(song);
                   setShowMenu(false);
                 }}
-                className="w-full px-3 py-1.5 rounded-lg text-left hover:bg-white/10 text-white flex items-center gap-2"
+                className="w-full px-3 py-2 rounded-xl text-left hover:bg-white/10 text-white flex items-center gap-2 font-medium"
               >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14M5 12h14"/></svg>
                 Add to Queue
               </button>
 
@@ -169,14 +171,14 @@ export function SongCard({
                       e.stopPropagation();
                       setShowPlaylistSubmenu(!showPlaylistSubmenu);
                     }}
-                    className="w-full px-3 py-1.5 rounded-lg text-left hover:bg-white/10 text-white flex items-center justify-between"
+                    className="w-full px-3 py-2 rounded-xl text-left hover:bg-white/10 text-white flex items-center justify-between font-medium"
                   >
                     <span>Add to Playlist</span>
                     <span>›</span>
                   </button>
 
                   {showPlaylistSubmenu && (
-                    <div className="absolute right-full top-0 mr-1 w-40 bg-[#1C1C22] border border-white/10 rounded-xl p-1.5 shadow-2xl z-50 flex flex-col gap-1">
+                    <div className="absolute right-full top-0 mr-1.5 w-40 bg-[#1C1C22] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 flex flex-col gap-1">
                       {customPlaylists.map((pl) => (
                         <button
                           key={pl.id}
@@ -186,7 +188,7 @@ export function SongCard({
                             setShowMenu(false);
                             setShowPlaylistSubmenu(false);
                           }}
-                          className="w-full px-2.5 py-1 rounded text-left truncate text-white/80 hover:text-white hover:bg-white/10"
+                          className="w-full px-2.5 py-1.5 rounded-xl text-left truncate text-white/80 hover:text-white hover:bg-white/10 font-medium"
                         >
                           {pl.name}
                         </button>
@@ -196,10 +198,10 @@ export function SongCard({
                 </div>
               )}
 
-              <button onClick={handleShare} className="w-full px-3 py-1.5 rounded-lg text-left hover:bg-white/10 text-white">
+              <button onClick={handleShare} className="w-full px-3 py-2 rounded-xl text-left hover:bg-white/10 text-white font-medium">
                 Share Link
               </button>
-              <button onClick={handleDownload} className="w-full px-3 py-1.5 rounded-lg text-left hover:bg-white/10 text-white">
+              <button onClick={handleDownload} className="w-full px-3 py-2 rounded-xl text-left hover:bg-white/10 text-white font-medium">
                 Download MP3
               </button>
             </div>
@@ -208,11 +210,11 @@ export function SongCard({
       </div>
 
       {/* Info Section */}
-      <div className="mt-3">
-        <div className={`font-bold text-sm truncate ${isCurrent ? "text-[#18E29A]" : "text-white"}`}>
+      <div className="mt-3.5 space-y-0.5">
+        <div className={`font-extrabold text-sm truncate font-heading ${isCurrent ? "text-[#18E29A]" : "text-white group-hover:text-[#18E29A] transition-colors"}`}>
           {song.title}
         </div>
-        <div className="text-xs text-white/60 truncate mt-0.5 font-medium">
+        <div className="text-xs text-white/60 truncate font-medium">
           {song.artist}
         </div>
       </div>
@@ -231,7 +233,7 @@ export function SongRow({
   onClick?: () => void;
   queue?: Song[];
 }) {
-  const { playSong, currentSong, isPlaying, togglePlay, toggleLike, likedSongIds, playNext, playLast } = usePlayer();
+  const { playSong, currentSong, isPlaying, togglePlay, toggleLike, likedSongIds } = usePlayer();
   const isCurrent = currentSong?.id === song.id;
   const isThisPlaying = isCurrent && isPlaying;
   const isLiked = likedSongIds.includes(song.id);
@@ -245,17 +247,19 @@ export function SongRow({
   return (
     <div
       onClick={handleClick}
-      className={`w-full grid grid-cols-[32px_minmax(0,4fr)_minmax(0,2fr)_auto] md:grid-cols-[36px_minmax(0,4fr)_minmax(0,2.5fr)_minmax(0,1fr)_auto] gap-4 items-center px-4 py-3 rounded-xl text-left group transition-all cursor-pointer ${
-        isCurrent ? "bg-[#18E29A]/10 border border-[#18E29A]/20" : "hover:bg-white/5 border border-transparent"
+      className={`w-full grid grid-cols-[32px_minmax(0,4fr)_minmax(0,2fr)_auto] md:grid-cols-[36px_minmax(0,4fr)_minmax(0,2.5fr)_minmax(0,1fr)_auto] gap-4 items-center px-4 py-3 rounded-2xl text-left group transition-all duration-200 cursor-pointer ${
+        isCurrent
+          ? "bg-[#18E29A]/15 border border-[#18E29A]/30 shadow-lg"
+          : "hover:bg-white/5 border border-transparent"
       }`}
     >
       {/* Index or Equalizer */}
-      <div className="text-sm font-semibold text-white/50 text-center shrink-0">
+      <div className="text-sm font-bold text-white/40 text-center shrink-0">
         {isThisPlaying ? (
           <div className="flex items-end justify-center h-4">
-            <span className="equalizer-bar" />
-            <span className="equalizer-bar" />
-            <span className="equalizer-bar" />
+            <span className="eq-bar-smooth" />
+            <span className="eq-bar-smooth" />
+            <span className="eq-bar-smooth" />
           </div>
         ) : (
           <>
@@ -276,11 +280,11 @@ export function SongRow({
         <img
           src={song.coverUrl}
           alt=""
-          className="h-11 w-11 rounded-lg object-cover shrink-0 shadow-md"
+          className="h-11 w-11 rounded-xl object-cover shrink-0 shadow-md border border-white/10"
           loading="lazy"
         />
         <div className="min-w-0">
-          <div className={`truncate text-sm font-bold ${isCurrent ? "text-[#18E29A]" : "text-white"}`}>
+          <div className={`truncate text-sm font-extrabold font-heading ${isCurrent ? "text-[#18E29A]" : "text-white group-hover:text-[#18E29A] transition-colors"}`}>
             {song.title}
           </div>
           <div className="truncate text-xs text-white/60 font-medium">{song.artist}</div>
@@ -304,17 +308,17 @@ export function SongRow({
             e.stopPropagation();
             toggleLike(song);
           }}
-          className={`h-8 w-8 grid place-items-center rounded-full ${
+          className={`h-8 w-8 grid place-items-center rounded-full icon-btn-smooth ${
             isLiked ? "text-rose-500" : "text-white/40 hover:text-white opacity-0 group-hover:opacity-100"
           }`}
           aria-label="Like song"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
         </button>
 
-        <span className="text-xs text-white/50 tabular-nums font-semibold w-10 text-right">
+        <span className="text-xs text-white/50 tabular-nums font-bold w-10 text-right">
           {song.duration ?? "3:30"}
         </span>
       </div>
