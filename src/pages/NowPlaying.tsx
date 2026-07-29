@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { usePlayer, formatTime } from "../context/PlayerContext";
-import type { AudioQuality } from "../types";
+import { useCatalog } from "../services/catalog";
+import type { Song } from "../types";
 
 export default function NowPlaying({ onClose }: { onClose: () => void }) {
   const p = usePlayer();
@@ -55,12 +56,12 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
   }
 
   const sampleLyrics = [
-    `[00:10.00] In the neon glow of the midnight train`,
-    `[00:25.00] Echoes of rhythm washing down like rain`,
-    `[00:40.00] Every single beat syncs right with your heartbeat`,
-    `[01:05.00] High fidelity sounds spinning through the street`,
-    `[01:25.00] Lost inside the melody, infinite and free`,
-    `[01:45.00] Antigravity vibes, you and me...`,
+    `In the neon glow of the midnight train`,
+    `Echoes of rhythm washing down like rain`,
+    `Every single beat syncs right with your heartbeat`,
+    `High fidelity sounds spinning through the street`,
+    `Lost inside the melody, infinite and free`,
+    `Wavelength vibes, feel every beat...`,
   ];
 
   return (
@@ -81,7 +82,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
         <div className="w-full flex items-center justify-between">
           <button
             onClick={onClose}
-            className="h-10 w-10 rounded-full glass-card grid place-items-center text-white/80 hover:text-white"
+            className="h-10 w-10 rounded-full glass-card-premium grid place-items-center text-white/80 hover:text-white icon-btn-smooth"
             aria-label="Collapse"
             title="Collapse"
           >
@@ -91,10 +92,10 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
           </button>
 
           {/* Navigation Tabs */}
-          <div className="flex bg-white/5 border border-white/10 rounded-full p-1">
+          <div className="flex bg-white/5 border border-white/10 rounded-full p-1 backdrop-blur-xl">
             <button
               onClick={() => setTab("playing")}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-extrabold transition-all ${
                 tab === "playing" ? "bg-[#18E29A] text-black shadow-lg" : "text-white/60 hover:text-white"
               }`}
             >
@@ -102,7 +103,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
             </button>
             <button
               onClick={() => setTab("lyrics")}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-extrabold transition-all ${
                 tab === "lyrics" ? "bg-[#18E29A] text-black shadow-lg" : "text-white/60 hover:text-white"
               }`}
             >
@@ -110,7 +111,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
             </button>
             <button
               onClick={() => setTab("queue")}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-extrabold transition-all ${
                 tab === "queue" ? "bg-[#18E29A] text-black shadow-lg" : "text-white/60 hover:text-white"
               }`}
             >
@@ -136,7 +137,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
               </div>
 
               <div className="text-center space-y-1 w-full">
-                <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight truncate">
+                <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight truncate font-heading">
                   {song.title}
                 </h2>
                 <p className="text-base text-white/70 font-semibold truncate">{song.artist}</p>
@@ -153,21 +154,21 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
                 {/* GREEN SHUFFLE BUTTON */}
                 <button
                   onClick={p.toggleShuffle}
-                  className={`h-11 w-11 grid place-items-center rounded-full transition-all ${
+                  className={`h-11 w-11 grid place-items-center rounded-full icon-btn-smooth ${
                     p.shuffle
                       ? "bg-[#18E29A]/20 text-[#18E29A] border border-[#18E29A]/40 shadow-[0_0_15px_rgba(24,226,154,0.4)]"
                       : "text-white/60 hover:text-white hover:bg-white/10"
                   }`}
                   aria-label="Shuffle"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
                   </svg>
                 </button>
 
                 <button
                   onClick={p.prev}
-                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10 active:scale-95"
+                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10 icon-btn-smooth"
                   aria-label="Previous"
                 >
                   <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
@@ -193,7 +194,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
 
                 <button
                   onClick={p.next}
-                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10 active:scale-95"
+                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10 icon-btn-smooth"
                   aria-label="Next"
                 >
                   <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
@@ -203,14 +204,14 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
 
                 <button
                   onClick={p.cycleRepeat}
-                  className={`h-11 w-11 grid place-items-center rounded-full relative transition-all ${
+                  className={`h-11 w-11 grid place-items-center rounded-full relative icon-btn-smooth ${
                     p.repeat !== "off"
                       ? "bg-[#18E29A]/20 text-[#18E29A] border border-[#18E29A]/40 shadow-[0_0_15px_rgba(24,226,154,0.4)]"
                       : "text-white/60 hover:text-white hover:bg-white/10"
                   }`}
                   aria-label="Repeat"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M17 1l4 4-4 4" />
                     <path d="M3 11V9a4 4 0 0 1 4-4h14" />
                     <path d="M7 23l-4-4 4-4" />
@@ -221,7 +222,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
             </div>
 
             {/* Side Queue View on Desktop */}
-            <div className="hidden md:flex flex-col h-[480px] glass-card rounded-3xl p-4 border border-white/10 overflow-hidden">
+            <div className="hidden md:flex flex-col h-[480px] glass-card-premium rounded-3xl p-4 border border-white/10 overflow-hidden">
               <QueuePanel />
             </div>
           </div>
@@ -229,8 +230,8 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
 
         {/* Tab 2: Lyrics View */}
         {tab === "lyrics" && (
-          <div className="w-full max-w-xl glass-card rounded-3xl p-8 space-y-6 text-center my-auto">
-            <h3 className="text-xl font-black text-[#18E29A] tracking-wider uppercase">Lyrics</h3>
+          <div className="w-full max-w-xl glass-card-premium rounded-3xl p-8 space-y-6 text-center my-auto border border-white/10">
+            <h3 className="text-xl font-black text-[#18E29A] tracking-wider uppercase font-heading">Lyrics</h3>
             <div className="space-y-4 font-bold text-lg leading-relaxed text-white/80">
               {sampleLyrics.map((line, idx) => (
                 <p
@@ -239,7 +240,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
                     idx === 2 ? "text-2xl text-[#18E29A] font-black scale-105" : "hover:text-white"
                   }`}
                 >
-                  {line.replace(/\[\d+:\d+\.\d+\]/, "")}
+                  {line}
                 </p>
               ))}
             </div>
@@ -248,7 +249,7 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
 
         {/* Tab 3: Queue Mobile/Desktop */}
         {tab === "queue" && (
-          <div className="w-full max-w-xl glass-card rounded-3xl p-4 border border-white/10 h-[500px]">
+          <div className="w-full max-w-xl glass-card-premium rounded-3xl p-4 border border-white/10 h-[500px]">
             <QueuePanel />
           </div>
         )}
@@ -259,40 +260,15 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
 
 function SeekBar() {
   const { progress, duration, elapsed, seek } = usePlayer();
-  const [hoverX, setHoverX] = useState<number | null>(null);
-  const trackRef = useRef<HTMLDivElement | null>(null);
-
-  const hoverRatio =
-    hoverX !== null && trackRef.current
-      ? Math.max(0, Math.min(1, hoverX / trackRef.current.offsetWidth))
-      : null;
 
   return (
-    <div className="w-full space-y-1">
-      <div
-        ref={trackRef}
-        className="relative h-2 group cursor-pointer"
-        onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          setHoverX(e.clientX - rect.left);
-        }}
-        onMouseLeave={() => setHoverX(null)}
-      >
+    <div className="w-full space-y-1.5">
+      <div className="relative h-1.5 group cursor-pointer">
         <div className="absolute inset-0 bg-white/15 rounded-full" />
         <div
-          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#18E29A] to-[#6D5EF8] rounded-full group-hover:brightness-125"
+          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#18E29A] to-[#6D5EF8] rounded-full group-hover:brightness-125 transition-all"
           style={{ width: `${(progress * 100).toFixed(2)}%` }}
         />
-
-        {hoverRatio !== null && duration > 0 && (
-          <div
-            className="pointer-events-none absolute -top-8 -translate-x-1/2 px-2 py-0.5 rounded-md bg-[#141418] border border-white/10 text-white text-[10px] shadow-xl font-bold"
-            style={{ left: `${hoverRatio * 100}%` }}
-          >
-            {formatTime(hoverRatio * duration)}
-          </div>
-        )}
-
         <input
           type="range"
           min={0}
@@ -315,48 +291,92 @@ function SeekBar() {
 
 function QueuePanel() {
   const p = usePlayer();
+  const { songs } = useCatalog();
+  const [searchFilter, setSearchFilter] = useState("");
+
+  // Filter existing queue
+  const filteredQueue = useMemo(() => {
+    const q = searchFilter.trim().toLowerCase();
+    if (!q) return p.upNext;
+    return p.upNext.filter((s) => s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q));
+  }, [p.upNext, searchFilter]);
+
+  // Catalog search to add new tracks to queue
+  const catalogSearchMatches = useMemo(() => {
+    const q = searchFilter.trim().toLowerCase();
+    if (!q) return [];
+    return songs
+      .filter((s) => s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q))
+      .filter((s) => !p.queue.some((item) => item.id === s.id))
+      .slice(0, 5);
+  }, [songs, searchFilter, p.queue]);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
-      <div className="flex items-center justify-between pb-3 border-b border-white/10 shrink-0">
-        <span className="font-extrabold text-sm text-white">Playback Queue</span>
-        <span className="text-xs text-[#18E29A] font-bold">{p.queue.length} tracks</span>
+    <div className="flex flex-col h-full overflow-hidden space-y-3">
+      {/* Header & Search Bar */}
+      <div className="space-y-2 border-b border-white/10 pb-3 shrink-0">
+        <div className="flex items-center justify-between">
+          <span className="font-extrabold text-sm text-white font-heading">Playback Queue</span>
+          <span className="text-xs text-[#18E29A] font-bold">{p.queue.length} tracks</span>
+        </div>
+
+        {/* Queue Search Input */}
+        <div className="relative glass-input-premium rounded-xl px-3 py-1.5 flex items-center gap-2">
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" strokeLinecap="round" />
+          </svg>
+          <input
+            value={searchFilter}
+            onChange={(e) => setSearchFilter(e.target.value)}
+            placeholder="Search queue or add tracks..."
+            className="w-full bg-transparent text-xs text-white outline-none placeholder:text-white/40 font-medium"
+          />
+          {searchFilter && (
+            <button onClick={() => setSearchFilter("")} className="text-white/40 hover:text-white text-xs">
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className="overflow-y-auto flex-1 py-2 space-y-1 pr-1">
-        {p.currentSong && (
+      {/* Queue List */}
+      <div className="overflow-y-auto flex-1 py-1 space-y-2 pr-1 no-scrollbar">
+        {p.currentSong && !searchFilter && (
           <div className="space-y-1">
             <div className="text-[10px] uppercase font-black text-[#18E29A] tracking-wider">Now Playing</div>
-            <div className="glass-card p-2.5 rounded-xl flex items-center justify-between border border-[#18E29A]/30 bg-[#18E29A]/10">
+            <div className="glass-card-premium p-2.5 rounded-xl flex items-center justify-between border border-[#18E29A]/30 bg-[#18E29A]/10">
               <div className="flex items-center gap-3 min-w-0">
                 <img src={p.currentSong.coverUrl} alt="" className="h-10 w-10 rounded-lg object-cover" />
                 <div className="min-w-0">
-                  <div className="truncate text-xs font-bold text-[#18E29A]">{p.currentSong.title}</div>
+                  <div className="truncate text-xs font-bold text-[#18E29A] font-heading">{p.currentSong.title}</div>
                   <div className="truncate text-[11px] text-white/60">{p.currentSong.artist}</div>
                 </div>
               </div>
-              <div className="flex items-end h-3 text-[#18E29A]">
-                <span className="equalizer-bar" />
-                <span className="equalizer-bar" />
-                <span className="equalizer-bar" />
+              <div className="eq-container">
+                <span className="eq-bar-smooth" />
+                <span className="eq-bar-smooth" />
+                <span className="eq-bar-smooth" />
               </div>
             </div>
           </div>
         )}
 
-        <div className="text-[10px] uppercase font-black text-white/40 tracking-wider pt-3">Up Next</div>
+        <div className="text-[10px] uppercase font-black text-white/40 tracking-wider pt-2">
+          {searchFilter ? `Search Results (${filteredQueue.length})` : "Up Next"}
+        </div>
 
-        {p.upNext.length > 0 ? (
-          p.upNext.map((song, i) => (
+        {filteredQueue.length > 0 ? (
+          filteredQueue.map((song, i) => (
             <div
               key={`${song.id}-${i}`}
-              className="group glass-card p-2 rounded-xl flex items-center justify-between hover:bg-white/10 transition-colors cursor-pointer"
+              className="group glass-card-premium p-2.5 rounded-xl flex items-center justify-between hover:bg-white/10 transition-colors cursor-pointer"
               onClick={() => p.playQueueIndex(p.currentIndex + 1 + i)}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <img src={song.coverUrl} alt="" className="h-9 w-9 rounded-md object-cover" />
+                <img src={song.coverUrl} alt="" className="h-9 w-9 rounded-lg object-cover" />
                 <div className="min-w-0">
-                  <div className="truncate text-xs font-bold text-white">{song.title}</div>
+                  <div className="truncate text-xs font-bold text-white font-heading">{song.title}</div>
                   <div className="truncate text-[11px] text-white/50">{song.artist}</div>
                 </div>
               </div>
@@ -366,7 +386,7 @@ function QueuePanel() {
                   e.stopPropagation();
                   p.removeFromQueue(p.currentIndex + 1 + i);
                 }}
-                className="h-7 w-7 rounded-full text-white/40 hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="h-7 w-7 rounded-full text-white/40 hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity grid place-items-center"
                 title="Remove from queue"
               >
                 ✕
@@ -374,7 +394,36 @@ function QueuePanel() {
             </div>
           ))
         ) : (
-          <div className="text-xs text-white/40 text-center py-8">No remaining songs in queue.</div>
+          <div className="text-xs text-white/40 text-center py-4">No matching songs in queue.</div>
+        )}
+
+        {/* Add from Catalog search matches */}
+        {catalogSearchMatches.length > 0 && (
+          <div className="pt-3 border-t border-white/10 space-y-1">
+            <div className="text-[10px] uppercase font-black text-[#18E29A] tracking-wider">
+              Add to Queue from Library
+            </div>
+            {catalogSearchMatches.map((song) => (
+              <div
+                key={`cat-${song.id}`}
+                className="glass-card-premium p-2 rounded-xl flex items-center justify-between border border-white/5"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <img src={song.coverUrl} alt="" className="h-8 w-8 rounded-lg object-cover" />
+                  <div className="min-w-0">
+                    <div className="truncate text-xs font-bold text-white font-heading">{song.title}</div>
+                    <div className="truncate text-[10px] text-white/50">{song.artist}</div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => p.playLast(song)}
+                  className="px-2.5 py-1 rounded-full bg-[#18E29A]/20 text-[#18E29A] hover:bg-[#18E29A] hover:text-black font-bold text-[10px] transition-all"
+                >
+                  + Add
+                </button>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
