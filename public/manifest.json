@@ -56,9 +56,9 @@
       "url": "/#/search",
       "icons": [
         {
-          "src": "/app_icon.jpeg",
-          "sizes": "1024x1024",
-          "type": "image/jpeg"
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     },
@@ -69,9 +69,9 @@
       "url": "/#/library",
       "icons": [
         {
-          "src": "/app_icon.jpeg",
-          "sizes": "1024x1024",
-          "type": "image/jpeg"
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     }
@@ -94,42 +94,54 @@
   "scope_extensions": [],
   "icons": [
     {
-      "src": "/app_icon.jpeg",
-      "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/app_icon.jpeg",
-      "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/app_icon.png",
       "sizes": "1024x1024",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/app_icon.jpg",
-      "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
   "screenshots": [
     {
-      "src": "/app_icon.jpeg",
-      "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "form_factor": "narrow",
       "label": "Wavelength Music Player Mobile View"
     },
     {
-      "src": "/app_icon.jpeg",
+      "src": "/icon-1024.png",
       "sizes": "1024x1024",
-      "type": "image/jpeg",
+      "type": "image/png",
       "form_factor": "wide",
       "label": "Wavelength Music Player Desktop View"
     }

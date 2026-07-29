@@ -1,11 +1,12 @@
-const CACHE_NAME = "wavelength-cache-v2";
+const CACHE_NAME = "wavelength-cache-v3";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
   "/manifest.json",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/icon-1024.png",
   "/app_icon.png",
-  "/app_icon.jpeg",
-  "/app_icon.jpg",
   "/favicon.png"
 ];
 
