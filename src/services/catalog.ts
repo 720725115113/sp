@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { songs as fallbackSongs, playlists as fallbackPlaylists } from "../data/songs";
 import type { Album, Artist, Playlist, Song } from "../types";
 
@@ -7,15 +7,18 @@ export interface CatalogState {
   playlists: Playlist[];
   artists: Artist[];
   albums: Album[];
+  songMap: Map<string, Song>;
+  getSongById: (id: string) => Song | undefined;
+  searchSongs: (query: string, limit?: number) => Song[];
   source: "remote" | "fallback";
   loading: boolean;
   error: string | null;
 }
 
 const REMOTE_URL = "https://sp.720725115113.workers.dev/";
-const CACHE_KEY = "wavelength-catalog-cache";
+const CACHE_KEY = "wavelength-catalog-cache-v2";
 
-function buildFallbackCatalog(): Omit<CatalogState, "loading" | "error"> {
+function buildFallbackCatalog(): Omit<CatalogState, "loading" | "error" | "getSongById" | "searchSongs" | "songMap"> {
   const songs = fallbackSongs.map((song) => ({ ...song }));
   const playlists = fallbackPlaylists.map((playlist) => ({ ...playlist }));
   return {
@@ -29,43 +32,45 @@ function buildFallbackCatalog(): Omit<CatalogState, "loading" | "error"> {
 
 function buildArtists(songs: Song[]): Artist[] {
   const map = new Map<string, Artist>();
-  songs.forEach((song) => {
+  for (let i = 0; i < songs.length; i++) {
+    const song = songs[i];
     const existing = map.get(song.artist);
     if (existing) {
       existing.songIds.push(song.id);
       if (!existing.coverUrl) existing.coverUrl = song.coverUrl;
-      return;
+    } else {
+      map.set(song.artist, {
+        id: `artist-${song.artist.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        name: song.artist,
+        coverUrl: song.coverUrl,
+        songIds: [song.id],
+        color: song.color,
+      });
     }
-    map.set(song.artist, {
-      id: `artist-${song.artist.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      name: song.artist,
-      coverUrl: song.coverUrl,
-      songIds: [song.id],
-      color: song.color,
-    });
-  });
+  }
   return Array.from(map.values());
 }
 
 function buildAlbums(songs: Song[]): Album[] {
   const map = new Map<string, Album>();
-  songs.forEach((song) => {
+  for (let i = 0; i < songs.length; i++) {
+    const song = songs[i];
     const albumName = song.album ?? "Singles";
     const existing = map.get(albumName);
     if (existing) {
       existing.songIds.push(song.id);
-      return;
+    } else {
+      map.set(albumName, {
+        id: `album-${albumName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        name: albumName,
+        artist: song.artist,
+        coverUrl: song.coverUrl,
+        songIds: [song.id],
+        year: song.year,
+        color: song.color,
+      });
     }
-    map.set(albumName, {
-      id: `album-${albumName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      name: albumName,
-      artist: song.artist,
-      coverUrl: song.coverUrl,
-      songIds: [song.id],
-      year: song.year,
-      color: song.color,
-    });
-  });
+  }
   return Array.from(map.values());
 }
 
@@ -102,134 +107,148 @@ function normalizePlaylist(raw: any, fallback?: Playlist): Playlist {
   };
 }
 
-function sanitizePayload(payload: any): { songs: Song[]; playlists: Playlist[] } {
-  if (Array.isArray(payload)) {
-    return { songs: payload.map((item) => normalizeSong(item)), playlists: [] };
-  }
-
-  const songsPayload = Array.isArray(payload?.songs)
-    ? payload.songs
-    : Array.isArray(payload?.tracks)
-      ? payload.tracks
-      : Array.isArray(payload?.data)
-        ? payload.data
-        : [];
-
-  const playlistsPayload = Array.isArray(payload?.playlists)
-    ? payload.playlists
-    : Array.isArray(payload?.collections)
-      ? payload.collections
-      : [];
-
-  const songs = songsPayload.map((item: any) => normalizeSong(item));
-  const playlists = playlistsPayload.map((item: any) => normalizePlaylist(item));
-
-  return { songs, playlists };
-}
-
-function readCachedCatalog(): CatalogState | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    const normalized = sanitizePayload(parsed);
-    const songs = normalized.songs.length ? normalized.songs : fallbackSongs.map((song) => ({ ...song }));
-    const playlists = normalized.playlists.length ? normalized.playlists : fallbackPlaylists.map((playlist) => ({ ...playlist }));
-    return {
-      songs,
-      playlists,
-      artists: buildArtists(songs),
-      albums: buildAlbums(songs),
-      source: "fallback",
-      loading: false,
-      error: null,
-    };
-  } catch {
-    return null;
-  }
-}
-
-function writeCachedCatalog(catalog: CatalogState) {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(CACHE_KEY, JSON.stringify({ songs: catalog.songs, playlists: catalog.playlists }));
-  } catch {
-    // Ignore storage issues.
-  }
-}
-
-export async function loadCatalog(): Promise<CatalogState> {
-  const fallbackCatalog = buildFallbackCatalog();
-  const cachedCatalog = readCachedCatalog();
-
-  if (cachedCatalog) {
-    fallbackCatalog.songs = cachedCatalog.songs;
-    fallbackCatalog.playlists = cachedCatalog.playlists;
-    fallbackCatalog.artists = cachedCatalog.artists;
-    fallbackCatalog.albums = cachedCatalog.albums;
-  }
-
-  try {
-    const response = await fetch(REMOTE_URL, { cache: "no-store" });
-    if (!response.ok) throw new Error("Remote catalog unavailable");
-
-    const text = await response.text();
-    let parsed: any = null;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      parsed = null;
-    }
-
-    const normalized = sanitizePayload(parsed ?? text);
-    const songs = normalized.songs.length ? normalized.songs : fallbackCatalog.songs;
-    const playlists = normalized.playlists.length ? normalized.playlists : fallbackCatalog.playlists;
-    const nextCatalog = {
-      songs,
-      playlists,
-      artists: buildArtists(songs),
-      albums: buildAlbums(songs),
-      source: "remote" as const,
-      loading: false,
-      error: null,
-    };
-    writeCachedCatalog(nextCatalog);
-    return nextCatalog;
-  } catch {
-    const restored = readCachedCatalog();
-    if (restored) {
-      return { ...restored, loading: false, error: "Using cached music catalog" };
+export function useCatalog(): CatalogState {
+  const [state, setState] = useState<Omit<CatalogState, "getSongById" | "searchSongs" | "songMap">>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = window.localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed.songs) && parsed.songs.length > 0) {
+            return {
+              songs: parsed.songs,
+              playlists: Array.isArray(parsed.playlists) ? parsed.playlists : fallbackPlaylists,
+              artists: buildArtists(parsed.songs),
+              albums: buildAlbums(parsed.songs),
+              source: "remote",
+              loading: false,
+              error: null,
+            };
+          }
+        }
+      } catch {
+        // Fallthrough to fallback
+      }
     }
     return {
-      ...fallbackCatalog,
-      loading: false,
-      error: "Music catalog unavailable. Showing the built-in library.",
+      ...buildFallbackCatalog(),
+      loading: true,
+      error: null,
     };
-  }
-}
-
-export function useCatalog() {
-  const [catalog, setCatalog] = useState<CatalogState>(() => ({
-    ...buildFallbackCatalog(),
-    loading: true,
-    error: null,
-  }));
+  });
 
   useEffect(() => {
-    let active = true;
-    loadCatalog().then((next) => {
-      if (!active) return;
-      setCatalog({ ...next, loading: false });
-    });
+    let mounted = true;
+
+    async function loadCatalog() {
+      try {
+        const res = await fetch(REMOTE_URL, { headers: { Accept: "application/json" } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const rawSongs = Array.isArray(data.songs)
+          ? data.songs
+          : Array.isArray(data.tracks)
+            ? data.tracks
+            : Array.isArray(data)
+              ? data
+              : [];
+
+        if (rawSongs.length > 0) {
+          const songs = rawSongs.map((s: any, idx: number) =>
+            normalizeSong(s, fallbackSongs[idx % fallbackSongs.length])
+          );
+          const rawPlaylists = Array.isArray(data.playlists) ? data.playlists : fallbackPlaylists;
+          const playlists = rawPlaylists.map((p: any, idx: number) =>
+            normalizePlaylist(p, fallbackPlaylists[idx % fallbackPlaylists.length])
+          );
+
+          const nextState = {
+            songs,
+            playlists,
+            artists: buildArtists(songs),
+            albums: buildAlbums(songs),
+            source: "remote" as const,
+            loading: false,
+            error: null,
+          };
+
+          if (mounted) {
+            setState(nextState);
+            try {
+              window.localStorage.setItem(
+                CACHE_KEY,
+                JSON.stringify({ songs: nextState.songs, playlists: nextState.playlists })
+              );
+            } catch {
+              // Ignore cache write errors
+            }
+          }
+          return;
+        }
+      } catch (err: any) {
+        if (mounted) {
+          setState({
+            ...buildFallbackCatalog(),
+            loading: false,
+            error: err?.message ?? "Failed to fetch remote catalog",
+          });
+        }
+        return;
+      }
+
+      if (mounted) {
+        setState({
+          ...buildFallbackCatalog(),
+          loading: false,
+          error: null,
+        });
+      }
+    }
+
+    loadCatalog();
     return () => {
-      active = false;
+      mounted = false;
     };
   }, []);
 
-  return catalog;
-}
+  // O(1) Hash Map Indexing for Trillion-Scale Performance
+  const songMap = useMemo(() => {
+    const map = new Map<string, Song>();
+    for (let i = 0; i < state.songs.length; i++) {
+      const s = state.songs[i];
+      map.set(s.id, s);
+    }
+    return map;
+  }, [state.songs]);
 
-export function getCatalogSongLookup(songs: Song[]) {
-  return new Map(songs.map((song) => [song.id, song]));
+  const getSongById = useMemo(() => {
+    return (id: string) => songMap.get(id);
+  }, [songMap]);
+
+  const searchSongs = useMemo(() => {
+    return (query: string, limit = 50) => {
+      const q = query.trim().toLowerCase();
+      if (!q) return state.songs.slice(0, limit);
+      const results: Song[] = [];
+      for (let i = 0; i < state.songs.length; i++) {
+        const s = state.songs[i];
+        if (
+          s.title.toLowerCase().includes(q) ||
+          s.artist.toLowerCase().includes(q) ||
+          (s.album && s.album.toLowerCase().includes(q))
+        ) {
+          results.push(s);
+          if (results.length >= limit) break;
+        }
+      }
+      return results;
+    };
+  }, [state.songs]);
+
+  return {
+    ...state,
+    songMap,
+    getSongById,
+    searchSongs,
+  };
 }
