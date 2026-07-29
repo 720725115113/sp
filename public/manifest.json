@@ -5,7 +5,7 @@
   "description": "Next-Generation Music Streaming Experience with Hi-Fi Audio & Dynamic Ambient Design.",
   "start_url": "/",
   "scope": "/",
-  "lang": "en-US",
+  "lang": "en",
   "dir": "ltr",
   "display": "standalone",
   "display_override": [
@@ -56,7 +56,7 @@
       "url": "/#/search",
       "icons": [
         {
-          "src": "/app_icon.png",
+          "src": "/app_icon.jpeg",
           "sizes": "1024x1024",
           "type": "image/jpeg"
         }
@@ -69,7 +69,7 @@
       "url": "/#/library",
       "icons": [
         {
-          "src": "/app_icon.png",
+          "src": "/app_icon.jpeg",
           "sizes": "1024x1024",
           "type": "image/jpeg"
         }
@@ -94,13 +94,19 @@
   "scope_extensions": [],
   "icons": [
     {
-      "src": "/app_icon.png",
+      "src": "/app_icon.jpeg",
       "sizes": "1024x1024",
       "type": "image/jpeg",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/app_icon.jpeg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/app_icon.png",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "any maskable"
@@ -114,14 +120,14 @@
   ],
   "screenshots": [
     {
-      "src": "/app_icon.png",
+      "src": "/app_icon.jpeg",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Wavelength Music Player Mobile View"
     },
     {
-      "src": "/app_icon.png",
+      "src": "/app_icon.jpeg",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "form_factor": "wide",
