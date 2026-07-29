@@ -85,7 +85,7 @@ interface PlayerState {
 
   addSearchHistory: (query: string) => void;
   removeSearchHistory: (query: string) => void;
-  clearSearchHistory: () => void;
+  clearSearchHistory: (query?: string) => void;
 
   addToast: (message: string, type?: Toast["type"]) => void;
   removeToast: (id: string) => void;
@@ -163,6 +163,7 @@ export function PlayerProvider({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
   const wakeLockRef = useRef<any>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
@@ -192,7 +193,7 @@ export function PlayerProvider({
     stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue };
   }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue]);
 
-  // 24-Hour Continuous Background Playback & WakeLock Engine
+  // 24-HOUR CONTINUOUS BACKGROUND PLAYBACK & UNTHROTTLED AUDIO CONTEXT KEEP-ALIVE
   const requestWakeLock = async () => {
     if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
       try {
@@ -214,9 +215,27 @@ export function PlayerProvider({
     }
   };
 
+  // Anti-Battery Saver Web Audio Context Keep-Alive Node
+  const keepAudioActive = () => {
+    try {
+      if (!audioCtxRef.current) {
+        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioCtx) {
+          audioCtxRef.current = new AudioCtx();
+        }
+      }
+      if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
+        audioCtxRef.current.resume();
+      }
+    } catch {
+      // AudioContext fallback
+    }
+  };
+
   useEffect(() => {
     if (isPlaying) {
       requestWakeLock();
+      keepAudioActive();
     } else {
       releaseWakeLock();
     }
@@ -226,6 +245,7 @@ export function PlayerProvider({
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible" && isPlaying) {
         requestWakeLock();
+        keepAudioActive();
       }
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -330,6 +350,7 @@ export function PlayerProvider({
     }
     a.playbackRate = playbackSpeed;
 
+    keepAudioActive();
     a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
 
     // Preload next track
@@ -587,6 +608,7 @@ export function PlayerProvider({
       return;
     }
     if (a.paused) {
+      keepAudioActive();
       a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     } else {
       a.pause();
