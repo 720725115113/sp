@@ -55,6 +55,8 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
     );
   }
 
+  const isLiked = p.likedSongIds.includes(song.id);
+
   const sampleLyrics = [
     `In the neon glow of the midnight train`,
     `Echoes of rhythm washing down like rain`,
@@ -127,13 +129,33 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
           <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_340px] gap-8 items-center flex-1 py-4">
             {/* Artwork & Info */}
             <div className="flex flex-col items-center max-w-md mx-auto w-full space-y-6">
+              {/* Picture Container with Heart Like Button on Top Right Corner */}
               <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
                 <img
                   src={song.coverUrl}
                   alt={song.title}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                {/* LIKE HEART BUTTON ON PICTURE TOP RIGHT CORNER (BOTH PC & MOBILE) */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    p.toggleLike(song);
+                  }}
+                  className={`absolute top-3.5 right-3.5 z-20 h-10 w-10 rounded-full bg-black/60 backdrop-blur-md grid place-items-center icon-btn-smooth transition-all shadow-xl ${
+                    isLiked
+                      ? "text-rose-500 bg-rose-500/20 border border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.4)]"
+                      : "text-white/80 hover:text-white hover:bg-black/80 border border-white/20"
+                  }`}
+                  aria-label="Like song"
+                  title={isLiked ? "Unlike song" : "Like song"}
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg>
+                </button>
               </div>
 
               <div className="text-center space-y-1 w-full">
