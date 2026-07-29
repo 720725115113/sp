@@ -150,7 +150,7 @@ function AppContent({
           onCreatePlaylistModal={() => setShowCreateModal(true)}
         />
 
-        <main className="flex-1 overflow-y-auto pb-28 md:pb-32 bg-transparent">
+        <main className="flex-1 overflow-y-auto pb-36 lg:pb-32 bg-transparent">
           <PremiumHeader
             onSearchClick={() => navigate("search")}
             onNavigate={navigate}
@@ -178,15 +178,15 @@ function AppContent({
         </main>
       </div>
 
-      {/* Mobile Navigation */}
-      <MiniSidebar onNavigate={(n) => navigate(n)} currentView={view.name} />
-
-      {/* Sticky Player Bar */}
+      {/* Sticky Mobile Player Bar (Positioned directly above bottom nav) */}
       <PlayerBar
         onOpenNowPlaying={() => setNowPlaying(true)}
         onOpenLyrics={() => setNowPlaying(true)}
         onOpenQueue={() => setNowPlaying(true)}
       />
+
+      {/* Mobile Bottom Navigation (Positioned fixed at very bottom) */}
+      <MiniSidebar onNavigate={(n) => navigate(n)} currentView={view.name} />
 
       {/* Expanded Fullscreen Player Modal */}
       {nowPlaying && <NowPlaying onClose={() => setNowPlaying(false)} />}

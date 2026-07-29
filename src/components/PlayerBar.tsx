@@ -19,14 +19,14 @@ export default function PlayerBar({
 
   if (!song) {
     return (
-      <div className="fixed bottom-0 left-0 right-0 z-40 h-16 glass-card-premium border-t border-white/10 px-4 flex items-center justify-between text-xs text-white/50">
+      <div className="fixed bottom-[56px] lg:bottom-0 left-0 right-0 z-30 h-14 glass-card-premium border-t border-white/10 px-4 flex items-center justify-between text-xs text-white/50">
         <span className="font-medium">Select a track from the library to start listening.</span>
       </div>
     );
   }
 
   return (
-    <div className="sticky bottom-0 z-40 w-full glass-card-premium border-t border-white/10 px-3 py-2 md:px-6 md:py-3 shadow-2xl backdrop-blur-3xl">
+    <div className="fixed bottom-[56px] lg:sticky lg:bottom-0 left-0 right-0 z-30 w-full glass-card-premium border-t border-white/10 px-3 py-2 md:px-6 md:py-3 shadow-2xl backdrop-blur-3xl">
       {/* Mobile Mini Player Bar (<768px) */}
       <div className="md:hidden flex items-center justify-between gap-3">
         <button
@@ -36,11 +36,11 @@ export default function PlayerBar({
           <img
             src={song.coverUrl}
             alt={song.title}
-            className="h-11 w-11 rounded-xl object-cover border border-white/10 shrink-0 shadow-md"
+            className="h-10 w-10 rounded-xl object-cover border border-white/10 shrink-0 shadow-md"
           />
           <div className="min-w-0 flex-1">
-            <div className="truncate text-sm font-extrabold text-white font-heading">{song.title}</div>
-            <div className="truncate text-xs text-white/60 font-medium">{song.artist}</div>
+            <div className="truncate text-xs font-extrabold text-white font-heading">{song.title}</div>
+            <div className="truncate text-[11px] text-white/60 font-medium">{song.artist}</div>
           </div>
         </button>
 
@@ -48,12 +48,12 @@ export default function PlayerBar({
           {/* GREEN SHUFFLE BUTTON */}
           <button
             onClick={p.toggleShuffle}
-            className={`h-9 w-9 grid place-items-center rounded-full icon-btn-smooth ${
+            className={`h-8 w-8 grid place-items-center rounded-full icon-btn-smooth ${
               p.shuffle ? "bg-[#18E29A]/20 text-[#18E29A] border border-[#18E29A]/40" : "text-white/60"
             }`}
             aria-label="Shuffle"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
             </svg>
           </button>
@@ -61,15 +61,15 @@ export default function PlayerBar({
           {/* PLAY / PAUSE */}
           <button
             onClick={p.togglePlay}
-            className="h-10 w-10 rounded-full btn-glow-primary grid place-items-center shrink-0"
+            className="h-9 w-9 rounded-full btn-glow-primary grid place-items-center shrink-0"
             aria-label="Play/Pause"
           >
             {p.isPlaying ? (
-              <svg viewBox="0 0 24 24" className="h-5 w-5 text-black" fill="currentColor">
+              <svg viewBox="0 0 24 24" className="h-4.5 w-4.5 text-black" fill="currentColor">
                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" className="h-5 w-5 text-black translate-x-[1px]" fill="currentColor">
+              <svg viewBox="0 0 24 24" className="h-4.5 w-4.5 text-black translate-x-[1px]" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
               </svg>
             )}
@@ -78,10 +78,10 @@ export default function PlayerBar({
           {/* NEXT */}
           <button
             onClick={p.next}
-            className="h-9 w-9 grid place-items-center rounded-full text-white/80 icon-btn-smooth"
+            className="h-8 w-8 grid place-items-center rounded-full text-white/80 icon-btn-smooth"
             aria-label="Next"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="currentColor">
               <path d="M16 6h2v12h-2zM4 6v12l11-6z" />
             </svg>
           </button>
