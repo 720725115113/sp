@@ -356,23 +356,24 @@ export function PlayerProvider({
 
   // Audio Engine & Dual Audio Crossfade Listener
   useEffect(() => {
-    if (!audioRef.current) {
-      const a = new Audio();
-      a.preload = "auto";
-      (a as any).playsInline = true;
-      a.volume = volumeRef.current;
-      audioRef.current = a;
-
+    const attachListeners = (a: HTMLAudioElement) => {
       a.addEventListener("timeupdate", () => {
+        if (a !== audioRef.current) return;
         if (!a.duration) return;
         const cur = a.currentTime;
         const dur = a.duration;
         const prog = cur / dur;
         const rem = dur - cur;
 
-        notifyProgress(cur, prog, dur);
+        if (!crossfadeRef.current?.isCrossfading) {
+          notifyProgress(cur, prog, dur);
+        } else if (secondaryAudioRef.current) {
+          const secCur = secondaryAudioRef.current.currentTime || 0;
+          const secDur = secondaryAudioRef.current.duration || 0;
+          notifyProgress(secCur, secDur > 0 ? secCur / secDur : 0, secDur);
+        }
 
-        // TRIGGER 3-SECOND CROSSFADE INTO NEXT SONG WITH VOLUME FADE
+        // TRIGGER 3-SECOND CROSSFADE INTO NEXT SONG WITH VOLUME FADE & LIVE UI UPDATE
         if (rem <= 3.0 && dur > 4.0 && !crossfadeRef.current && isPlayingRef.current) {
           const { queue: q, currentIndex: idx, repeat: r } = stateRef.current;
           let nextIdx = idx + 1;
@@ -389,6 +390,7 @@ export function PlayerProvider({
               const sec = new Audio();
               sec.preload = "auto";
               (sec as any).playsInline = true;
+              attachListeners(sec);
               secondaryAudioRef.current = sec;
             }
 
@@ -398,6 +400,9 @@ export function PlayerProvider({
             sec.volume = 0;
             sec.playbackRate = playbackSpeedRef.current;
             sec.play().catch(() => {});
+
+            // LIVE UPDATE UI IMMEDIATELY TO NEXT SONG DETAILS IN LAST 3 SECONDS
+            setCurrentIndex(nextIdx);
           }
         }
 
@@ -415,15 +420,15 @@ export function PlayerProvider({
       });
 
       a.addEventListener("loadedmetadata", () => {
-        setDurationState(a.duration || 0);
+        if (a === audioRef.current) setDurationState(a.duration || 0);
       });
 
       a.addEventListener("ended", () => {
-        handleEnded();
+        if (a === audioRef.current) handleEnded();
       });
 
       a.addEventListener("error", () => {
-        if (a.src) {
+        if (a === audioRef.current && a.src) {
           setTimeout(() => {
             a.load();
             if (stateRef.current.currentSong) {
@@ -433,14 +438,29 @@ export function PlayerProvider({
         }
       });
 
-      a.addEventListener("play", () => setIsPlaying(true));
-      a.addEventListener("pause", () => setIsPlaying(false));
+      a.addEventListener("play", () => {
+        if (a === audioRef.current) setIsPlaying(true);
+      });
+
+      a.addEventListener("pause", () => {
+        if (a === audioRef.current && !crossfadeRef.current?.isCrossfading) setIsPlaying(false);
+      });
+    };
+
+    if (!audioRef.current) {
+      const a = new Audio();
+      a.preload = "auto";
+      (a as any).playsInline = true;
+      a.volume = volumeRef.current;
+      attachListeners(a);
+      audioRef.current = a;
     }
 
     if (!secondaryAudioRef.current) {
       const sec = new Audio();
       sec.preload = "auto";
       (sec as any).playsInline = true;
+      attachListeners(sec);
       secondaryAudioRef.current = sec;
     }
 
@@ -488,20 +508,9 @@ export function PlayerProvider({
     const a = audioRef.current;
     if (!a || !currentSong) return;
 
-    // Check if crossfade completed transition
-    if (crossfadeRef.current?.isCrossfading && secondaryAudioRef.current && secondaryAudioRef.current.src.includes(encodeURI(currentSong.audioUrl))) {
-      // Swap secondary audio into main audio
-      const temp = audioRef.current;
-      audioRef.current = secondaryAudioRef.current;
-      secondaryAudioRef.current = temp;
-
-      if (secondaryAudioRef.current) {
-        secondaryAudioRef.current.pause();
-        secondaryAudioRef.current.src = "";
-      }
-      audioRef.current.volume = volume;
-      crossfadeRef.current = null;
-      setIsPlaying(true);
+    // Check if crossfade is currently running for this track
+    if (crossfadeRef.current?.isCrossfading) {
+      // Live UI update triggered during crossfade: let crossfade engine continue
       return;
     }
 
