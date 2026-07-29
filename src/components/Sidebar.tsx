@@ -47,14 +47,6 @@ export default function Sidebar({ onNavigate, currentView, playlistIds }: Props)
           icon={<path d="M4 4h4v16H4Zm6 0h4v16h-4Zm6 0 4 1-3 15-4-1Z" />}
           label="Your Library"
         />
-        <SideLink
-          active={currentView === "admin"}
-          onClick={() => onNavigate("admin")}
-          icon={
-            <path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6Zm0 5 4 1.5v3c0 3-2 5.8-4 6.5-2-.7-4-3.5-4-6.5v-3Z" />
-          }
-          label="Admin"
-        />
       </nav>
 
       <div className="flex flex-col gap-1 overflow-y-auto">
@@ -122,7 +114,6 @@ export function MiniSidebar({
     { k: "home", l: "Home" },
     { k: "search", l: "Search" },
     { k: "library", l: "Library" },
-    { k: "admin", l: "Admin" },
   ];
   return (
     <nav className="flex items-center justify-around bg-black/80 backdrop-blur-xl border-t border-white/10 px-2 py-2 md:px-4 md:justify-center md:gap-2 shrink-0">

@@ -1,13 +1,11 @@
 import { useMemo } from "react";
-import { songs as allSongs, playlists } from "../data/songs";
 import { SongCard, SongRow } from "../components/SongList";
 import { usePlayer } from "../context/PlayerContext";
+import { useCatalog } from "../services/catalog";
 
 export default function PlaylistView({ playlistId }: { playlistId: string }) {
-  const playlist = useMemo(
-    () => playlists.find((p) => p.id === playlistId),
-    [playlistId],
-  );
+  const { playlists, songs } = useCatalog();
+  const playlist = useMemo(() => playlists.find((item) => item.id === playlistId), [playlistId, playlists]);
   const { playSong, shuffle, toggleShuffle } = usePlayer();
 
   if (!playlist) {
@@ -17,11 +15,8 @@ export default function PlaylistView({ playlistId }: { playlistId: string }) {
   }
 
   const playlistSongs = useMemo(
-    () =>
-      playlist.songIds
-        .map((id) => allSongs.find((s) => s.id === id))
-        .filter(Boolean) as typeof allSongs,
-    [playlist],
+    () => playlist.songIds.map((id) => songs.find((song) => song.id === id)).filter(Boolean) as typeof songs,
+    [playlist.songIds, songs],
   );
 
   const totalMinutes = playlistSongs.length * 4; // approximate

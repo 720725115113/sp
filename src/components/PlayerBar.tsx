@@ -82,6 +82,14 @@ export default function PlayerBar({
 
       {/* Right: volume */}
       <div className="hidden md:flex items-center justify-end gap-2">
+        <button onClick={() => p.toggleLike(song)} className={`h-8 w-8 grid place-items-center rounded-full ${p.likedSongIds.includes(song.id) ? "text-rose-400" : "text-white/70 hover:text-white"}`} aria-label="Like">
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill={p.likedSongIds.includes(song.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8">
+            <path d="M12 20s-6.5-4.2-8.5-8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 5.6C18.5 15.8 12 20 12 20Z" />
+          </svg>
+        </button>
+        <button onClick={() => p.setPlaybackSpeed(p.playbackSpeed === 1 ? 1.25 : p.playbackSpeed === 1.25 ? 1.5 : 1)} className="rounded-full border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-white/70 hover:text-white" aria-label="Playback speed">
+          {p.playbackSpeed.toFixed(2).replace(/\.00$/, "") + "x"}
+        </button>
         <IconBtn onClick={() => p.setVolume(p.volume > 0 ? 0 : 0.8)} label="Mute">
           {p.volume === 0 ? (
             <path d="M4 10v4h4l5 5V5L8 10H4Zm14.5 2-2.5-2.5L13.5 12 16 14.5 18.5 12Z" />

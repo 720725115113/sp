@@ -19,3 +19,21 @@ export interface Playlist {
   songIds: string[];
   color?: string;
 }
+
+export interface Artist {
+  id: string;
+  name: string;
+  coverUrl: string;
+  songIds: string[];
+  color?: string;
+}
+
+export interface Album {
+  id: string;
+  name: string;
+  artist: string;
+  coverUrl: string;
+  songIds: string[];
+  year?: number;
+  color?: string;
+}
