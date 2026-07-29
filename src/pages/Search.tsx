@@ -1,8 +1,7 @@
 import { useMemo, useState } from "react";
-import { SongCard, SongRow } from "../components/SongList";
+import { SongRow } from "../components/SongList";
 import { useCatalog } from "../services/catalog";
 import { usePlayer } from "../context/PlayerContext";
-import type { Album, Artist, Playlist, Song } from "../types";
 
 interface Props {
   onNavigate: (view: string, id?: string) => void;
@@ -40,7 +39,7 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
 
   return (
     <div className="animate-fade-in px-4 md:px-8 py-6 space-y-8 pb-16">
-      {/* Header & Voice / Input Search */}
+      {/* Header & Input Search */}
       <div className="space-y-4 max-w-3xl">
         <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight font-heading">Search</h1>
         
@@ -167,21 +166,29 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
         </div>
       )}
 
-      {/* Live Search Results */}
+      {/* Live Search Results (Windows Details View List for BOTH PC and Mobile) */}
       {isSearching && (
         <div className="space-y-8">
           {(activeChip === "all" || activeChip === "songs") && results.songs.length > 0 && (
             <section className="space-y-3">
-              <h2 className="text-xl font-extrabold text-white font-heading">Songs</h2>
-              <div className="hidden md:block glass-card-premium rounded-3xl overflow-hidden p-2 border border-white/10">
-                {results.songs.map((s, idx) => (
-                  <SongRow key={s.id} song={s} index={idx} queue={results.songs} />
-                ))}
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden gap-3">
-                {results.songs.map((s) => (
-                  <SongCard key={s.id} song={s} queue={results.songs} size="sm" />
-                ))}
+              <h2 className="text-xl font-extrabold text-white font-heading">Songs ({results.songs.length})</h2>
+              
+              {/* Windows Details View List for BOTH PC & MOBILE */}
+              <div className="glass-card-premium rounded-3xl overflow-hidden p-2 border border-white/10 shadow-xl">
+                <div className="grid grid-cols-[28px_minmax(0,3fr)_minmax(0,1.5fr)_auto] md:grid-cols-[36px_minmax(0,4fr)_minmax(0,2.5fr)_minmax(0,1fr)_auto_auto] gap-3 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-white/40 border-b border-white/10">
+                  <div className="text-center">#</div>
+                  <div>Title & Artist</div>
+                  <div className="hidden md:block">Album</div>
+                  <div className="hidden md:block text-right">Year</div>
+                  <div className="text-right">Time</div>
+                  <div className="w-7"></div>
+                </div>
+
+                <div className="divide-y divide-white/5">
+                  {results.songs.map((s, idx) => (
+                    <SongRow key={s.id} song={s} index={idx} queue={results.songs} />
+                  ))}
+                </div>
               </div>
             </section>
           )}

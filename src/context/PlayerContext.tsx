@@ -150,6 +150,7 @@ export function PlayerProvider({
   songs: Song[];
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
@@ -193,11 +194,11 @@ export function PlayerProvider({
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Audio element setup
+  // Ultra-Fast Low Latency Audio Initialization & Error Recovery
   useEffect(() => {
     if (!audioRef.current) {
       const a = new Audio();
-      a.preload = "metadata";
+      a.preload = "auto";
       a.volume = volume;
       audioRef.current = a;
 
@@ -214,19 +215,20 @@ export function PlayerProvider({
 
       a.addEventListener("loadedmetadata", () => {
         setDuration(a.duration || 0);
-        const activeSong = stateRef.current.currentSong;
-        if (activeSong?.id) {
-          const savedPos = progressBySongId[activeSong.id];
-          if (savedPos && savedPos > 0 && savedPos < a.duration - 1) {
-            a.currentTime = savedPos;
-            setElapsed(savedPos);
-            setProgress(savedPos / a.duration);
-          }
-        }
       });
 
       a.addEventListener("ended", () => {
         handleEnded();
+      });
+
+      a.addEventListener("error", () => {
+        // Auto recover on network stall
+        if (a.src) {
+          setTimeout(() => {
+            a.load();
+            a.play().catch(() => {});
+          }, 500);
+        }
       });
 
       a.addEventListener("play", () => setIsPlaying(true));
@@ -261,7 +263,7 @@ export function PlayerProvider({
     if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // Active song playback trigger with crossfade simulation
+  // INSTANT MILLISECOND PLAYBACK & PRELOADING NEXT TRACK
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !currentSong) return;
@@ -269,10 +271,28 @@ export function PlayerProvider({
     const targetUrl = currentSong.audioUrl;
     if (a.src !== targetUrl) {
       a.src = targetUrl;
+      a.currentTime = 0;
+      setElapsed(0);
+      setProgress(0);
       a.load();
     }
     a.playbackRate = playbackSpeed;
-    a.play().catch(() => setIsPlaying(false));
+    a.play().then(() => {
+      setIsPlaying(true);
+    }).catch(() => {
+      setIsPlaying(false);
+    });
+
+    // Background preloader for next song in queue for instant 0ms transitions
+    const nextSong = queue[currentIndex + 1];
+    if (nextSong) {
+      if (!preloadAudioRef.current) {
+        preloadAudioRef.current = new Audio();
+        preloadAudioRef.current.preload = "auto";
+      }
+      preloadAudioRef.current.src = nextSong.audioUrl;
+      preloadAudioRef.current.load();
+    }
   }, [currentSong?.id]);
 
   // Update recently played
@@ -403,6 +423,8 @@ export function PlayerProvider({
       }
     }
     setCurrentIndex(nextIndex);
+    setElapsed(0);
+    setProgress(0);
     setIsPlaying(true);
   };
 
@@ -422,6 +444,8 @@ export function PlayerProvider({
     setOriginalQueue(normalized);
     setQueue(playOrder);
     setCurrentIndex(finalIndex);
+    setElapsed(0);
+    setProgress(0);
     setIsPlaying(true);
     addToast(`Playing "${song.title}"`, "info");
   };
@@ -429,6 +453,8 @@ export function PlayerProvider({
   const playQueueIndex = (index: number) => {
     if (index < 0 || index >= queue.length) return;
     setCurrentIndex(index);
+    setElapsed(0);
+    setProgress(0);
     setIsPlaying(true);
   };
 
@@ -473,9 +499,10 @@ export function PlayerProvider({
       return;
     }
     if (a.paused) {
-      a.play().catch(() => setIsPlaying(false));
+      a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     } else {
       a.pause();
+      setIsPlaying(false);
     }
   };
 
@@ -493,6 +520,8 @@ export function PlayerProvider({
     let prevIndex = currentIndex - 1;
     if (prevIndex < 0) prevIndex = queue.length - 1;
     setCurrentIndex(prevIndex);
+    setElapsed(0);
+    setProgress(0);
     setIsPlaying(true);
   };
 
