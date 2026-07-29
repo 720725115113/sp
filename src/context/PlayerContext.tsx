@@ -128,7 +128,7 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
       volume: parsed.volume ?? 0.85,
       shuffle: parsed.shuffle ?? false,
       repeat: parsed.repeat ?? "off",
-      isPlaying: false,
+      isPlaying: parsed.isPlaying ?? false,
       likedSongIds: Array.isArray(parsed.likedSongIds) ? parsed.likedSongIds : [],
       recentlyPlayed: Array.isArray(parsed.recentlyPlayed) ? parsed.recentlyPlayed : [],
       playbackSpeed: parsed.playbackSpeed ?? 1,
@@ -151,12 +151,13 @@ export function PlayerProvider({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
+  const isInitialMountRef = useRef(true);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
   const [originalQueue, setOriginalQueue] = useState<Song[]>(() => persistedState.queue);
   const [currentIndex, setCurrentIndex] = useState<number>(() => persistedState.currentIndex);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(() => persistedState.isPlaying);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [elapsed, setElapsed] = useState(() => persistedState.elapsed);
@@ -222,11 +223,12 @@ export function PlayerProvider({
       });
 
       a.addEventListener("error", () => {
-        // Auto recover on network stall
         if (a.src) {
           setTimeout(() => {
             a.load();
-            a.play().catch(() => {});
+            if (stateRef.current.currentSong) {
+              a.play().catch(() => {});
+            }
           }, 500);
         }
       });
@@ -263,7 +265,7 @@ export function PlayerProvider({
     if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // INSTANT MILLISECOND PLAYBACK & PRELOADING NEXT TRACK
+  // PLAYBACK TRIGGER & STATE RESTORATION
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !currentSong) return;
@@ -271,19 +273,26 @@ export function PlayerProvider({
     const targetUrl = currentSong.audioUrl;
     if (a.src !== targetUrl) {
       a.src = targetUrl;
-      a.currentTime = 0;
-      setElapsed(0);
-      setProgress(0);
+      a.currentTime = persistedState.elapsed || 0;
+      setElapsed(persistedState.elapsed || 0);
       a.load();
     }
     a.playbackRate = playbackSpeed;
-    a.play().then(() => {
-      setIsPlaying(true);
-    }).catch(() => {
-      setIsPlaying(false);
-    });
 
-    // Background preloader for next song in queue for instant 0ms transitions
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
+      // On initial page visit or refresh: resume playback ONLY if user was actively playing before refresh
+      if (persistedState.isPlaying) {
+        a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      } else {
+        setIsPlaying(false);
+      }
+    } else {
+      // Direct user action to change/play track
+      a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    }
+
+    // Preload next track in queue
     const nextSong = queue[currentIndex + 1];
     if (nextSong) {
       if (!preloadAudioRef.current) {
@@ -315,7 +324,7 @@ export function PlayerProvider({
       volume,
       shuffle,
       repeat,
-      isPlaying: false,
+      isPlaying,
       likedSongIds,
       recentlyPlayed,
       playbackSpeed,
@@ -329,7 +338,7 @@ export function PlayerProvider({
     } catch {
       // Storage limits ignored
     }
-  }, [queue, currentIndex, elapsed, volume, shuffle, repeat, likedSongIds, recentlyPlayed, playbackSpeed, audioQuality, progressBySongId, customPlaylists, searchHistory, currentSong?.id]);
+  }, [queue, currentIndex, elapsed, volume, shuffle, repeat, isPlaying, likedSongIds, recentlyPlayed, playbackSpeed, audioQuality, progressBySongId, customPlaylists, searchHistory, currentSong?.id]);
 
   // Global Keyboard Shortcuts
   useEffect(() => {

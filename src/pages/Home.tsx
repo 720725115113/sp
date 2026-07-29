@@ -27,6 +27,12 @@ export default function Home({ onNavigate }: Props) {
 
   const featuredPlaylist = playlists[0] ?? null;
 
+  // Randomized Top Tracks on every page refresh / initial visit
+  const topTracks = useMemo(() => {
+    if (!songs.length) return [];
+    return shuffleArray(songs).slice(0, 6);
+  }, [songs]);
+
   const recent = useMemo(() => (recentlyPlayed.length ? recentlyPlayed : songs.slice(0, 8)), [recentlyPlayed, songs]);
   const trending = useMemo(() => (songs.length ? shuffleArray(songs).slice(0, 8) : []), [songs]);
   const recommended = useMemo(() => songs.slice(0, 10), [songs]);
@@ -140,7 +146,7 @@ export default function Home({ onNavigate }: Props) {
         </section>
       )}
 
-      {/* WINDOWS THIS PC / DETAILS VIEW FOR TOP 6 SONGS ON HOME SCREEN */}
+      {/* DYNAMIC RANDOMIZED TOP 6 TRACKS */}
       <Section title="Top Tracks">
         <div className="glass-card-premium rounded-3xl overflow-hidden p-2 border border-white/10 shadow-xl">
           {/* Header Row */}
@@ -153,10 +159,10 @@ export default function Home({ onNavigate }: Props) {
             <div className="w-7"></div>
           </div>
 
-          {/* Details List (Top 6 Songs) */}
+          {/* Details List (Dynamic Top 6 Songs) */}
           <div className="divide-y divide-white/5">
-            {songs.slice(0, 6).map((song, index) => (
-              <SongRow key={song.id} song={song} index={index} queue={songs.slice(0, 6)} />
+            {topTracks.map((song, index) => (
+              <SongRow key={song.id} song={song} index={index} queue={topTracks} />
             ))}
           </div>
         </div>
