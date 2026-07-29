@@ -92,9 +92,23 @@ interface PlayerState {
 }
 
 const PlayerContext = createContext<PlayerState | null>(null);
-const STORAGE_KEY = "wavelength-player-state-v3";
+const LIKED_STORAGE_KEY = "wavelength-liked-songs-permanent";
+const SETTINGS_STORAGE_KEY = "wavelength-settings-v1";
+
+function readPersistedLikedSongs(): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(LIKED_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
+  const likedSongIds = readPersistedLikedSongs();
   const fallback: PersistedPlayerState = {
     queue: defaultSongs,
     currentIndex: -1,
@@ -104,7 +118,7 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
     shuffle: false,
     repeat: "off",
     isPlaying: false,
-    likedSongIds: [],
+    likedSongIds,
     recentlyPlayed: [],
     playbackSpeed: 1,
     audioQuality: "high",
@@ -115,20 +129,20 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
   if (typeof window === "undefined") return fallback;
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(SETTINGS_STORAGE_KEY);
     if (!raw) return fallback;
     const parsed = JSON.parse(raw) as Partial<PersistedPlayerState>;
     return {
-      queue: Array.isArray(parsed.queue) && parsed.queue.length ? parsed.queue : defaultSongs,
-      currentIndex: parsed.currentIndex ?? -1,
-      currentSongId: parsed.currentSongId ?? null,
-      elapsed: 0, // Always reset progress to 0 on state read
+      queue: defaultSongs,
+      currentIndex: -1,
+      currentSongId: null,
+      elapsed: 0, // NO TRANSIENT PLAYBACK POSITION CACHE
       volume: parsed.volume ?? 0.85,
       shuffle: parsed.shuffle ?? false,
       repeat: parsed.repeat ?? "off",
-      isPlaying: parsed.isPlaying ?? false,
-      likedSongIds: Array.isArray(parsed.likedSongIds) ? parsed.likedSongIds : [],
-      recentlyPlayed: Array.isArray(parsed.recentlyPlayed) ? parsed.recentlyPlayed : [],
+      isPlaying: false, // DO NOT AUTOPLAY TRANSIENT POSITIONS
+      likedSongIds, // PERMANENT LIKED SONGS CACHE RESTORED
+      recentlyPlayed: [], // NO PLAYED SONGS POSITION CACHE
       playbackSpeed: parsed.playbackSpeed ?? 1,
       audioQuality: parsed.audioQuality ?? "high",
       customPlaylists: Array.isArray(parsed.customPlaylists) ? parsed.customPlaylists : [],
@@ -148,13 +162,12 @@ export function PlayerProvider({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
-  const isInitialMountRef = useRef(true);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
   const [originalQueue, setOriginalQueue] = useState<Song[]>(() => persistedState.queue);
-  const [currentIndex, setCurrentIndex] = useState<number>(() => persistedState.currentIndex);
-  const [isPlaying, setIsPlaying] = useState(() => persistedState.isPlaying);
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [elapsed, setElapsed] = useState(0);
@@ -164,7 +177,7 @@ export function PlayerProvider({
   const [playbackSpeed, setPlaybackSpeedState] = useState(() => persistedState.playbackSpeed);
   const [audioQuality, setAudioQualityState] = useState<AudioQuality>(() => persistedState.audioQuality);
   const [likedSongIds, setLikedSongIds] = useState<string[]>(() => persistedState.likedSongIds);
-  const [recentlyPlayed, setRecentlyPlayed] = useState<Song[]>(() => persistedState.recentlyPlayed);
+  const [recentlyPlayed, setRecentlyPlayed] = useState<Song[]>([]);
   const [customPlaylists, setCustomPlaylists] = useState<Playlist[]>(() => persistedState.customPlaylists);
   const [searchHistory, setSearchHistory] = useState<string[]>(() => persistedState.searchHistory);
   const [sleepTimerSeconds, setSleepTimerSeconds] = useState<number | null>(null);
@@ -191,7 +204,7 @@ export function PlayerProvider({
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Ultra-Fast Low-Latency Audio Engine
+  // Ultra-Fast Audio Engine
   useEffect(() => {
     if (!audioRef.current) {
       const a = new Audio();
@@ -257,7 +270,7 @@ export function PlayerProvider({
     if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // INSTANT SUB-MILLISECOND PLAYBACK & ALWAYS START FROM 0:00 SECONDS
+  // INSTANT SUB-MILLISECOND PLAYBACK STARTING AT 0:00 SECONDS
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !currentSong) return;
@@ -265,31 +278,20 @@ export function PlayerProvider({
     const targetUrl = currentSong.audioUrl;
     if (a.src !== targetUrl) {
       a.src = targetUrl;
-      a.currentTime = 0; // ALWAYS FORCE START FROM 0:00 (0 MILLISECONDS)
+      a.currentTime = 0; // ALWAYS START FROM 0 SECONDS
       setElapsed(0);
       setProgress(0);
       a.load();
     } else {
-      // Re-triggering same song: force start from 0:00
       a.currentTime = 0;
       setElapsed(0);
       setProgress(0);
     }
     a.playbackRate = playbackSpeed;
 
-    if (isInitialMountRef.current) {
-      isInitialMountRef.current = false;
-      if (persistedState.isPlaying) {
-        a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-      } else {
-        setIsPlaying(false);
-      }
-    } else {
-      // Immediate millisecond start from 0sec on track change
-      a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-    }
+    a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
 
-    // Preload next track in queue
+    // Preload next track
     const nextSong = queue[currentIndex + 1];
     if (nextSong) {
       if (!preloadAudioRef.current) {
@@ -310,31 +312,34 @@ export function PlayerProvider({
     });
   }, [currentSong?.id]);
 
-  // Persist state
+  // PERMANENTLY SAVE LIKED SONGS TO LOCAL DEVICE MEMORY
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const payload: PersistedPlayerState = {
-      queue,
-      currentIndex,
-      currentSongId: currentSong?.id ?? null,
-      elapsed: 0,
-      volume,
-      shuffle,
-      repeat,
-      isPlaying,
-      likedSongIds,
-      recentlyPlayed,
-      playbackSpeed,
-      audioQuality,
-      customPlaylists,
-      searchHistory,
-    };
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      window.localStorage.setItem(LIKED_STORAGE_KEY, JSON.stringify(likedSongIds));
     } catch {
-      // Ignore quota limits
+      // Storage limits ignored
     }
-  }, [queue, currentIndex, volume, shuffle, repeat, isPlaying, likedSongIds, recentlyPlayed, playbackSpeed, audioQuality, customPlaylists, searchHistory, currentSong?.id]);
+  }, [likedSongIds]);
+
+  // Save general settings
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const payload = {
+        volume,
+        shuffle,
+        repeat,
+        playbackSpeed,
+        audioQuality,
+        customPlaylists,
+        searchHistory,
+      };
+      window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(payload));
+    } catch {
+      // Storage limits ignored
+    }
+  }, [volume, shuffle, repeat, playbackSpeed, audioQuality, customPlaylists, searchHistory]);
 
   // Keyboard Shortcuts
   useEffect(() => {
@@ -430,7 +435,7 @@ export function PlayerProvider({
       }
     }
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // FORCE INSTANT 0 SECONDS ON NEXT TRACK
+      audioRef.current.currentTime = 0; // FORCE 0 SECONDS ON NEXT
     }
     setElapsed(0);
     setProgress(0);
@@ -452,7 +457,7 @@ export function PlayerProvider({
     const finalIndex = idx >= 0 ? idx : 0;
     
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // FORCE INSTANT 0 SECONDS ON PLAY CLICK
+      audioRef.current.currentTime = 0; // FORCE 0 SECONDS ON PLAY
     }
     setOriginalQueue(normalized);
     setQueue(playOrder);
@@ -466,7 +471,7 @@ export function PlayerProvider({
   const playQueueIndex = (index: number) => {
     if (index < 0 || index >= queue.length) return;
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // FORCE INSTANT 0 SECONDS
+      audioRef.current.currentTime = 0; // FORCE 0 SECONDS
     }
     setElapsed(0);
     setProgress(0);
@@ -527,7 +532,7 @@ export function PlayerProvider({
   const prev = () => {
     const a = audioRef.current;
     if (a) {
-      a.currentTime = 0; // FORCE INSTANT 0 SECONDS ON PREV
+      a.currentTime = 0; // FORCE 0 SECONDS ON PREV
     }
     setElapsed(0);
     setProgress(0);
