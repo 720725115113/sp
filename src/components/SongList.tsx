@@ -1,7 +1,8 @@
+import { memo } from "react";
 import type { Song } from "../types";
 import { usePlayer } from "../context/PlayerContext";
 
-export function SongCard({
+function SongCardComponent({
   song,
   onClick,
   queue,
@@ -109,8 +110,9 @@ export function SongCard({
   );
 }
 
-{/* Windows This PC / Details View Row */}
-export function SongRow({
+export const SongCard = memo(SongCardComponent);
+
+function SongRowComponent({
   song,
   index,
   onClick,
@@ -215,3 +217,5 @@ export function SongRow({
     </div>
   );
 }
+
+export const SongRow = memo(SongRowComponent);

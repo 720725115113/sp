@@ -35,6 +35,8 @@ interface PersistedPlayerState {
   searchHistory: string[];
 }
 
+export type ProgressListener = (data: { elapsed: number; progress: number; duration: number }) => void;
+
 interface PlayerState {
   queue: Song[];
   originalQueue: Song[];
@@ -57,6 +59,7 @@ interface PlayerState {
   searchHistory: string[];
   toasts: Toast[];
   
+  subscribeProgress: (cb: ProgressListener) => () => void;
   playSong: (song: Song, queue?: Song[]) => void;
   playQueueIndex: (index: number) => void;
   playNext: (song: Song) => void;
@@ -94,6 +97,7 @@ interface PlayerState {
 const PlayerContext = createContext<PlayerState | null>(null);
 const LIKED_STORAGE_KEY = "wavelength-liked-songs-permanent";
 const SETTINGS_STORAGE_KEY = "wavelength-settings-v1";
+const SESSION_PLAYBACK_KEY = "wavelength-player-session";
 const SILENT_AUDIO_URI = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
 
 function readPersistedLikedSongs(): string[] {
@@ -117,7 +121,7 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
     elapsed: 0,
     volume: 0.85,
     shuffle: false,
-    repeat: "off",
+    repeat: "all", // DEFAULT CONTINUOUS LOOP MODE
     isPlaying: false,
     likedSongIds,
     recentlyPlayed: [],
@@ -130,24 +134,38 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
   if (typeof window === "undefined") return fallback;
 
   try {
-    const raw = window.localStorage.getItem(SETTINGS_STORAGE_KEY);
-    if (!raw) return fallback;
-    const parsed = JSON.parse(raw) as Partial<PersistedPlayerState>;
+    const rawSettings = window.localStorage.getItem(SETTINGS_STORAGE_KEY);
+    const rawSession = window.localStorage.getItem(SESSION_PLAYBACK_KEY);
+    
+    let parsedSettings: Partial<PersistedPlayerState> = {};
+    let parsedSession: Partial<PersistedPlayerState> = {};
+
+    if (rawSettings) {
+      try { parsedSettings = JSON.parse(rawSettings); } catch {}
+    }
+    if (rawSession) {
+      try { parsedSession = JSON.parse(rawSession); } catch {}
+    }
+
+    const savedRecentlyPlayed = Array.isArray(parsedSession.recentlyPlayed || parsedSettings.recentlyPlayed)
+      ? (parsedSession.recentlyPlayed || parsedSettings.recentlyPlayed || []).slice(0, 3) // STRICTLY 3 PREVIOUS SONGS
+      : [];
+
     return {
       queue: defaultSongs,
-      currentIndex: -1,
-      currentSongId: null,
-      elapsed: 0,
-      volume: parsed.volume ?? 0.85,
-      shuffle: parsed.shuffle ?? false,
-      repeat: parsed.repeat ?? "off",
+      currentIndex: typeof parsedSession.currentIndex === "number" ? parsedSession.currentIndex : -1,
+      currentSongId: parsedSession.currentSongId ?? null,
+      elapsed: parsedSession.elapsed ?? 0,
+      volume: parsedSettings.volume ?? 0.85,
+      shuffle: parsedSettings.shuffle ?? false,
+      repeat: parsedSettings.repeat ?? "all", // CONTINUOUS PLAYBACK DEFAULT
       isPlaying: false,
       likedSongIds,
-      recentlyPlayed: [],
-      playbackSpeed: parsed.playbackSpeed ?? 1,
-      audioQuality: parsed.audioQuality ?? "high",
-      customPlaylists: Array.isArray(parsed.customPlaylists) ? parsed.customPlaylists : [],
-      searchHistory: Array.isArray(parsed.searchHistory) ? parsed.searchHistory : fallback.searchHistory,
+      recentlyPlayed: savedRecentlyPlayed,
+      playbackSpeed: parsedSettings.playbackSpeed ?? 1,
+      audioQuality: parsedSettings.audioQuality ?? "high",
+      customPlaylists: Array.isArray(parsedSettings.customPlaylists) ? parsedSettings.customPlaylists : [],
+      searchHistory: Array.isArray(parsedSettings.searchHistory) ? parsedSettings.searchHistory : fallback.searchHistory,
     };
   } catch {
     return fallback;
@@ -162,27 +180,29 @@ export function PlayerProvider({
   songs: Song[];
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const secondaryAudioRef = useRef<HTMLAudioElement | null>(null);
   const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
   const silentAudioRef = useRef<HTMLAudioElement | null>(null);
   const wakeLockRef = useRef<any>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const oscRef = useRef<OscillatorNode | null>(null);
+
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
   const [originalQueue, setOriginalQueue] = useState<Song[]>(() => persistedState.queue);
-  const [currentIndex, setCurrentIndex] = useState<number>(-1);
+  const [currentIndex, setCurrentIndex] = useState<number>(() => persistedState.currentIndex);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [elapsed, setElapsed] = useState(0);
+  const [progress, setProgressState] = useState(0);
+  const [duration, setDurationState] = useState(0);
+  const [elapsed, setElapsedState] = useState(0);
   const [volume, setVolumeState] = useState(() => persistedState.volume);
   const [shuffle, setShuffle] = useState(() => persistedState.shuffle);
   const [repeat, setRepeat] = useState<"off" | "all" | "one">(() => persistedState.repeat);
   const [playbackSpeed, setPlaybackSpeedState] = useState(() => persistedState.playbackSpeed);
   const [audioQuality, setAudioQualityState] = useState<AudioQuality>(() => persistedState.audioQuality);
   const [likedSongIds, setLikedSongIds] = useState<string[]>(() => persistedState.likedSongIds);
-  const [recentlyPlayed, setRecentlyPlayed] = useState<Song[]>([]);
+  const [recentlyPlayed, setRecentlyPlayed] = useState<Song[]>(() => persistedState.recentlyPlayed.slice(0, 3));
   const [customPlaylists, setCustomPlaylists] = useState<Playlist[]>(() => persistedState.customPlaylists);
   const [searchHistory, setSearchHistory] = useState<string[]>(() => persistedState.searchHistory);
   const [sleepTimerSeconds, setSleepTimerSeconds] = useState<number | null>(null);
@@ -191,19 +211,41 @@ export function PlayerProvider({
   const currentSong = currentIndex >= 0 && currentIndex < queue.length ? queue[currentIndex] : null;
   const upNext = currentIndex >= 0 && currentIndex < queue.length - 1 ? queue.slice(currentIndex + 1, currentIndex + 50) : [];
 
+  // High-frequency time listeners (prevents React top-level context re-renders)
+  const progressListenersRef = useRef<Set<ProgressListener>>(new Set());
+  const crossfadeRef = useRef<{ isCrossfading: boolean; nextIndex: number } | null>(null);
+
+  const isPlayingRef = useRef(isPlaying);
+  const volumeRef = useRef(volume);
+  const playbackSpeedRef = useRef(playbackSpeed);
+  const durationRef = useRef(duration);
   const stateRef = useRef({ repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue });
+
+  useEffect(() => { isPlayingRef.current = isPlaying; }, [isPlaying]);
+  useEffect(() => { volumeRef.current = volume; }, [volume]);
+  useEffect(() => { playbackSpeedRef.current = playbackSpeed; }, [playbackSpeed]);
+  useEffect(() => { durationRef.current = duration; }, [duration]);
   useEffect(() => {
     stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue };
   }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue]);
 
-  // UNLIMITED BACKGROUND AUDIO & EXTREME POWER SAVER BYPASS ENGINE
+  const subscribeProgress = (cb: ProgressListener) => {
+    progressListenersRef.current.add(cb);
+    return () => {
+      progressListenersRef.current.delete(cb);
+    };
+  };
+
+  const notifyProgress = (el: number, prog: number, dur: number) => {
+    progressListenersRef.current.forEach((fn) => fn({ elapsed: el, progress: prog, duration: dur }));
+  };
+
+  // UNLIMITED BACKGROUND AUDIO & EXTREME POWER SAVER KEEP-ALIVE
   const requestWakeLock = async () => {
     if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
       try {
         wakeLockRef.current = await (navigator as any).wakeLock.request("screen");
-      } catch {
-        // WakeLock request ignored
-      }
+      } catch {}
     }
   };
 
@@ -212,13 +254,10 @@ export function PlayerProvider({
       try {
         await wakeLockRef.current.release();
         wakeLockRef.current = null;
-      } catch {
-        // WakeLock release ignored
-      }
+      } catch {}
     }
   };
 
-  // Anti-Battery Saver Web Audio Oscillator Node Keep-Alive
   const keepAudioActive = () => {
     try {
       if (!audioCtxRef.current) {
@@ -234,8 +273,8 @@ export function PlayerProvider({
         const osc = audioCtxRef.current.createOscillator();
         const gain = audioCtxRef.current.createGain();
         osc.type = "sine";
-        osc.frequency.value = 20; // 20Hz sub-audible hardware pulse
-        gain.gain.value = 0.00001; // virtually silent
+        osc.frequency.value = 20; // 20Hz sub-audible keep-alive pulse
+        gain.gain.value = 0.00001;
         osc.connect(gain);
         gain.connect(audioCtxRef.current.destination);
         osc.start();
@@ -244,9 +283,7 @@ export function PlayerProvider({
       if (silentAudioRef.current) {
         silentAudioRef.current.play().catch(() => {});
       }
-    } catch {
-      // AudioContext fallback
-    }
+    } catch {}
   };
 
   useEffect(() => {
@@ -260,34 +297,51 @@ export function PlayerProvider({
   }, [isPlaying]);
 
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (isPlaying) {
+    const handleVisibilityOrLock = () => {
+      if (isPlayingRef.current) {
         requestWakeLock();
         keepAudioActive();
+        if (audioRef.current && audioRef.current.paused) {
+          audioRef.current.play().catch(() => {});
+        }
       }
     };
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("pagehide", handleVisibilityChange);
-    window.addEventListener("blur", handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityOrLock);
+    window.addEventListener("pagehide", handleVisibilityOrLock);
+    window.addEventListener("blur", handleVisibilityOrLock);
+    window.addEventListener("focus", handleVisibilityOrLock);
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("pagehide", handleVisibilityChange);
-      window.removeEventListener("blur", handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityOrLock);
+      window.removeEventListener("pagehide", handleVisibilityOrLock);
+      window.removeEventListener("blur", handleVisibilityOrLock);
+      window.removeEventListener("focus", handleVisibilityOrLock);
     };
-  }, [isPlaying]);
+  }, []);
 
-  // Web Lock API to prevent tab discards on lockscreen & extreme power saver mode
+  // Web Lock API to prevent tab/process killing in screen-off & extreme power saver mode
   useEffect(() => {
     if (typeof navigator !== "undefined" && "locks" in navigator && isPlaying) {
       (navigator as any).locks.request("wavelength_unlimited_background_audio", { mode: "shared" }, () => {
-        return new Promise(() => {
-          // Keeps background audio process alive indefinitely when screen is off
-        });
+        return new Promise(() => {});
       }).catch(() => {});
     }
   }, [isPlaying]);
 
-  // Toasts
+  // Cancel any active 3-second crossfade
+  const cancelCrossfade = () => {
+    if (crossfadeRef.current?.isCrossfading) {
+      crossfadeRef.current = null;
+      if (secondaryAudioRef.current) {
+        secondaryAudioRef.current.pause();
+        secondaryAudioRef.current.src = "";
+      }
+      if (audioRef.current) {
+        audioRef.current.volume = volumeRef.current;
+      }
+    }
+  };
+
+  // Toast System
   const addToast = (message: string, type: Toast["type"] = "info") => {
     const id = `toast-${Date.now()}-${Math.random()}`;
     setToasts((prev) => [...prev, { id, message, type }]);
@@ -300,23 +354,68 @@ export function PlayerProvider({
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Low-Latency Audio Engine & Silent Background Audio Anchor
+  // Audio Engine & Dual Audio Crossfade Listener
   useEffect(() => {
     if (!audioRef.current) {
       const a = new Audio();
       a.preload = "auto";
-      a.volume = volume;
+      (a as any).playsInline = true;
+      a.volume = volumeRef.current;
       audioRef.current = a;
 
       a.addEventListener("timeupdate", () => {
         if (!a.duration) return;
         const cur = a.currentTime;
-        setElapsed(cur);
-        setProgress(cur / a.duration);
+        const dur = a.duration;
+        const prog = cur / dur;
+        const rem = dur - cur;
+
+        notifyProgress(cur, prog, dur);
+
+        // TRIGGER 3-SECOND CROSSFADE INTO NEXT SONG WITH VOLUME FADE
+        if (rem <= 3.0 && dur > 4.0 && !crossfadeRef.current && isPlayingRef.current) {
+          const { queue: q, currentIndex: idx, repeat: r } = stateRef.current;
+          let nextIdx = idx + 1;
+          if (nextIdx >= q.length) {
+            nextIdx = (r === "all" || r === "off") ? 0 : -1; // Default continuous loop
+          }
+          if (r === "one") nextIdx = idx;
+
+          if (nextIdx >= 0 && nextIdx < q.length) {
+            const upcomingTrack = q[nextIdx];
+            crossfadeRef.current = { isCrossfading: true, nextIndex: nextIdx };
+
+            if (!secondaryAudioRef.current) {
+              const sec = new Audio();
+              sec.preload = "auto";
+              (sec as any).playsInline = true;
+              secondaryAudioRef.current = sec;
+            }
+
+            const sec = secondaryAudioRef.current;
+            sec.src = upcomingTrack.audioUrl;
+            sec.currentTime = 0;
+            sec.volume = 0;
+            sec.playbackRate = playbackSpeedRef.current;
+            sec.play().catch(() => {});
+          }
+        }
+
+        // FADE VOLUME DURING LAST 3 SECONDS
+        if (crossfadeRef.current?.isCrossfading) {
+          const fadeProgress = Math.min(1, Math.max(0, (3.0 - rem) / 3.0)); // 0 at 3s remaining, 1 at 0s
+          const maxVol = volumeRef.current;
+          // Reduce current playing song volume slightly down to 0
+          a.volume = Math.max(0, maxVol * (1 - fadeProgress));
+          // Increase upcoming next song sound louder up to maximum volume
+          if (secondaryAudioRef.current) {
+            secondaryAudioRef.current.volume = Math.min(maxVol, maxVol * fadeProgress);
+          }
+        }
       });
 
       a.addEventListener("loadedmetadata", () => {
-        setDuration(a.duration || 0);
+        setDurationState(a.duration || 0);
       });
 
       a.addEventListener("ended", () => {
@@ -336,6 +435,13 @@ export function PlayerProvider({
 
       a.addEventListener("play", () => setIsPlaying(true));
       a.addEventListener("pause", () => setIsPlaying(false));
+    }
+
+    if (!secondaryAudioRef.current) {
+      const sec = new Audio();
+      sec.preload = "auto";
+      (sec as any).playsInline = true;
+      secondaryAudioRef.current = sec;
     }
 
     if (!silentAudioRef.current) {
@@ -365,38 +471,57 @@ export function PlayerProvider({
     return () => clearInterval(timer);
   }, [sleepTimerSeconds]);
 
-  // Volume & Speed effects
+  // Volume & Speed sync
   useEffect(() => {
-    if (audioRef.current) audioRef.current.volume = volume;
+    if (audioRef.current && !crossfadeRef.current?.isCrossfading) {
+      audioRef.current.volume = volume;
+    }
   }, [volume]);
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
+    if (secondaryAudioRef.current) secondaryAudioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // INSTANT SUB-MILLISECOND PLAYBACK STARTING AT 0:00 SECONDS
+  // Playback execution when track changes
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !currentSong) return;
 
+    // Check if crossfade completed transition
+    if (crossfadeRef.current?.isCrossfading && secondaryAudioRef.current && secondaryAudioRef.current.src.includes(encodeURI(currentSong.audioUrl))) {
+      // Swap secondary audio into main audio
+      const temp = audioRef.current;
+      audioRef.current = secondaryAudioRef.current;
+      secondaryAudioRef.current = temp;
+
+      if (secondaryAudioRef.current) {
+        secondaryAudioRef.current.pause();
+        secondaryAudioRef.current.src = "";
+      }
+      audioRef.current.volume = volume;
+      crossfadeRef.current = null;
+      setIsPlaying(true);
+      return;
+    }
+
+    cancelCrossfade();
+
     const targetUrl = currentSong.audioUrl;
     if (a.src !== targetUrl) {
       a.src = targetUrl;
-      a.currentTime = 0; // ALWAYS START FROM 0 SECONDS
-      setElapsed(0);
-      setProgress(0);
-      a.load();
-    } else {
       a.currentTime = 0;
-      setElapsed(0);
-      setProgress(0);
+      setElapsedState(0);
+      setProgressState(0);
+      notifyProgress(0, 0, a.duration || 0);
+      a.load();
     }
     a.playbackRate = playbackSpeed;
 
     keepAudioActive();
     a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
 
-    // Preload next track
+    // Preload upcoming track
     const nextSong = queue[currentIndex + 1];
     if (nextSong) {
       if (!preloadAudioRef.current) {
@@ -413,25 +538,22 @@ export function PlayerProvider({
     if (!currentSong) return;
     setRecentlyPlayed((prev) => {
       const filtered = prev.filter((s) => s.id !== currentSong.id);
-      return [currentSong, ...filtered].slice(0, 3); // STRICT LIMIT: EXACTLY 3 PREVIOUS SONGS
+      return [currentSong, ...filtered].slice(0, 3); // STRICT LIMIT: EXACTLY 3 PREVIOUS SONGS STATUS ONLY
     });
   }, [currentSong?.id]);
 
-  // PERMANENTLY SAVE LIKED SONGS TO LOCAL DEVICE MEMORY
+  // PERMANENT LOCAL STORAGE SAVING FOR LIKED SONGS & SESSION STATE
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
       window.localStorage.setItem(LIKED_STORAGE_KEY, JSON.stringify(likedSongIds));
-    } catch {
-      // Storage limits ignored
-    }
+    } catch {}
   }, [likedSongIds]);
 
-  // Save general settings
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
-      const payload = {
+      const payloadSettings = {
         volume,
         shuffle,
         repeat,
@@ -440,11 +562,17 @@ export function PlayerProvider({
         customPlaylists,
         searchHistory,
       };
-      window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(payload));
-    } catch {
-      // Storage limits ignored
-    }
-  }, [volume, shuffle, repeat, playbackSpeed, audioQuality, customPlaylists, searchHistory]);
+      window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(payloadSettings));
+
+      const payloadSession = {
+        currentIndex,
+        currentSongId: currentSong?.id ?? null,
+        elapsed,
+        recentlyPlayed: recentlyPlayed.slice(0, 3), // 3 PREVIOUS SONGS ONLY
+      };
+      window.localStorage.setItem(SESSION_PLAYBACK_KEY, JSON.stringify(payloadSession));
+    } catch {}
+  }, [volume, shuffle, repeat, playbackSpeed, audioQuality, customPlaylists, searchHistory, currentIndex, currentSong?.id, elapsed, recentlyPlayed]);
 
   // Keyboard Shortcuts
   useEffect(() => {
@@ -493,7 +621,7 @@ export function PlayerProvider({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [volume, currentSong]);
 
-  // FULL LOCKSCREEN, NOTIFICATION & SYSTEM MEDIA SESSION INTEGRATION
+  // MEDIA SESSION API (LOCKSCREEN & CONTROL CENTER CONTINUOUS AUDIO)
   useEffect(() => {
     if (!navigator.mediaSession || !currentSong) return;
 
@@ -520,9 +648,7 @@ export function PlayerProvider({
           position: Math.min(elapsed, duration),
         });
       }
-    } catch {
-      // PositionState fallback
-    }
+    } catch {}
 
     navigator.mediaSession.setActionHandler("play", () => togglePlay());
     navigator.mediaSession.setActionHandler("pause", () => togglePlay());
@@ -534,6 +660,7 @@ export function PlayerProvider({
     navigator.mediaSession.setActionHandler("seekbackward", () => seekToSeconds(Math.max(0, elapsed - 10)));
     navigator.mediaSession.setActionHandler("seekforward", () => seekToSeconds(Math.min(duration, elapsed + 10)));
     navigator.mediaSession.setActionHandler("stop", () => {
+      cancelCrossfade();
       if (audioRef.current) audioRef.current.pause();
       if (silentAudioRef.current) silentAudioRef.current.pause();
       setIsPlaying(false);
@@ -541,12 +668,33 @@ export function PlayerProvider({
   }, [currentSong?.id, isPlaying, elapsed, duration, playbackSpeed]);
 
   const handleEnded = () => {
+    if (crossfadeRef.current?.isCrossfading) {
+      const nextIdx = crossfadeRef.current.nextIndex;
+      if (secondaryAudioRef.current) {
+        const temp = audioRef.current;
+        audioRef.current = secondaryAudioRef.current;
+        secondaryAudioRef.current = temp;
+        if (secondaryAudioRef.current) {
+          secondaryAudioRef.current.pause();
+          secondaryAudioRef.current.src = "";
+        }
+        if (audioRef.current) {
+          audioRef.current.volume = volumeRef.current;
+        }
+      }
+      crossfadeRef.current = null;
+      setCurrentIndex(nextIdx);
+      setIsPlaying(true);
+      return;
+    }
+
     const { repeat: r } = stateRef.current;
     if (r === "one") {
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        setElapsed(0);
-        setProgress(0);
+        setElapsedState(0);
+        setProgressState(0);
+        notifyProgress(0, 0, audioRef.current.duration || 0);
         audioRef.current.play();
       }
       return;
@@ -555,27 +703,30 @@ export function PlayerProvider({
   };
 
   const goNext = (auto = false) => {
+    cancelCrossfade();
     const { queue: q, currentIndex: idx } = stateRef.current;
     if (q.length === 0) return;
     let nextIndex = idx + 1;
     if (nextIndex >= q.length) {
-      if (stateRef.current.repeat === "all") {
-        nextIndex = 0;
+      if (stateRef.current.repeat === "all" || stateRef.current.repeat === "off") {
+        nextIndex = 0; // CONTINUOUS LOOP MODE
       } else {
         if (auto) setIsPlaying(false);
         return;
       }
     }
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // FORCE 0 SECONDS ON NEXT
+      audioRef.current.currentTime = 0;
     }
-    setElapsed(0);
-    setProgress(0);
+    setElapsedState(0);
+    setProgressState(0);
+    notifyProgress(0, 0, audioRef.current?.duration || 0);
     setCurrentIndex(nextIndex);
     setIsPlaying(true);
   };
 
   const playSong = (song: Song, newQueue?: Song[]) => {
+    cancelCrossfade();
     const source = newQueue ?? (originalQueue.length ? originalQueue : songs);
     const normalized = source.filter(Boolean);
     
@@ -589,24 +740,27 @@ export function PlayerProvider({
     const finalIndex = idx >= 0 ? idx : 0;
     
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // FORCE 0 SECONDS ON PLAY
+      audioRef.current.currentTime = 0;
     }
     setOriginalQueue(normalized);
     setQueue(playOrder);
     setCurrentIndex(finalIndex);
-    setElapsed(0);
-    setProgress(0);
+    setElapsedState(0);
+    setProgressState(0);
+    notifyProgress(0, 0, 0);
     setIsPlaying(true);
     addToast(`Playing "${song.title}"`, "info");
   };
 
   const playQueueIndex = (index: number) => {
+    cancelCrossfade();
     if (index < 0 || index >= queue.length) return;
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // FORCE 0 SECONDS
+      audioRef.current.currentTime = 0;
     }
-    setElapsed(0);
-    setProgress(0);
+    setElapsedState(0);
+    setProgressState(0);
+    notifyProgress(0, 0, 0);
     setCurrentIndex(index);
     setIsPlaying(true);
   };
@@ -655,6 +809,7 @@ export function PlayerProvider({
       keepAudioActive();
       a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     } else {
+      cancelCrossfade();
       a.pause();
       if (silentAudioRef.current) silentAudioRef.current.pause();
       setIsPlaying(false);
@@ -664,12 +819,14 @@ export function PlayerProvider({
   const next = () => goNext(false);
 
   const prev = () => {
+    cancelCrossfade();
     const a = audioRef.current;
     if (a) {
-      a.currentTime = 0; // FORCE 0 SECONDS ON PREV
+      a.currentTime = 0;
     }
-    setElapsed(0);
-    setProgress(0);
+    setElapsedState(0);
+    setProgressState(0);
+    notifyProgress(0, 0, 0);
 
     if (queue.length === 0) return;
     let prevIndex = currentIndex - 1;
@@ -679,25 +836,33 @@ export function PlayerProvider({
   };
 
   const seek = (ratio: number) => {
+    cancelCrossfade();
     const a = audioRef.current;
     if (!a || !a.duration) return;
     const nextSec = Math.max(0, Math.min(1, ratio)) * a.duration;
     a.currentTime = nextSec;
-    setElapsed(nextSec);
-    setProgress(ratio);
+    setElapsedState(nextSec);
+    setProgressState(ratio);
+    notifyProgress(nextSec, ratio, a.duration);
   };
 
   const seekToSeconds = (seconds: number) => {
+    cancelCrossfade();
     const a = audioRef.current;
     if (!a || !a.duration) return;
     const clamped = Math.max(0, Math.min(a.duration, seconds));
     a.currentTime = clamped;
-    setElapsed(clamped);
-    setProgress(clamped / a.duration);
+    setElapsedState(clamped);
+    setProgressState(clamped / a.duration);
+    notifyProgress(clamped, clamped / a.duration, a.duration);
   };
 
   const setVolume = (v: number) => {
-    setVolumeState(Math.max(0, Math.min(1, v)));
+    const val = Math.max(0, Math.min(1, v));
+    setVolumeState(val);
+    if (audioRef.current && !crossfadeRef.current?.isCrossfading) {
+      audioRef.current.volume = val;
+    }
   };
 
   const toggleShuffle = () => {
@@ -728,7 +893,7 @@ export function PlayerProvider({
   const cycleRepeat = () => {
     setRepeat((r) => {
       const nextR = r === "off" ? "all" : r === "all" ? "one" : "off";
-      addToast(`Repeat ${nextR}`, "info");
+      addToast(`Repeat ${nextR.toUpperCase()}`, "info");
       return nextR;
     });
   };
@@ -858,6 +1023,7 @@ export function PlayerProvider({
         searchHistory,
         toasts,
 
+        subscribeProgress,
         playSong,
         playQueueIndex,
         playNext,
@@ -901,6 +1067,23 @@ export function usePlayer() {
   const ctx = useContext(PlayerContext);
   if (!ctx) throw new Error("usePlayer must be used inside PlayerProvider");
   return ctx;
+}
+
+export function usePlayerProgress() {
+  const p = usePlayer();
+  const [progressData, setProgressData] = useState({
+    elapsed: p.elapsed,
+    progress: p.progress,
+    duration: p.duration,
+  });
+
+  useEffect(() => {
+    return p.subscribeProgress((data) => {
+      setProgressData(data);
+    });
+  }, [p]);
+
+  return progressData;
 }
 
 export function formatTime(sec: number) {

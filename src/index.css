@@ -38,6 +38,8 @@ h1, h2, h3, h4, .font-heading {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .ambient-orb-1 {
@@ -47,7 +49,9 @@ h1, h2, h3, h4, .font-heading {
   width: 600px;
   height: 600px;
   background: radial-gradient(circle, rgba(109, 94, 248, 0.18) 0%, rgba(24, 226, 154, 0.05) 50%, transparent 70%);
-  filter: blur(80px);
+  filter: blur(60px);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
   animation: floatOrb 20s ease-in-out infinite alternate;
 }
 
@@ -58,32 +62,36 @@ h1, h2, h3, h4, .font-heading {
   width: 500px;
   height: 500px;
   background: radial-gradient(circle, rgba(24, 226, 154, 0.15) 0%, rgba(109, 94, 248, 0.08) 50%, transparent 70%);
-  filter: blur(90px);
+  filter: blur(70px);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
   animation: floatOrb 25s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(60px, -40px) scale(1.1); }
-  100% { transform: translate(-40px, 50px) scale(0.95); }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(50px, -30px, 0) scale(1.08); }
+  100% { transform: translate3d(-30px, 40px, 0) scale(0.96); }
 }
 
 /* Premium Ultra-Glass Cards */
 .glass-card-premium {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%), rgba(18, 18, 24, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .glass-card-premium:hover {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.03) 100%), rgba(25, 25, 34, 0.85);
   border-color: rgba(24, 226, 154, 0.35);
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 20px 40px -15px rgba(24, 226, 154, 0.25), 0 0 20px rgba(109, 94, 248, 0.15);
+  transform: translate3d(0, -5px, 0) scale(1.012);
+  box-shadow: 0 16px 35px -12px rgba(24, 226, 154, 0.25), 0 0 16px rgba(109, 94, 248, 0.15);
 }
 
 /* Glass Floating Input */

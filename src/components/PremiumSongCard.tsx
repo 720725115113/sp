@@ -1,5 +1,4 @@
 import { usePlayer } from "../context/PlayerContext";
-import { useIsSongPlaying } from "./Sidebar";
 import type { Song } from "../types";
 
 export function PremiumSongCard({
@@ -11,8 +10,8 @@ export function PremiumSongCard({
   queue?: Song[];
   size?: "sm" | "md" | "lg";
 }) {
-  const { playSong, toggleLike, likedSongIds } = usePlayer();
-  const playing = useIsSongPlaying(song.id);
+  const { playSong, toggleLike, likedSongIds, currentSong, isPlaying } = usePlayer();
+  const playing = currentSong?.id === song.id && isPlaying;
   const isLiked = likedSongIds.includes(song.id);
 
   const dimensions = {

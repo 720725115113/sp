@@ -1,5 +1,5 @@
 import { useRef, useState, useMemo } from "react";
-import { usePlayer, formatTime } from "../context/PlayerContext";
+import { usePlayer, usePlayerProgress, formatTime } from "../context/PlayerContext";
 import { useCatalog } from "../services/catalog";
 
 export default function NowPlaying({ onClose }: { onClose: () => void }) {
@@ -280,7 +280,8 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
 }
 
 function SeekBar() {
-  const { progress, duration, elapsed, seek } = usePlayer();
+  const { seek } = usePlayer();
+  const { progress, duration, elapsed } = usePlayerProgress();
 
   return (
     <div className="w-full space-y-1.5">

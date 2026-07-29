@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { SongCard, SongRow } from "../components/SongList";
 import { usePlayer } from "../context/PlayerContext";
 import { useCatalog } from "../services/catalog";
-import type { Album, Artist, Playlist, Song } from "../types";
+import type { Album, Artist } from "../types";
 
 function shuffleArray<T>(arr: T[]): T[] {
   const copy = [...arr];
@@ -34,8 +34,6 @@ export default function Home({ onNavigate }: Props) {
   }, [songs]);
 
   const recent = useMemo(() => (recentlyPlayed.length ? recentlyPlayed : songs.slice(0, 8)), [recentlyPlayed, songs]);
-  const trending = useMemo(() => (songs.length ? shuffleArray(songs).slice(0, 8) : []), [songs]);
-  const recommended = useMemo(() => songs.slice(0, 10), [songs]);
 
   const regionalMixes = [
     { title: "Tamil Hits", color: "bg-gradient-to-r from-rose-500 to-orange-500" },

@@ -100,7 +100,7 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-white font-heading">Recent Searches</h2>
                 <button
-                  onClick={clearSearchHistory}
+                  onClick={() => clearSearchHistory()}
                   className="text-xs text-white/50 hover:text-[#18E29A] font-bold"
                 >
                   Clear all

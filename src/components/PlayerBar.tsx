@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { usePlayer, formatTime } from "../context/PlayerContext";
+import { usePlayer, usePlayerProgress, formatTime } from "../context/PlayerContext";
 import type { AudioQuality } from "../types";
 
 export default function PlayerBar({
@@ -383,7 +383,8 @@ export default function PlayerBar({
 }
 
 function ProgressBar() {
-  const { progress, duration, elapsed, seek } = usePlayer();
+  const { seek } = usePlayer();
+  const { progress, duration, elapsed } = usePlayerProgress();
   const [hoverX, setHoverX] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
