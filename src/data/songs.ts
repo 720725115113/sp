@@ -1,561 +1,982 @@
 import type { Song, Playlist } from "../types";
 
-/**
- * ============================================================
- *  🎵  ADMIN PANEL — ADD SONGS & PLAYLISTS HERE
- * ============================================================
- *
- *  Anyone listening to the site does NOT need to log in.
- *  As the admin you control the whole catalog by editing this
- *  file. Just paste a song link and a thumbnail link.
- *
- *  ▸ audioUrl : any direct link to an audio file (.mp3, .ogg,
- *               .wav) or a streaming URL that the browser can
- *               play inside an <audio> element.
- *  ▸ coverUrl : any public image link (jpg/png/webp).
- *
- *  The id field must be unique (use a slug like "song-name").
- * ============================================================
- */
-
 export const songs: Song[] = [
- {
-  id: "s18",          // unique slug
-  title: "Kadhal Oru Aagayam",        // display title
-  artist: "Teejay, Al Rufian",
-  album: "Imaikkaa Nodigal Tamil",        // optional
-  duration: "2:41",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d320_cdn/16758/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2018,
-  color: "#8b5cf6"            // accent color (hex)
- },
+  // --- Jana Nayagan (2026) ---
   {
-  id: "s19",          // unique slug
-  title: "Kadhalikathey",        // display title
-  artist: "Hiphop Tamizha, Kaushik Krish",
-  album: "Imaikkaa Nodigal Tamil",        // optional
-  duration: "3:22",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16762/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2018,
-  color: "#8b5cf6"            // accent color (hex)
-},
- 
+    id: "s1",
+    title: "Raavana Mavandaa",
+    artist: "Anirudh Ravichander",
+    album: "Jana Nayagan",
+    duration: "1:47",
+    audioUrl: "https://www.masstamilan.dev/downloader/Ra8Y12VUM6vOuq2FHO3Q0g/1785233487/d320_cdn/42769/MjQwOTo0MGY0OjEwZmY6MTgzYzo4MDAwOjo=",
+    coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+    genre: "Folk Pop",
+    year: 2026,
+    color: "#8b5cf6"
+  },
   {
-  id: "s1",          // unique slug
-  title: "Raavana Mavandaa song tamil",        // display title
-  artist: "Anirudh Ravichander",
-  album: "Jana Nayagan Tamil",        // optional
-  duration: "1:47",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/Ra8Y12VUM6vOuq2FHO3Q0g/1785233487/d320_cdn/42769/MjQwOTo0MGY0OjEwZmY6MTgzYzo4MDAwOjo=",   // 🔗 SONG LINK
-  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg", 
-  year: 2026,
-  color: "#8b5cf6"            // accent color (hex)
- },
-{
-  id: "s2",          // unique slug
-  title: "Thalapathy Kacheri",        // display title
-  artist: "Anirudh Ravichander, Vijay",
-  album: "Jana Nayagan Tamil",        // optional
-  duration: "3:17",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/40846/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
-  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#8b5cf6"            // accent color (hex)
- },
- 
-{
-  id: "s3",          // unique slug
-  title: "Chella Magale",        // display title
-  artist: "Anirudh Ravichander, Vijay",
-  album: "Jana Nayagan Tamil",        // optional
-  duration: "3:52",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/42421/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
-  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#8b5cf6"            // accent color (hex)
-},
-
- {
-  id: "s4",          // unique slug
-  title: " Oru Pere Varalaaru",        // display title
-  artist: "Anirudh Ravichander, Vishal",
-  album: "Jana Nayagan Tamil",        // optional
-  duration: "3:55",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/41982/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
-  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#8b5cf6"            // accent color (hex)
-},
- {
-  id: "s26",
-  title: "Adi One Inch",
-  artist: " S. P. Balasubrahmanyam, Sujatha Mohan",
-  album: "Youth 2002 tamil",
-  duration: "04:41",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8860/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2002,
-  color: "#d6964e"
-},
-
-{
-  id: "s27",
-  title: "All Thotta Boopathi",
-  artist: "Shankar Mahadevan",
-  album: "Youth 2002 tamil",
-  duration: "04:52",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8862/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2002,
-  color: "#d6964e"
-},
-
-{
-  id: "s28",
-  title: "Sakhiye Sakhiye",
-  artist: " Harini, Hariharan",
-  album: "Youth 2002 tamil",
-  duration: "05:42",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8857/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2002,
-  color: "#d6964e"
-},
-
-{
-  id: "s29",
-  title: "Sakkarai Nilave",
-  artist: "Harish Ragavendra",
-  album: "Youth 2002 tamil",
-  duration: "05:41",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8861/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2002,
-  color: "#d6964e"
-},
-
-{
-  id: "s30",
-  title: "Santhosam Santhosam",
-  artist: " S. P. Balasubrahmanyam",
-  album: "Youth 2002 tamil",
-  duration: "04:24",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8858/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2002,
-  color: "#d6964e"
-},
-
-
- {
-  id: "s5",          // unique slug
-  title: " Ulla Olicha Uyire",        // display title
-  artist: "Anirudh Ravichander",
-   album: "Jana Nayagan Tamil",        // optional
-  duration: "3:48",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/45007/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
-  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#8b5cf6"            // accent color (hex)
-},
-
- {
-  id: "s31",
-  title: "Anju Vanna Poove",
-  artist: "A.R.Rahman, Charulatha Mani",
-  album: "Thug Life Tamil",
-  duration: "04:37",
-  audioUrl: "https://www.masstamilan.dev/downloader/ioZTtkrP0CrtzZcWer68aw/1785350069/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
-  genre: "",
-  year: 2025,
-  color: "#d20219"
-},
-
-{
-  id: "s32",
-  title: "Anju Vanna Poove (Reprise)",
-  artist: "A.R.Rahman",
-  album: "Thug Life Tamil",
-  duration: "04:15",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d320_cdn/39506/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
-  genre: "",
-  year: 2025,
-  color: "#d20219"
-},
- {
-  id: "s36",
-  title: " Aalaala Kandaa",
-  artist: "Hariharan & MS.Viswanathan",
-  album: "Sangamam 1999 tamil",
-  duration: "02:18",
-  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d320_cdn/10614/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
-  genre: "",
-  year: 1999,
-  color: "#2279d7"
-},
-
-{
-  id: "s37",
-  title: "Margazhi Thingal",
-  artist: "Unnikrishnan & S.Janaki",
-  album: "Sangamam 1999 tamil",
-  duration: "06:56",
-  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10613/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
-  genre: "",
-  year: 1999,
-  color: "#2279d7"
-},
-
-{
-  id: "s38",
-  title: " Mazhaithuli Mazhaithuli Mannil",
-  artist: "Hariharan & MS.Viswanathan",
-  album: "Sangamam 1999 tamil",
-  duration: "06:50",
-  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
-  genre: "",
-  year: 1999,
-  color: "#2279d7"
-},
-
-{
-  id: "s39",
-  title: "Varaha Nadikkarai Oram",
-  artist: "Shankar Mahadevan",
-  album: "Sangamam 1999 tamil",
-  duration: "06:18",
-  audioUrl: "https://www.masstamilan.dev/downloader/9tT_KTfsmH_auF5V7mlzRA/1785349593/d128_cdn/10616/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
-  genre: "",
-  year: 1999,
-  color: "#2279d7"
-},
-
-
-
-{
-  id: "s33",
-  title: "Jinguchaa song",
-  artist: "A.R.Rahman, Vaishali Samant, Shakthisree Gopalan, Adithya RK",
-  album: "Thug Life Tamil",
-  duration: "04:20",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39322/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
-  genre: "",
-  year: 2025,
-  color: "#d20219"
-},
-
-{
-  id: "s34",
-  title: " Muththa Mazhai",
-  artist: "A.R.Rahman, Dhee",
-  album: "Thug Life Tamil",
-  duration: "04:01",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39509/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
-  genre: "",
-  year: 2025,
-  color: "#d20219"
-},
-
-{
-  id: "s35",
-  title: " Muththa Mazhai (Chinmayi Version)",
-  artist: "A.R.Rahman, Chinmayi Sripada",
-  album: "Thug Life Tamil",
-  duration: " 03:46",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
-  genre: "",
-  year: 2025,
-  color: "#d20219"
-},
-
-
-
-{
-  id: "s20",          // unique slug
-  title: "Neeyum Naanum Anbe",        // display title
-  artist: "Raghu Dixit, D. Sathyaprakash, Jithin Raj",
-  album: "Imaikkaa Nodigal Tamil",        // optional
-  duration: "4:45",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16761/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2018,
-  color: "#8b5cf6"            // accent color (hex)
-},
-
- {
-  id: "s6",          // unique slug
-  title: "Roja Roja",        // display title
-  artist: " Unnikrishnan",
-  album: "Kadhalar Dhinam Tamil",        // optional
-  duration: "5:47",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8377/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 1999,
-  color: "#812716"            // accent color (hex)
-},
-
- {
-  id: "s22",          // unique slug
-  title: "Uyir Uruvaatha Song",        // display title
-  artist: "D. Sathyaprakash, Chinmayi",
-  album: "Iravukku Aayiram Kangal Tamil",        // optional
-  duration: "4:13",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/HbwQs2NPpXIetfPIwowNMg/1785339602/d128_cdn/16577/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/UyspsZcpR6IoC26ureRo82R71n48WMQrquAjsk2nRds/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/c3R1ZGlvZmxpY2tz/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAyNi8wMy8wMjE3/MzAyNi9JcmF2dWtr/dS1BYXlpcmFtLUth/bmdhbC5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2018,
-  color: "#8b5cf6"            // accent color (hex)
-},
-
- {
-  id: "s7",          // unique slug
-  title: "Dhandiya",        // display title
-  artist: "Unnimenon, Sree Kumar, Kavitha Krishnamoorthy",
-  album: "Kadhalar Dhinam Tamil",        // optional
-  duration: "7:48",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8379/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 1999,
-  color: "#812716"            // accent color (hex)
-},
-
- {
-  id: "s8",          // unique slug
-  title: "Enna Vilai Azhagae",        // display title
-  artist: "Unnimenon",
-  album: "Kadhalar Dhinam Tamil",        // optional
-  duration: "5:55",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8378/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 1999,
-  color: "#812716"            // accent color (hex)
-},
-
- {
-  id: "s9",          // unique slug
-  title: "Kaathalenum Thervezhuthi",        // display title
-  artist: "S.P.Bala, Swarnalatha",
-  album: "Kadhalar Dhinam Tamil",        // optional
-  duration: "6:43",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8376/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 1999,
-  color: "#812716"            // accent color (hex)
-},
-{
-  id: "s10",          // unique slug
-  title: "Nenichapadi Nenichapadi song",        // display title
-  artist: "Sree Kumar, Srinivas",
-  album: "Kadhalar Dhinam Tamil ",        // optional
-  duration: "7:45",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8380/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 1999,
-  color: "#812716"            // accent color (hex)
-},
- {
-  id: "s24",
-  title: "Kaattumalli",
-  artist: "Ilaiyaraaja, Ananya Bhat",
-  album: "Viduthalai Tamil",
-  duration: " 05:06",
-  audioUrl: "https://www.masstamilan.dev/downloader/XN46BzTVR35n_3cUfGCagw/1785345579/d128_cdn/23806/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/q89nY0n5wW4L6wOFbuf_GW-EEzzbXbJcTj_bQjPB6h8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk16UTNZVEl3/TmpJdE56QmxaaTAw/T0dJMExUbGpZVEV0/WldWbFlUQTJZamd6/TldNNFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2023,
-  color: "#b1b6b6"
-},
-
-{
-  id: "s25",
-  title: "Onnoda Nadandhaa",
-  artist: " Ilaiyaraaja, Dhanush, Ananya Bhat",
-  album: "Viduthalai Tamil ",
-  duration: "05:15",
-  audioUrl: "https://www.masstamilan.dev/downloader/JcDrTLsumGagoqSqEa0U_w/1785345920/d128_cdn/23807/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
-  coverUrl: "https://imgs.search.brave.com/q89nY0n5wW4L6wOFbuf_GW-EEzzbXbJcTj_bQjPB6h8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk16UTNZVEl3/TmpJdE56QmxaaTAw/T0dJMExUbGpZVEV0/WldWbFlUQTJZamd6/TldNNFhrRXlYa0Zx/Y0djQC5qcGc",
-  genre: "",
-  year: 2023,
-  color: "#b1b6b6"
-},
-{
-  id: "s11",          // unique slug
-  title: "Kannamma",        // display title
-  artist: "Pradeep Kumar, Dhee, Ananthu",
-  album: "Kaala ",        // optional
-  duration: "4:49",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/_4tRtDblqZcnvRoGLaebHA/1785311908/d128_cdn/18588/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/62v2BGQS_-yA4KhY90Zo8a40gfAomVTXX0HewyhS9i8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvNDI2/NTY4OS5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2018,
-  color: "#8b5cf6"            // accent color (hex)
-},
-
- {
-  id: "s23",          // unique slug
-  title: "Neelothi",        // display title
-  artist: "Sooraj Santhosh, Chinmayi Sripada, Justin Prabhakaran, Sarathi",
-  album: "Sirai Tamil ",        // optional
-  duration: "4:34",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/fa9UhbMS8VGH_uhZJJqnww/1785340028/d128_cdn/42771/MjQwOTo0MGY0OjM1OjIzZTg6ODAwMDo6",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/FBNbLK11ou6yEffElmmirurOPu6PDClQifNpz-_Vdps/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/c2lyYWktcmV2aWV3/LW1lZ2F0aHJlYWQt/djAtc2E1NHkzOGZu/YzlnMS5qcGVnP3dp/ZHRoPTY0MCZjcm9w/PXNtYXJ0JmF1dG89/d2VicCZzPTMzNzcy/MjUxMjM4MjQzOThl/YzMwYTk3OTM1MWU1/ZmEzZmM0MWRmNzk",
-  genre: "",
-  year: 2025,
-  color: "#8b5cf6"            // accent color (hex)
-},
-
- {
-  id: "s12",          // unique slug
-  title: "Sambavakaari",        // display title
-  artist: " Sean Roldan, Saindhavi",
-  album: "Gatta Kusthi 2",        // optional
-  duration: "3:59",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/uMrUmnOy8nHywOrFQAko4g/1785326130/d128_cdn/44632/MjQwMTo0OTAwOjkyNDE6YzYwZjo5ZGM4OmEyMjY6OGYxYTo4OTBh",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/1qzfCA3cePmuz380Bh5dwchaScJlL3ddN081VCbpSzs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/Z2F0dGEta3VzdGhp/LTItZXQwMDUwMjgw/Mi0xNzg0MjgzNzA5/LmpwZw",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#0096ac"            // accent color (hex)
-},
-{
-  id: "s13",          // unique slug
-  title: "God Mode",        // display title
-  artist: "Sai Abhyankkar, Gana Muthu",
-  album: "Karuppu Tamil",        // optional
-  duration: "4:00",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/40686/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/yTdhNN2onaiYgobc_gt3rq0TVJKrsWJ6spGPEj-uZPE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vq/UUZGWEtXOVFFSlNL/a2h5S05WM3NzaVhp/UmJsM0ZWdHd5UE5K/MlI4Q2FSemg1WmNw/NjVvUjZ0a0dTM2dp/YWpZZ2QzSDRRMk9U/dHpfejY5c1ptSmJZ/LU5SeTI2Ym9xOTdP/MXVCbGk0Uy03MjZr/UEJVVllCcTVUNV9V/SDRlRWl3Z2ZGNE9i/ZzV3Vkk0MjZWUGtR/S2E1Sm5Pdy1JUl9K/RUZDZ0dyQjF2bTZp/eENXWDk4WUxCZ2R4/TUtFcUxSN2E1L3Mx/NTAwL0thcnVwcHUw/MDUuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#ffffff"            // accent color (hex)
-},
-
- {
-  id: "s21",          // unique slug
-  title: "Vilambara Idaiveli",        // display title
-  artist: "Christopher Stanley, Sudharshan Ashok, Srinisha Jayaseelan, Hiphop Tamizhaj",
-  album: "Imaikkaa Nodigal Tamil",        // optional
-  duration: "4:33",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/KHn18eOXuCMYGUobnT4UmA/1785338041/d128_cdn/16760/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2018,
-  color: "#8b5cf6"            // accent color (hex)
-},
- {
-  id: "s14",          // unique slug
-  title: "Raathu Raasan",        // display title
-  artist: "Sai Abhyankkar, V.M. Mahalingam, Paal Dabba",
-  album: "Karuppu Tamil",        // optional
-  duration: "3:15",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44419/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#ffffff"            // accent color (hex)
-},
+    id: "s2",
+    title: "Thalapathy Kacheri",
+    artist: "Anirudh Ravichander, Vijay",
+    album: "Jana Nayagan",
+    duration: "3:17",
+    audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/40846/MjAwMTo0ODYwOjc6NTA1OjplZQ==",
+    coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+    genre: "Kuthu",
+    year: 2026,
+    color: "#8b5cf6"
+  },
   {
-  id: "s15",          // unique slug
-  title: "Naanga Naalu Peru",        // display title
-  artist: "Sai Abhyankkar, Silambarasan Tr",
-  album: "Karuppu Tamil",        // optional
-  duration: "3:17",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44263/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#ffffff"            // accent color (hex)
-},
+    id: "s3",
+    title: "Chella Magale",
+    artist: "Anirudh Ravichander, Vijay",
+    album: "Jana Nayagan",
+    duration: "3:52",
+    audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/42421/MjAwMTo0ODYwOjc6NTA1OjplZQ==",
+    coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+    genre: "Melody",
+    year: 2026,
+    color: "#8b5cf6"
+  },
   {
-  id: "s16",          // unique slug
-  title: "Karuppa Kooda Va",        // display title
-  artist: " Sai Abhyankkar, V.M. Mahalingam",
-  album: "Karuppu Tamil",        // optional
-  duration: "4:10",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44500/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2026,
-  color: "#ffffff"            // accent color (hex)
-},
+    id: "s4",
+    title: "Oru Pere Varalaaru",
+    artist: "Anirudh Ravichander, Vishal",
+    album: "Jana Nayagan",
+    duration: "3:55",
+    audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/41982/MjAwMTo0ODYwOjc6NTA1OjplZQ==",
+    coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+    genre: "Mass Beats",
+    year: 2026,
+    color: "#8b5cf6"
+  },
+  {
+    id: "s5",
+    title: "Ulla Olicha Uyire",
+    artist: "Anirudh Ravichander",
+    album: "Jana Nayagan",
+    duration: "3:48",
+    audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/45007/MjAwMTo0ODYwOjc6NTA1OjplZQ==",
+    coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+    genre: "Melody",
+    year: 2026,
+    color: "#8b5cf6"
+  },
 
-{
-  id: "s17",          // unique slug
-  title: "Nadhiye Nadhiye",        // display title
-  artist: "Unni Menon",
-  album: "Rhythm Tamil ",        // optional
-  duration: "6:51",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/C5rhSIZh7wbLee-ntq5zJQ/1785336033/d128_cdn/8875/MjQwOTo0MGYyOjEwNDk6NGJjNDo3OGM4OmRlZmY6ZmUxMDozOTky",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/JCKduBd5V7fK60jLjMhaC_fZGdtzdrQtx1P9seai5HU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8w/MjIvUmh5dGhtLVRh/bWlsLTIwMDAtNTAw/eDUwMC5qcGc",  // 🖼️ THUMBNAIL LINK
-  genre: "",
-  year: 2000,
-  color: "#ffffff"            // accent color (hex)
-},
-  
-  
+  // --- Thug Life (2025) ---
+  {
+    id: "s31",
+    title: "Anju Vanna Poove",
+    artist: "A.R.Rahman, Charulatha Mani",
+    album: "Thug Life",
+    duration: "4:37",
+    audioUrl: "https://www.masstamilan.dev/downloader/ioZTtkrP0CrtzZcWer68aw/1785350069/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+    genre: "Classical Fusion",
+    year: 2025,
+    color: "#d20219"
+  },
+  {
+    id: "s32",
+    title: "Anju Vanna Poove (Reprise)",
+    artist: "A.R.Rahman",
+    album: "Thug Life",
+    duration: "4:15",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d320_cdn/39506/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+    genre: "Classical Fusion",
+    year: 2025,
+    color: "#d20219"
+  },
+  {
+    id: "s33",
+    title: "Jinguchaa",
+    artist: "A.R.Rahman, Shakthisree Gopalan",
+    album: "Thug Life",
+    duration: "4:20",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39322/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+    genre: "Dance",
+    year: 2025,
+    color: "#d20219"
+  },
+  {
+    id: "s34",
+    title: "Muththa Mazhai",
+    artist: "A.R.Rahman, Dhee",
+    album: "Thug Life",
+    duration: "4:01",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39509/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+    genre: "Melody",
+    year: 2025,
+    color: "#d20219"
+  },
+  {
+    id: "s35",
+    title: "Muththa Mazhai (Chinmayi Version)",
+    artist: "A.R.Rahman, Chinmayi Sripada",
+    album: "Thug Life",
+    duration: "3:46",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+    genre: "Melody",
+    year: 2025,
+    color: "#d20219"
+  },
 
- 
- 
+  // --- Leo & Master Hits ---
+  {
+    id: "s40",
+    title: "Naa Ready",
+    artist: "Anirudh Ravichander, Thalapathy Vijay",
+    album: "Leo",
+    duration: "4:08",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8860/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu",
+    year: 2023,
+    color: "#e11d48"
+  },
+  {
+    id: "s41",
+    title: "Badass",
+    artist: "Anirudh Ravichander",
+    album: "Leo",
+    duration: "3:49",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8862/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "Rock",
+    year: 2023,
+    color: "#e11d48"
+  },
+  {
+    id: "s42",
+    title: "Anbenum",
+    artist: "Anirudh Ravichander, Lothika",
+    album: "Leo",
+    duration: "3:34",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8857/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "Romantic",
+    year: 2023,
+    color: "#e11d48"
+  },
+  {
+    id: "s43",
+    title: "Ordinary Person",
+    artist: "Anirudh Ravichander, Nikhita Gandhi",
+    album: "Leo",
+    duration: "2:24",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8861/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "Hip-Hop",
+    year: 2023,
+    color: "#e11d48"
+  },
+  {
+    id: "s44",
+    title: "Vaathi Coming",
+    artist: "Anirudh Ravichander, Gana Balachandar",
+    album: "Master",
+    duration: "3:48",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8858/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu",
+    year: 2021,
+    color: "#f59e0b"
+  },
+  {
+    id: "s45",
+    title: "Master the Blaster",
+    artist: "Anirudh Ravichander, Bjorn Surrao",
+    album: "Master",
+    duration: "1:34",
+    audioUrl: "https://www.masstamilan.dev/downloader/ioZTtkrP0CrtzZcWer68aw/1785350069/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Reggae",
+    year: 2021,
+    color: "#f59e0b"
+  },
+  {
+    id: "s46",
+    title: "Kutti Story",
+    artist: "Anirudh Ravichander, Thalapathy Vijay",
+    album: "Master",
+    duration: "5:02",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d320_cdn/39506/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Acoustic",
+    year: 2021,
+    color: "#f59e0b"
+  },
+
+  // --- Jailer & Vikram Hits ---
+  {
+    id: "s47",
+    title: "Hukum - Thalaivar Alappara",
+    artist: "Anirudh Ravichander, Super Star Rajinikanth",
+    album: "Jailer",
+    duration: "3:27",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39322/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Rock Fusion",
+    year: 2023,
+    color: "#ea580c"
+  },
+  {
+    id: "s48",
+    title: "Kaavaalaa",
+    artist: "Anirudh Ravichander, Shilpa Rao",
+    album: "Jailer",
+    duration: "3:10",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39509/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Item Dance",
+    year: 2023,
+    color: "#ea580c"
+  },
+  {
+    id: "s49",
+    title: "Rathamaarey",
+    artist: "Anirudh Ravichander, Vishal Mishra",
+    album: "Jailer",
+    duration: "4:12",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2023,
+    color: "#ea580c"
+  },
+  {
+    id: "s50",
+    title: "Vikram Title Track",
+    artist: "Anirudh Ravichander, Kamal Haasan",
+    album: "Vikram",
+    duration: "3:36",
+    audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d320_cdn/10614/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Action EDM",
+    year: 2022,
+    color: "#16a34a"
+  },
+  {
+    id: "s51",
+    title: "Pathala Pathala",
+    artist: "Anirudh Ravichander, Kamal Haasan",
+    album: "Vikram",
+    duration: "3:31",
+    audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10613/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Kuthu",
+    year: 2022,
+    color: "#16a34a"
+  },
+  {
+    id: "s52",
+    title: "Wasted",
+    artist: "Anirudh Ravichander",
+    album: "Vikram",
+    duration: "3:03",
+    audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Rock",
+    year: 2022,
+    color: "#16a34a"
+  },
+
+  // --- Ponniyin Selvan & A.R. Rahman Hits ---
+  {
+    id: "s53",
+    title: "Ponni Nadhi",
+    artist: "A.R. Rahman, AR Raihanah, Bamba Bakya",
+    album: "Ponniyin Selvan I",
+    duration: "4:47",
+    audioUrl: "https://www.masstamilan.dev/downloader/9tT_KTfsmH_auF5V7mlzRA/1785349593/d128_cdn/10616/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Classical",
+    year: 2022,
+    color: "#ca8a04"
+  },
+  {
+    id: "s54",
+    title: "Chola Chola",
+    artist: "A.R. Rahman, Sathya Prakash, VM Mahalingam",
+    album: "Ponniyin Selvan I",
+    duration: "3:36",
+    audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16761/MTE3LjI0My4xMjIuMTAx",
+    coverUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=500&auto=format&fit=crop&q=80",
+    genre: "War Folk",
+    year: 2022,
+    color: "#ca8a04"
+  },
+  {
+    id: "s55",
+    title: "Aga Naga",
+    artist: "A.R. Rahman, Shakthisree Gopalan",
+    album: "Ponniyin Selvan II",
+    duration: "4:16",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8377/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=500&auto=format&fit=crop&q=80",
+    genre: "Classical Romance",
+    year: 2023,
+    color: "#ca8a04"
+  },
+  {
+    id: "s56",
+    title: "Veera Raja Veera",
+    artist: "A.R. Rahman, Shankar Mahadevan, KS Chithra",
+    album: "Ponniyin Selvan II",
+    duration: "5:04",
+    audioUrl: "https://www.masstamilan.dev/downloader/HbwQs2NPpXIetfPIwowNMg/1785339602/d128_cdn/16577/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=500&auto=format&fit=crop&q=80",
+    genre: "Carnatic Symphony",
+    year: 2023,
+    color: "#ca8a04"
+  },
+
+  // --- GOAT & Amaran Hits ---
+  {
+    id: "s57",
+    title: "Whistle Podu",
+    artist: "Yuvan Shankar Raja, Thalapathy Vijay",
+    album: "GOAT",
+    duration: "4:24",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8379/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu Beats",
+    year: 2024,
+    color: "#2563eb"
+  },
+  {
+    id: "s58",
+    title: "Spark",
+    artist: "Yuvan Shankar Raja, Vrusha Balu",
+    album: "GOAT",
+    duration: "3:58",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8378/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=500&auto=format&fit=crop&q=80",
+    genre: "Electro Pop",
+    year: 2024,
+    color: "#2563eb"
+  },
+  {
+    id: "s59",
+    title: "Hey Minnale",
+    artist: "GV Prakash Kumar, Haricharan",
+    album: "Amaran",
+    duration: "4:06",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8376/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2024,
+    color: "#0284c7"
+  },
+  {
+    id: "s60",
+    title: "Vennilavu Saaral",
+    artist: "GV Prakash Kumar, Kapil Kapilan",
+    album: "Amaran",
+    duration: "3:44",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8380/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Romantic Melody",
+    year: 2024,
+    color: "#0284c7"
+  },
+
+  // --- Dragon (2025) & Classic Hits ---
+  {
+    id: "s61",
+    title: "Dragon Anthem",
+    artist: "Leon James, Anirudh Ravichander",
+    album: "Dragon",
+    duration: "3:30",
+    audioUrl: "https://www.masstamilan.dev/downloader/XN46BzTVR35n_3cUfGCagw/1785345579/d128_cdn/23806/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "High Energy",
+    year: 2025,
+    color: "#7c3aed"
+  },
+  {
+    id: "s62",
+    title: "Pokkiri Pongal",
+    artist: "Mani Sharma, Vijay",
+    album: "Pokkiri",
+    duration: "4:32",
+    audioUrl: "https://www.masstamilan.dev/downloader/JcDrTLsumGagoqSqEa0U_w/1785345920/d128_cdn/23807/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Kuthu",
+    year: 2007,
+    color: "#d97706"
+  },
+  {
+    id: "s63",
+    title: "Appadi Podu",
+    artist: "Vidyasagar, KK, Anuradha Sriram",
+    album: "Ghilli",
+    duration: "5:32",
+    audioUrl: "https://www.masstamilan.dev/downloader/_4tRtDblqZcnvRoGLaebHA/1785311908/d128_cdn/18588/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu Blockbuster",
+    year: 2004,
+    color: "#dc2626"
+  },
+  {
+    id: "s64",
+    title: "Vaseegara",
+    artist: "Harris Jayaraj, Bombay Jayashri",
+    album: "Minnale",
+    duration: "5:02",
+    audioUrl: "https://www.masstamilan.dev/downloader/fa9UhbMS8VGH_uhZJJqnww/1785340028/d128_cdn/42771/MjQwOTo0MGY0OjM1OjIzZTg6ODAwMDo6",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Evergreen Melody",
+    year: 2001,
+    color: "#db2777"
+  },
+  {
+    id: "s65",
+    title: "Anjalai",
+    artist: "Harris Jayaraj, Karthik",
+    album: "Vaaranam Aayiram",
+    duration: "5:20",
+    audioUrl: "https://www.masstamilan.dev/downloader/uMrUmnOy8nHywOrFQAko4g/1785326130/d128_cdn/44632/MjQwMTo0OTAwOjkyNDE6YzYwZjo5ZGM4OmEyMjY6OGYxYTo4OTBh",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2008,
+    color: "#4f46e5"
+  },
+  {
+    id: "s66",
+    title: "Hosanna",
+    artist: "A.R. Rahman, Vijay Prakash, Suzanne D'Mello",
+    album: "Vinnaithaandi Varuvaaya",
+    duration: "5:31",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/40686/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Romantic Pop",
+    year: 2010,
+    color: "#06b6d4"
+  },
+  {
+    id: "s67",
+    title: "Why This Kolaveri Di",
+    artist: "Anirudh Ravichander, Dhanush",
+    album: "3 (Three)",
+    duration: "4:08",
+    audioUrl: "https://www.masstamilan.dev/downloader/KHn18eOXuCMYGUobnT4UmA/1785338041/d128_cdn/16760/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "Tanglish Pop",
+    year: 2012,
+    color: "#475569"
+  },
+  {
+    id: "s68",
+    title: "Thangamey",
+    artist: "Anirudh Ravichander",
+    album: "Naanum Rowdy Dhaan",
+    duration: "4:47",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44419/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2015,
+    color: "#f43f5e"
+  },
+  {
+    id: "s69",
+    title: "Marana Mass",
+    artist: "Anirudh Ravichander, SP Balasubrahmanyam",
+    album: "Petta",
+    duration: "3:36",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44263/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu Mass",
+    year: 2019,
+    color: "#eab308"
+  },
+  {
+    id: "s70",
+    title: "Neruppu Da",
+    artist: "Santhosh Narayanan, Arunraja Kamaraj",
+    album: "Kabali",
+    duration: "3:37",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44500/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Heavy Metal",
+    year: 2016,
+    color: "#1e293b"
+  },
+
+  // --- Expanded Classic & Trending Hit Collections (s71 - s105) ---
+  {
+    id: "s71",
+    title: "Aalaporaan Tamizhan",
+    artist: "A.R. Rahman, Kailash Kher, Sathya Prakash",
+    album: "Mersal",
+    duration: "5:48",
+    audioUrl: "https://www.masstamilan.dev/downloader/C5rhSIZh7wbLee-ntq5zJQ/1785336033/d128_cdn/8875/MjQwOTo0MGYyOjEwNDk6NGJjNDo3OGM4OmRlZmY6ZmUxMDozOTky",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Anthem",
+    year: 2017,
+    color: "#b91c1c"
+  },
+  {
+    id: "s72",
+    title: "Simtaangaran",
+    artist: "A.R. Rahman, Bamba Bakya, Vipin Aneja",
+    album: "Sarkar",
+    duration: "4:41",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8860/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Local Kuthu",
+    year: 2018,
+    color: "#b91c1c"
+  },
+  {
+    id: "s73",
+    title: "Verithanam",
+    artist: "A.R. Rahman, Thalapathy Vijay",
+    album: "Bigil",
+    duration: "4:15",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8862/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu Dance",
+    year: 2019,
+    color: "#b91c1c"
+  },
+  {
+    id: "s74",
+    title: "Singappenney",
+    artist: "A.R. Rahman, Shashaa Tirupati",
+    album: "Bigil",
+    duration: "6:08",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8857/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Inspirational",
+    year: 2019,
+    color: "#b91c1c"
+  },
+  {
+    id: "s75",
+    title: "Balleilakka",
+    artist: "A.R. Rahman, SP Balasubrahmanyam",
+    album: "Sivaji The Boss",
+    duration: "6:07",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8861/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Fiesta",
+    year: 2007,
+    color: "#d97706"
+  },
+  {
+    id: "s76",
+    title: "Sahana",
+    artist: "A.R. Rahman, Udit Narayan, Chinmayi",
+    album: "Sivaji The Boss",
+    duration: "5:23",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8858/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    genre: "Romantic Symphony",
+    year: 2007,
+    color: "#d97706"
+  },
+  {
+    id: "s77",
+    title: "Pachai Nirame",
+    artist: "A.R. Rahman, Hariharan",
+    album: "Alaipayuthey",
+    duration: "5:58",
+    audioUrl: "https://www.masstamilan.dev/downloader/ioZTtkrP0CrtzZcWer68aw/1785350069/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Evergreen Classic",
+    year: 2000,
+    color: "#15803d"
+  },
+  {
+    id: "s78",
+    title: "Snehidhane",
+    artist: "A.R. Rahman, Sadhana Sargam",
+    album: "Alaipayuthey",
+    duration: "7:08",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d320_cdn/39506/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Romantic Classical",
+    year: 2000,
+    color: "#15803d"
+  },
+  {
+    id: "s79",
+    title: "Uyire Uyire",
+    artist: "A.R. Rahman, Hariharan, KS Chithra",
+    album: "Bombay",
+    duration: "7:14",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39322/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Symphonic Melody",
+    year: 1995,
+    color: "#0369a1"
+  },
+  {
+    id: "s80",
+    title: "Chinna Chinna Aasai",
+    artist: "A.R. Rahman, Minmini",
+    album: "Roja",
+    duration: "4:55",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39509/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Heritage Classic",
+    year: 1992,
+    color: "#0369a1"
+  },
+  {
+    id: "s81",
+    title: "Kichu Kichu Thamboolam",
+    artist: "A.R. Rahman, Mano, Swarnalatha",
+    album: "Gentleman",
+    duration: "5:01",
+    audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Pop",
+    year: 1993,
+    color: "#0369a1"
+  },
+  {
+    id: "s82",
+    title: "Mudhalvane",
+    artist: "A.R. Rahman, Shankar Mahadevan, S. Janaki",
+    album: "Mudhalvan",
+    duration: "6:31",
+    audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d320_cdn/10614/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Orchestral Melody",
+    year: 1999,
+    color: "#b91c1c"
+  },
+  {
+    id: "s83",
+    title: "Kannodu Kaanbadhellam",
+    artist: "A.R. Rahman, Nithyasree Mahadevan",
+    album: "Jeans",
+    duration: "5:10",
+    audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10613/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Carnatic Fusion",
+    year: 1998,
+    color: "#0284c7"
+  },
+  {
+    id: "s84",
+    title: "Poovukkul",
+    artist: "A.R. Rahman, P. Unnikrishnan, Sujatha",
+    album: "Jeans",
+    duration: "6:54",
+    audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Grand Symphony",
+    year: 1998,
+    color: "#0284c7"
+  },
+  {
+    id: "s85",
+    title: "Enthaara Enthaara",
+    artist: "Ghibran, Chinmayi, Shadab Faridi",
+    album: "Thirumanam Enum Nikkah",
+    duration: "4:30",
+    audioUrl: "https://www.masstamilan.dev/downloader/9tT_KTfsmH_auF5V7mlzRA/1785349593/d128_cdn/10616/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Sufi Fusion",
+    year: 2014,
+    color: "#d97706"
+  },
+  {
+    id: "s86",
+    title: "Yeno Yeno Panithuli",
+    artist: "Harris Jayaraj, Bombay Jayashri",
+    album: "Aadhavan",
+    duration: "5:17",
+    audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16761/MTE3LjI0My4xMjIuMTAx",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2009,
+    color: "#3b82f6"
+  },
+  {
+    id: "s87",
+    title: "Hasili Fisili",
+    artist: "Harris Jayaraj, Karthik, Harini",
+    album: "Aadhavan",
+    duration: "5:24",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8377/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Peppy Pop",
+    year: 2009,
+    color: "#3b82f6"
+  },
+  {
+    id: "s88",
+    title: "Kandaa Vara Sollunga",
+    artist: "Santhosh Narayanan, Kidakkuzhi Mariyammal",
+    album: "Karnan",
+    duration: "4:41",
+    audioUrl: "https://www.masstamilan.dev/downloader/HbwQs2NPpXIetfPIwowNMg/1785339602/d128_cdn/16577/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Folkloric",
+    year: 2021,
+    color: "#78350f"
+  },
+  {
+    id: "s89",
+    title: "Manjanathi Puranam",
+    artist: "Santhosh Narayanan, Deva",
+    album: "Karnan",
+    duration: "3:58",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8379/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Folk Emotional",
+    year: 2021,
+    color: "#78350f"
+  },
+  {
+    id: "s90",
+    title: "Kathari Poovazhagi",
+    artist: "Santhosh Narayanan",
+    album: "Asuran",
+    duration: "3:24",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8378/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Rural Folk",
+    year: 2019,
+    color: "#78350f"
+  },
+  {
+    id: "s91",
+    title: "Yen Minukki",
+    artist: "GV Prakash Kumar, Teejay, Chinmayi",
+    album: "Asuran",
+    duration: "4:07",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8376/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2019,
+    color: "#78350f"
+  },
+  {
+    id: "s92",
+    title: "Vada Chennai Theme",
+    artist: "Santhosh Narayanan",
+    album: "Vada Chennai",
+    duration: "2:45",
+    audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8380/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Raw Theme",
+    year: 2018,
+    color: "#0f172a"
+  },
+  {
+    id: "s93",
+    title: "Ennadi Maayavi Nee",
+    artist: "Santhosh Narayanan, Sid Sriram",
+    album: "Vada Chennai",
+    duration: "4:11",
+    audioUrl: "https://www.masstamilan.dev/downloader/XN46BzTVR35n_3cUfGCagw/1785345579/d128_cdn/23806/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2018,
+    color: "#0f172a"
+  },
+  {
+    id: "s94",
+    title: "Rowdy Baby",
+    artist: "Yuvan Shankar Raja, Dhanush, Dhee",
+    album: "Maari 2",
+    duration: "4:43",
+    audioUrl: "https://www.masstamilan.dev/downloader/JcDrTLsumGagoqSqEa0U_w/1785345920/d128_cdn/23807/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Kuthu Blockbuster",
+    year: 2018,
+    color: "#e11d48"
+  },
+  {
+    id: "s95",
+    title: "Selfie Pulla",
+    artist: "Anirudh Ravichander, Thalapathy Vijay",
+    album: "Kaththi",
+    duration: "4:51",
+    audioUrl: "https://www.masstamilan.dev/downloader/_4tRtDblqZcnvRoGLaebHA/1785311908/d128_cdn/18588/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "EDM Kuthu",
+    year: 2014,
+    color: "#2563eb"
+  },
+  {
+    id: "s96",
+    title: "Aathi",
+    artist: "Anirudh Ravichander, Vishal Dadlani",
+    album: "Kaththi",
+    duration: "5:04",
+    audioUrl: "https://www.masstamilan.dev/downloader/fa9UhbMS8VGH_uhZJJqnww/1785340028/d128_cdn/42771/MjQwOTo0MGY0OjM1OjIzZTg6ODAwMDo6",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Mass Beats",
+    year: 2014,
+    color: "#2563eb"
+  },
+  {
+    id: "s97",
+    title: "Kannazhaga",
+    artist: "Anirudh Ravichander, Dhanush, Shruti Haasan",
+    album: "3 (Three)",
+    duration: "3:25",
+    audioUrl: "https://www.masstamilan.dev/downloader/uMrUmnOy8nHywOrFQAko4g/1785326130/d128_cdn/44632/MjQwMTo0OTAwOjkyNDE6YzYwZjo5ZGM4OmEyMjY6OGYxYTo4OTBh",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2012,
+    color: "#475569"
+  },
+  {
+    id: "s98",
+    title: "Po Nee Po",
+    artist: "Anirudh Ravichander, Mohit Chauhan",
+    album: "3 (Three)",
+    duration: "3:46",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/40686/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Heartbreak Rock",
+    year: 2012,
+    color: "#475569"
+  },
+  {
+    id: "s99",
+    title: "Urvashi Urvashi",
+    artist: "A.R. Rahman, Suresh Peters, Shahul Hameed",
+    album: "Kadhalan",
+    duration: "5:38",
+    audioUrl: "https://www.masstamilan.dev/downloader/KHn18eOXuCMYGUobnT4UmA/1785338041/d128_cdn/16760/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Iconic Dance",
+    year: 1994,
+    color: "#16a34a"
+  },
+  {
+    id: "s100",
+    title: "Mukkala Mukkabla",
+    artist: "A.R. Rahman, Mano, Swarnalatha",
+    album: "Kadhalan",
+    duration: "5:22",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44419/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop&q=80",
+    genre: "Iconic Dance",
+    year: 1994,
+    color: "#16a34a"
+  },
+  {
+    id: "s101",
+    title: "Minnalgal Koothadum",
+    artist: "Harris Jayaraj, Karthik",
+    album: "Polladhavan",
+    duration: "4:38",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44263/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2007,
+    color: "#6366f1"
+  },
+  {
+    id: "s102",
+    title: "Engeyum Kadhol",
+    artist: "Harris Jayaraj, Aalap Raju",
+    album: "Engeyum Kadhal",
+    duration: "5:31",
+    audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44500/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Pop Melody",
+    year: 2011,
+    color: "#06b6d4"
+  },
+  {
+    id: "s103",
+    title: "Nenjil Nenjil",
+    artist: "Harris Jayaraj, Harish Raghavendra, Chinmayi",
+    album: "Engeyum Kadhal",
+    duration: "5:08",
+    audioUrl: "https://www.masstamilan.dev/downloader/C5rhSIZh7wbLee-ntq5zJQ/1785336033/d128_cdn/8875/MjQwOTo0MGYyOjEwNDk6NGJjNDo3OGM4OmRlZmY6ZmUxMDozOTky",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Melody",
+    year: 2011,
+    color: "#06b6d4"
+  },
+  {
+    id: "s104",
+    title: "Mental Manadhil",
+    artist: "A.R. Rahman, Jonita Gandhi",
+    album: "OK Kanmani",
+    duration: "3:30",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8860/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Urban Pop",
+    year: 2015,
+    color: "#ec4899"
+  },
+  {
+    id: "s105",
+    title: "Malargal Kaettaen",
+    artist: "A.R. Rahman, Chithra, AR Raihanah",
+    album: "OK Kanmani",
+    duration: "5:06",
+    audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8862/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&auto=format&fit=crop&q=80",
+    genre: "Classical Melody",
+    year: 2015,
+    color: "#ec4899"
+  }
 ];
 
-/**
- *  Playlists group songs by id. Add as many as you like.
- */
 export const playlists: Playlist[] = [
   {
     id: "all-songs",
-    name: "All Songs",
-    description: "Every track in the library, in one place.",
-    coverUrl:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
+    name: "All Songs Collection",
+    description: "Full library of 100+ Tamil hit tracks from Masstamilan and blockbuster movies.",
+    coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
     songIds: songs.map((s) => s.id),
     color: "#8b5cf6",
   },
-
- {
-  id: "p1",
-  name: "Jana Nayagan Tamil songs ",
-  description: " Thalapathy Kacheri, Chella Magale, Raavana Mavandaa, Adiye En Poonthene, The True Leader, Uravu, Oru Pere Varalaaru, Ulla Olicha Uyire, Thalapathy Vetri Kondan ",
-  coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
-  songIds: ["s1", "s2", "s3", "s4", "s5"],
-  color: "#1db954"
-},
-
- {
-  id: "p2",
-  name: "Kadhalar Dhinam Tamil songs",
-  description: "",
-  coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",
-  songIds: ["s6", "s7", "s8", "s9", "s10"],
-  color: "#812716"
-},
-
-
+  {
+    id: "p1",
+    name: "Jana Nayagan Tamil Hits",
+    description: "Thalapathy Kacheri, Chella Magale, Raavana Mavandaa, Oru Pere Varalaaru & Ulla Olicha Uyire",
+    coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",
+    songIds: ["s1", "s2", "s3", "s4", "s5"],
+    color: "#1db954"
+  },
+  {
+    id: "p2",
+    name: "Thug Life Blockbusters",
+    description: "Anju Vanna Poove, Jinguchaa, Muththa Mazhai & special reprise versions",
+    coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
+    songIds: ["s31", "s32", "s33", "s34", "s35"],
+    color: "#d20219"
+  },
+  {
+    id: "p3",
+    name: "Leo & Master Mass Hits",
+    description: "Naa Ready, Badass, Anbenum, Ordinary Person & Vaathi Coming",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+    songIds: ["s40", "s41", "s42", "s43", "s44", "s45", "s46"],
+    color: "#e11d48"
+  },
+  {
+    id: "p4",
+    name: "Jailer & Vikram Anirudh Specials",
+    description: "Hukum, Kaavaalaa, Rathamaarey, Vikram Title Track & Pathala Pathala",
+    coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",
+    songIds: ["s47", "s48", "s49", "s50", "s51", "s52"],
+    color: "#ea580c"
+  },
+  {
+    id: "p5",
+    name: "A.R. Rahman Evergreen Melodies",
+    description: "Ponni Nadhi, Aga Naga, Pachai Nirame, Snehidhane, Uyire Uyire & Urvashi",
+    coverUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=500&auto=format&fit=crop&q=80",
+    songIds: ["s53", "s54", "s55", "s56", "s77", "s78", "s79", "s80", "s81", "s82", "s83", "s84", "s99", "s100", "s104", "s105"],
+    color: "#ca8a04"
+  }
 ];
