@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Sidebar, { MiniSidebar } from "./components/Sidebar";
 import PlayerBar from "./components/PlayerBar";
-import { PlayerProvider } from "./context/PlayerContext";
+import PremiumHeader from "./components/PremiumHeader";
+import { PlayerProvider, usePlayer } from "./context/PlayerContext";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Library from "./pages/Library";
@@ -34,6 +35,7 @@ export default function App() {
   const [view, setView] = useState<View>(() => parseHash());
   const [searchQuery, setSearchQuery] = useState("");
   const [nowPlaying, setNowPlaying] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     const onHash = () => setView(parseHash());
@@ -55,112 +57,206 @@ export default function App() {
 
   return (
     <PlayerProvider songs={catalog.songs}>
-      <div className="h-full flex flex-col">
-        <div className="flex-1 flex min-h-0">
-          <Sidebar
-            onNavigate={navigate}
-            currentView={currentView}
-            playlistIds={catalog.playlists.map((p) => ({ id: p.id, name: p.name }))}
-          />
-          <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#121218] via-[#0a0a10] to-[#07070b] pb-24 md:pb-28">
-            <TopBar
-              view={view}
-              onNavigate={navigate}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-            />
-            {view.name === "home" && <Home onNavigate={navigate} />}
-            {view.name === "search" && (
-              <Search
-                onNavigate={navigate}
-                query={searchQuery}
-                onQueryChange={setSearchQuery}
-              />
-            )}
-            {view.name === "library" && <Library onNavigate={navigate} />}
-            {view.name === "playlist" && (
-              <PlaylistView playlistId={(view as { id: string }).id} />
-            )}
-          </main>
-        </div>
-
-        <MiniSidebar onNavigate={(n) => navigate(n)} currentView={view.name} />
-        <PlayerBar onOpenNowPlaying={() => setNowPlaying(true)} />
-        {nowPlaying && <NowPlaying onClose={() => setNowPlaying(false)} />}
-      </div>
+      <AppContent
+        view={view}
+        currentView={currentView}
+        navigate={navigate}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        nowPlaying={nowPlaying}
+        setNowPlaying={setNowPlaying}
+        showCreateModal={showCreateModal}
+        setShowCreateModal={setShowCreateModal}
+        catalog={catalog}
+      />
     </PlayerProvider>
   );
 }
 
-function TopBar({
+function AppContent({
   view,
-  onNavigate,
+  currentView,
+  navigate,
   searchQuery,
-  onSearchChange,
+  setSearchQuery,
+  nowPlaying,
+  setNowPlaying,
+  showCreateModal,
+  setShowCreateModal,
+  catalog,
 }: {
   view: View;
-  onNavigate: (v: string) => void;
+  currentView: string;
+  navigate: (name: string, id?: string) => void;
   searchQuery: string;
-  onSearchChange: (value: string) => void;
+  setSearchQuery: (v: string) => void;
+  nowPlaying: boolean;
+  setNowPlaying: (v: boolean) => void;
+  showCreateModal: boolean;
+  setShowCreateModal: (v: boolean) => void;
+  catalog: ReturnType<typeof useCatalog>;
 }) {
-  return (
-    <div className="sticky top-0 z-20 flex flex-col gap-3 px-4 md:px-8 py-3 bg-black/40 backdrop-blur-xl border-b border-white/5">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => history.back()}
-            className="h-9 w-9 rounded-full bg-black/40 hover:bg-black/60 grid place-items-center text-white/70 hover:text-white"
-            aria-label="Back"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M15 6l-6 6 6 6" />
-            </svg>
-          </button>
-          <button
-            onClick={() => history.forward()}
-            className="h-9 w-9 rounded-full bg-black/40 hover:bg-black/60 grid place-items-center text-white/70 hover:text-white"
-            aria-label="Forward"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M9 6l6 6-6 6" />
-            </svg>
-          </button>
-          <div className="hidden sm:block text-xs text-white/50 capitalize ml-2">
-            {view.name === "playlist" ? "Playlist" : view.name}
-          </div>
-        </div>
+  const { toasts, removeToast, createPlaylist } = usePlayer();
+  const [newPlName, setNewPlName] = useState("");
+  const [newPlDesc, setNewPlDesc] = useState("");
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [isCollab, setIsCollab] = useState(false);
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => onNavigate("search")}
-            className="md:hidden h-9 w-9 rounded-full bg-black/40 hover:bg-black/60 grid place-items-center text-white/80"
-            aria-label="Search"
+  const handleCreatePlaylistSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPlName.trim()) return;
+    const pl = createPlaylist(newPlName, newPlDesc, isPrivate, isCollab);
+    setNewPlName("");
+    setNewPlDesc("");
+    setShowCreateModal(false);
+    navigate("playlist", pl.id);
+  };
+
+  return (
+    <div className="h-full flex flex-col bg-[#09090B] text-white">
+      {/* Toast Notification Container */}
+      <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
+        {toasts.map((t) => (
+          <div
+            key={t.id}
+            onClick={() => removeToast(t.id)}
+            className="pointer-events-auto glass-card px-4 py-2.5 rounded-2xl shadow-2xl border border-[#18E29A]/40 text-xs font-bold text-white flex items-center gap-2 animate-fade-in"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          <div className="h-9 px-3 md:px-4 rounded-full bg-gradient-to-br from-fuchsia-500 via-violet-500 to-indigo-500 grid place-items-center text-xs font-semibold shadow-lg shadow-violet-500/20">
-            Guest · Free
+            <span>{t.type === "success" ? "✅" : t.type === "error" ? "❌" : "🎵"}</span>
+            <span>{t.message}</span>
           </div>
-        </div>
+        ))}
       </div>
 
-      <label className="relative block">
-        <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="11" cy="11" r="7" />
-          <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-        </svg>
-        <input
-          data-global-search
-          value={searchQuery}
-          onChange={(event) => onSearchChange(event.target.value)}
-          onFocus={() => onNavigate("search")}
-          placeholder="Search songs, artists, albums and playlists"
-          className="w-full rounded-full border border-white/10 bg-white/10 py-2.5 pl-11 pr-4 text-sm text-white outline-none ring-0 placeholder:text-white/40"
+      {/* Main Body Grid */}
+      <div className="flex-1 flex min-h-0 overflow-hidden">
+        <Sidebar
+          onNavigate={navigate}
+          currentView={currentView}
+          playlistIds={catalog.playlists.map((p) => ({ id: p.id, name: p.name }))}
+          onCreatePlaylistModal={() => setShowCreateModal(true)}
         />
-      </label>
+
+        <main className="flex-1 overflow-y-auto pb-28 md:pb-32 bg-[#09090B]">
+          <PremiumHeader
+            onSearchClick={() => navigate("search")}
+            onNavigate={navigate}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+          />
+
+          {view.name === "home" && <Home onNavigate={navigate} />}
+          {view.name === "search" && (
+            <Search
+              onNavigate={navigate}
+              query={searchQuery}
+              onQueryChange={setSearchQuery}
+            />
+          )}
+          {view.name === "library" && (
+            <Library
+              onNavigate={navigate}
+              onCreatePlaylistModal={() => setShowCreateModal(true)}
+            />
+          )}
+          {view.name === "playlist" && (
+            <PlaylistView playlistId={(view as { id: string }).id} />
+          )}
+        </main>
+      </div>
+
+      {/* Mobile Navigation */}
+      <MiniSidebar onNavigate={(n) => navigate(n)} currentView={view.name} />
+
+      {/* Sticky Player Bar */}
+      <PlayerBar
+        onOpenNowPlaying={() => setNowPlaying(true)}
+        onOpenLyrics={() => setNowPlaying(true)}
+        onOpenQueue={() => setNowPlaying(true)}
+      />
+
+      {/* Expanded Fullscreen Player Modal */}
+      {nowPlaying && <NowPlaying onClose={() => setNowPlaying(false)} />}
+
+      {/* Create Playlist Modal */}
+      {showCreateModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md grid place-items-center p-4 animate-fade-in">
+          <form
+            onSubmit={handleCreatePlaylistSubmit}
+            className="w-full max-w-md glass-card p-6 rounded-3xl space-y-4 border border-white/10 shadow-2xl"
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-extrabold text-white">Create New Playlist</h3>
+              <button
+                type="button"
+                onClick={() => setShowCreateModal(false)}
+                className="text-white/40 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              <label className="block text-xs font-bold text-white/70">Playlist Name</label>
+              <input
+                required
+                autoFocus
+                value={newPlName}
+                onChange={(e) => setNewPlName(e.target.value)}
+                placeholder="e.g. Midnight Lo-Fi Vibes"
+                className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-white outline-none"
+              />
+
+              <label className="block text-xs font-bold text-white/70">Description (Optional)</label>
+              <textarea
+                rows={2}
+                value={newPlDesc}
+                onChange={(e) => setNewPlDesc(e.target.value)}
+                placeholder="Describe your mix..."
+                className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-white outline-none"
+              />
+
+              <div className="flex items-center justify-between pt-2">
+                <label className="flex items-center gap-2 text-xs font-bold text-white/80 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isPrivate}
+                    onChange={(e) => setIsPrivate(e.target.checked)}
+                    className="accent-[#18E29A] h-4 w-4 rounded"
+                  />
+                  Private Playlist
+                </label>
+
+                <label className="flex items-center gap-2 text-xs font-bold text-white/80 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isCollab}
+                    onChange={(e) => setIsCollab(e.target.checked)}
+                    className="accent-[#18E29A] h-4 w-4 rounded"
+                  />
+                  Collaborative
+                </label>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+              <button
+                type="button"
+                onClick={() => setShowCreateModal(false)}
+                className="px-5 py-2.5 rounded-full btn-glow-secondary text-xs font-bold text-white"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-6 py-2.5 rounded-full btn-glow-primary text-xs font-extrabold text-black"
+              >
+                Create
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

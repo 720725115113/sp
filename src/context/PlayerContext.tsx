@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Song } from "../types";
+import type { AudioQuality, Playlist, Song, Toast } from "../types";
 
 function shuffleArray<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -30,7 +30,10 @@ interface PersistedPlayerState {
   likedSongIds: string[];
   recentlyPlayed: Song[];
   playbackSpeed: number;
+  audioQuality: AudioQuality;
   progressBySongId: Record<string, number>;
+  customPlaylists: Playlist[];
+  searchHistory: string[];
 }
 
 interface PlayerState {
@@ -46,11 +49,21 @@ interface PlayerState {
   shuffle: boolean;
   repeat: "off" | "all" | "one";
   playbackSpeed: number;
+  audioQuality: AudioQuality;
+  sleepTimer: number | null; // seconds remaining
   likedSongIds: string[];
   recentlyPlayed: Song[];
   upNext: Song[];
+  customPlaylists: Playlist[];
+  searchHistory: string[];
+  toasts: Toast[];
+  
   playSong: (song: Song, queue?: Song[]) => void;
   playQueueIndex: (index: number) => void;
+  playNext: (song: Song) => void;
+  playLast: (song: Song) => void;
+  removeFromQueue: (index: number) => void;
+  reorderQueue: (fromIndex: number, toIndex: number) => void;
   togglePlay: () => void;
   next: () => void;
   prev: () => void;
@@ -61,91 +74,71 @@ interface PlayerState {
   cycleRepeat: () => void;
   toggleLike: (song: Song) => void;
   setPlaybackSpeed: (speed: number) => void;
+  setAudioQuality: (q: AudioQuality) => void;
+  setSleepTimerMinutes: (minutes: number | null) => void;
+
+  createPlaylist: (name: string, description?: string, isPrivate?: boolean, isCollaborative?: boolean) => Playlist;
+  renamePlaylist: (id: string, name: string) => void;
+  deletePlaylist: (id: string) => void;
+  togglePinPlaylist: (id: string) => void;
+  addSongToPlaylist: (playlistId: string, songId: string) => void;
+  removeSongFromPlaylist: (playlistId: string, songId: string) => void;
+
+  addSearchHistory: (query: string) => void;
+  removeSearchHistory: (query: string) => void;
+  clearSearchHistory: () => void;
+
+  addToast: (message: string, type?: Toast["type"]) => void;
+  removeToast: (id: string) => void;
 }
 
 const PlayerContext = createContext<PlayerState | null>(null);
-const STORAGE_KEY = "wavelength-player-state";
-const LIKED_SONGS_STORAGE_KEY = "wavelength-liked-song-ids";
-
-function readStoredLikedSongIds(): string[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = window.localStorage.getItem(LIKED_SONGS_STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
+const STORAGE_KEY = "wavelength-player-state-v2";
 
 function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
-  if (typeof window === "undefined") {
-    return {
-      queue: defaultSongs,
-      currentIndex: -1,
-      currentSongId: null,
-      elapsed: 0,
-      volume: 0.8,
-      shuffle: false,
-      repeat: "off",
-      isPlaying: false,
-      likedSongIds: [],
-      recentlyPlayed: [],
-      playbackSpeed: 1,
-      progressBySongId: {},
-    };
-  }
+  const fallback: PersistedPlayerState = {
+    queue: defaultSongs,
+    currentIndex: -1,
+    currentSongId: null,
+    elapsed: 0,
+    volume: 0.85,
+    shuffle: false,
+    repeat: "off",
+    isPlaying: false,
+    likedSongIds: [],
+    recentlyPlayed: [],
+    playbackSpeed: 1,
+    audioQuality: "high",
+    progressBySongId: {},
+    customPlaylists: [],
+    searchHistory: ["A.R. Rahman", "Anirudh", "Modern Classical", "Lo-Fi Beats"],
+  };
+
+  if (typeof window === "undefined") return fallback;
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    const storedLikedSongIds = readStoredLikedSongIds();
-    if (!raw) {
-      return {
-        queue: defaultSongs,
-        currentIndex: -1,
-        currentSongId: null,
-        elapsed: 0,
-        volume: 0.8,
-        shuffle: false,
-        repeat: "off",
-        isPlaying: false,
-        likedSongIds: storedLikedSongIds,
-        recentlyPlayed: [],
-        playbackSpeed: 1,
-        progressBySongId: {},
-      };
-    }
+    if (!raw) return fallback;
     const parsed = JSON.parse(raw) as Partial<PersistedPlayerState>;
     return {
-      queue: Array.isArray(parsed.queue) ? parsed.queue : defaultSongs,
+      queue: Array.isArray(parsed.queue) && parsed.queue.length ? parsed.queue : defaultSongs,
       currentIndex: parsed.currentIndex ?? -1,
       currentSongId: parsed.currentSongId ?? null,
       elapsed: parsed.elapsed ?? 0,
-      volume: parsed.volume ?? 0.8,
+      volume: parsed.volume ?? 0.85,
       shuffle: parsed.shuffle ?? false,
       repeat: parsed.repeat ?? "off",
-      isPlaying: parsed.isPlaying ?? false,
-      likedSongIds: Array.isArray(parsed.likedSongIds) ? parsed.likedSongIds : storedLikedSongIds,
+      isPlaying: false,
+      likedSongIds: Array.isArray(parsed.likedSongIds) ? parsed.likedSongIds : [],
       recentlyPlayed: Array.isArray(parsed.recentlyPlayed) ? parsed.recentlyPlayed : [],
       playbackSpeed: parsed.playbackSpeed ?? 1,
+      audioQuality: parsed.audioQuality ?? "high",
       progressBySongId: parsed.progressBySongId ?? {},
+      customPlaylists: Array.isArray(parsed.customPlaylists) ? parsed.customPlaylists : [],
+      searchHistory: Array.isArray(parsed.searchHistory) ? parsed.searchHistory : fallback.searchHistory,
     };
   } catch {
-    return {
-      queue: defaultSongs,
-      currentIndex: -1,
-      currentSongId: null,
-      elapsed: 0,
-      volume: 0.8,
-      shuffle: false,
-      repeat: "off",
-      isPlaying: false,
-      likedSongIds: [],
-      recentlyPlayed: [],
-      playbackSpeed: 1,
-      progressBySongId: {},
-    };
+    return fallback;
   }
 }
 
@@ -159,8 +152,8 @@ export function PlayerProvider({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
-  const [queue, setQueue] = useState<Song[]>(() => persistedState.queue.length ? persistedState.queue : songs);
-  const [originalQueue, setOriginalQueue] = useState<Song[]>(() => persistedState.queue.length ? persistedState.queue : songs);
+  const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
+  const [originalQueue, setOriginalQueue] = useState<Song[]>(() => persistedState.queue);
   const [currentIndex, setCurrentIndex] = useState<number>(() => persistedState.currentIndex);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -170,108 +163,131 @@ export function PlayerProvider({
   const [shuffle, setShuffle] = useState(() => persistedState.shuffle);
   const [repeat, setRepeat] = useState<"off" | "all" | "one">(() => persistedState.repeat);
   const [playbackSpeed, setPlaybackSpeedState] = useState(() => persistedState.playbackSpeed);
+  const [audioQuality, setAudioQualityState] = useState<AudioQuality>(() => persistedState.audioQuality);
   const [likedSongIds, setLikedSongIds] = useState<string[]>(() => persistedState.likedSongIds);
   const [recentlyPlayed, setRecentlyPlayed] = useState<Song[]>(() => persistedState.recentlyPlayed);
   const [progressBySongId, setProgressBySongId] = useState<Record<string, number>>(() => persistedState.progressBySongId);
-  const [isReady, setIsReady] = useState(false);
+  const [customPlaylists, setCustomPlaylists] = useState<Playlist[]>(() => persistedState.customPlaylists);
+  const [searchHistory, setSearchHistory] = useState<string[]>(() => persistedState.searchHistory);
+  const [sleepTimerSeconds, setSleepTimerSeconds] = useState<number | null>(null);
+  const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const currentSong = currentIndex >= 0 ? queue[currentIndex] ?? null : null;
-  const upNext =
-    currentIndex >= 0 && currentIndex < queue.length - 1
-      ? queue.slice(currentIndex + 1)
-      : [];
+  const currentSong = currentIndex >= 0 && currentIndex < queue.length ? queue[currentIndex] : null;
+  const upNext = currentIndex >= 0 && currentIndex < queue.length - 1 ? queue.slice(currentIndex + 1) : [];
 
-  const stateRef = useRef({ repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue, progressBySongId });
+  const stateRef = useRef({ repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue });
   useEffect(() => {
-    stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue, progressBySongId };
-  }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue, progressBySongId]);
+    stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue };
+  }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue]);
 
+  // Toasts
+  const addToast = (message: string, type: Toast["type"] = "info") => {
+    const id = `toast-${Date.now()}-${Math.random()}`;
+    setToasts((prev) => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 3000);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  // Audio element setup
   useEffect(() => {
     if (!audioRef.current) {
       const a = new Audio();
       a.preload = "metadata";
       a.volume = volume;
       audioRef.current = a;
+
       a.addEventListener("timeupdate", () => {
         if (!a.duration) return;
-        const nextElapsed = a.currentTime;
-        setElapsed(nextElapsed);
-        setProgress(nextElapsed / a.duration);
-        setProgressBySongId((prev) => {
-          if (!currentSong?.id) return prev;
-          const next = { ...prev, [currentSong.id]: nextElapsed };
-          return next;
-        });
-      });
-      a.addEventListener("loadedmetadata", () => {
-        setDuration(a.duration || 0);
-        const resumeFrom = currentSong?.id ? progressBySongId[currentSong.id] ?? persistedState.elapsed : 0;
-        if (resumeFrom > 0) {
-          a.currentTime = Math.min(resumeFrom, a.duration || resumeFrom);
-          setElapsed(Math.min(resumeFrom, a.duration || resumeFrom));
-          setProgress((Math.min(resumeFrom, a.duration || resumeFrom)) / (a.duration || 1));
+        const cur = a.currentTime;
+        setElapsed(cur);
+        setProgress(cur / a.duration);
+        if (stateRef.current.currentSong?.id) {
+          const songId = stateRef.current.currentSong.id;
+          setProgressBySongId((prev) => ({ ...prev, [songId]: cur }));
         }
       });
+
+      a.addEventListener("loadedmetadata", () => {
+        setDuration(a.duration || 0);
+        const activeSong = stateRef.current.currentSong;
+        if (activeSong?.id) {
+          const savedPos = progressBySongId[activeSong.id];
+          if (savedPos && savedPos > 0 && savedPos < a.duration - 1) {
+            a.currentTime = savedPos;
+            setElapsed(savedPos);
+            setProgress(savedPos / a.duration);
+          }
+        }
+      });
+
       a.addEventListener("ended", () => {
         handleEnded();
       });
+
       a.addEventListener("play", () => setIsPlaying(true));
       a.addEventListener("pause", () => setIsPlaying(false));
-      a.addEventListener("canplay", () => setIsReady(true));
     }
   }, []);
 
+  // Sleep timer countdown
   useEffect(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    a.volume = volume;
-  }, [volume]);
-
-  useEffect(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    a.playbackRate = playbackSpeed;
-  }, [playbackSpeed]);
-
-  useEffect(() => {
-    const a = audioRef.current;
-    if (!a || !currentSong) {
-      if (!currentSong) {
-        setProgress(0);
-        setDuration(0);
-        setElapsed(0);
+    if (sleepTimerSeconds === null) return;
+    if (sleepTimerSeconds <= 0) {
+      if (audioRef.current && !audioRef.current.paused) {
+        audioRef.current.pause();
+        addToast("Sleep timer finished. Music paused.", "info");
       }
+      setSleepTimerSeconds(null);
       return;
     }
 
-    const resumeFrom = progressBySongId[currentSong.id] ?? persistedState.elapsed;
-    if (a.src !== currentSong.audioUrl) {
-      a.src = currentSong.audioUrl;
+    const timer = setInterval(() => {
+      setSleepTimerSeconds((prev) => (prev !== null ? prev - 1 : null));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [sleepTimerSeconds]);
+
+  // Volume & Speed effects
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
+  }, [playbackSpeed]);
+
+  // Active song playback trigger with crossfade simulation
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a || !currentSong) return;
+
+    const targetUrl = currentSong.audioUrl;
+    if (a.src !== targetUrl) {
+      a.src = targetUrl;
       a.load();
     }
     a.playbackRate = playbackSpeed;
-    if (resumeFrom > 0 && a.duration) {
-      a.currentTime = Math.min(resumeFrom, a.duration);
-      setElapsed(Math.min(resumeFrom, a.duration));
-      setProgress(Math.min(resumeFrom, a.duration) / (a.duration || 1));
-    }
+    a.play().catch(() => setIsPlaying(false));
+  }, [currentSong?.id]);
 
-    a.play().catch(() => {
-      setIsPlaying(false);
-    });
-  }, [currentSong?.id, playbackSpeed]);
-
+  // Update recently played
   useEffect(() => {
     if (!currentSong) return;
     setRecentlyPlayed((prev) => {
-      const next = [currentSong, ...prev.filter((song) => song.id !== currentSong.id)].slice(0, 12);
-      return next;
+      const filtered = prev.filter((s) => s.id !== currentSong.id);
+      return [currentSong, ...filtered].slice(0, 16);
     });
   }, [currentSong?.id]);
 
+  // Persist state
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const persisted = {
+    const payload: PersistedPlayerState = {
       queue,
       currentIndex,
       currentSongId: currentSong?.id ?? null,
@@ -279,90 +295,95 @@ export function PlayerProvider({
       volume,
       shuffle,
       repeat,
-      isPlaying,
+      isPlaying: false,
       likedSongIds,
       recentlyPlayed,
       playbackSpeed,
+      audioQuality,
       progressBySongId,
+      customPlaylists,
+      searchHistory,
     };
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(persisted));
-    window.localStorage.setItem(LIKED_SONGS_STORAGE_KEY, JSON.stringify(likedSongIds));
-  }, [queue, currentIndex, elapsed, volume, shuffle, repeat, isPlaying, likedSongIds, recentlyPlayed, playbackSpeed, progressBySongId, currentSong?.id]);
-
-  useEffect(() => {
-    if (songs.length === 0) return;
-    const hasCurrent = queue.some((song) => song.id === currentSong?.id);
-    if (!hasCurrent && currentSong) {
-      setQueue(songs);
-      setOriginalQueue(songs);
-      setCurrentIndex(-1);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch {
+      // Storage limits ignored
     }
-  }, [songs, queue, currentSong?.id]);
+  }, [queue, currentIndex, elapsed, volume, shuffle, repeat, likedSongIds, recentlyPlayed, playbackSpeed, audioQuality, progressBySongId, customPlaylists, searchHistory, currentSong?.id]);
 
+  // Global Keyboard Shortcuts
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      const isTyping = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA";
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        const searchInput = document.querySelector<HTMLInputElement>("[data-global-search]");
-        searchInput?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const isInput = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.isContentEditable;
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        const input = document.querySelector<HTMLInputElement>("[data-global-search]");
+        input?.focus();
         return;
       }
-      if (isTyping) return;
-      if (event.code === "Space") {
-        event.preventDefault();
+      if (isInput) return;
+
+      if (e.code === "Space") {
+        e.preventDefault();
         togglePlay();
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
         next();
-      } else if (event.key === "ArrowLeft") {
-        event.preventDefault();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
         prev();
-      } else if (event.key === "ArrowUp") {
-        event.preventDefault();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
         setVolume(Math.min(1, volume + 0.05));
-      } else if (event.key === "ArrowDown") {
-        event.preventDefault();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
         setVolume(Math.max(0, volume - 0.05));
+      } else if (e.key.toLowerCase() === "l" && currentSong) {
+        e.preventDefault();
+        toggleLike(currentSong);
+      } else if (e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        toggleShuffle();
+      } else if (e.key.toLowerCase() === "r") {
+        e.preventDefault();
+        cycleRepeat();
+      } else if (e.key.toLowerCase() === "m") {
+        e.preventDefault();
+        setVolume(volume > 0 ? 0 : 0.85);
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [volume]);
+  }, [volume, currentSong]);
 
+  // Web Media Session integration
   useEffect(() => {
-    if (!navigator.mediaSession) return;
+    if (!navigator.mediaSession || !currentSong) return;
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: currentSong?.title ?? "Wavelength",
-      artist: currentSong?.artist ?? "Wavelength",
-      album: currentSong?.album ?? "Music",
-      artwork: currentSong?.coverUrl
+      title: currentSong.title,
+      artist: currentSong.artist,
+      album: currentSong.album ?? "Wavelength",
+      artwork: currentSong.coverUrl
         ? [{ src: currentSong.coverUrl, sizes: "512x512", type: "image/jpeg" }]
         : [],
     });
+
     navigator.mediaSession.setActionHandler("play", () => togglePlay());
     navigator.mediaSession.setActionHandler("pause", () => togglePlay());
     navigator.mediaSession.setActionHandler("previoustrack", () => prev());
     navigator.mediaSession.setActionHandler("nexttrack", () => next());
-    navigator.mediaSession.setActionHandler("seekbackward", () => {
-      const a = audioRef.current;
-      if (a) a.currentTime = Math.max(0, a.currentTime - 10);
-    });
-    navigator.mediaSession.setActionHandler("seekforward", () => {
-      const a = audioRef.current;
-      if (a) a.currentTime = Math.min(a.duration || 0, a.currentTime + 10);
-    });
-  }, [currentSong?.id, currentSong?.title, currentSong?.artist, currentSong?.album, currentSong?.coverUrl]);
+    navigator.mediaSession.setActionHandler("seekbackward", () => seekToSeconds(Math.max(0, elapsed - 10)));
+    navigator.mediaSession.setActionHandler("seekforward", () => seekToSeconds(Math.min(duration, elapsed + 10)));
+  }, [currentSong?.id, elapsed, duration]);
 
   const handleEnded = () => {
     const { repeat: r } = stateRef.current;
     if (r === "one") {
-      const a = audioRef.current;
-      if (a) {
-        a.currentTime = 0;
-        a.play();
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
       }
       return;
     }
@@ -370,64 +391,39 @@ export function PlayerProvider({
   };
 
   const goNext = (auto = false) => {
-    const { queue: q, currentIndex: idx, repeat: r } = stateRef.current;
+    const { queue: q, currentIndex: idx } = stateRef.current;
     if (q.length === 0) return;
     let nextIndex = idx + 1;
     if (nextIndex >= q.length) {
-      const sourceList = stateRef.current.originalQueue.length ? stateRef.current.originalQueue : songs;
-      const nextQueue = shuffleArray(sourceList);
-      setOriginalQueue(sourceList);
-      setQueue(nextQueue);
-      setCurrentIndex(0);
-      if (auto) setIsPlaying(true);
-      const newSong = nextQueue[0];
-      if (newSong?.id && !auto) {
-        setProgressBySongId((prev) => {
-          const updated = { ...prev };
-          delete updated[newSong.id];
-          return updated;
-        });
+      if (stateRef.current.repeat === "all") {
+        nextIndex = 0;
+      } else {
+        if (auto) setIsPlaying(false);
+        return;
       }
-      return;
     }
-    if (r === "off" && nextIndex >= q.length) {
-      if (auto) setIsPlaying(false);
-      return;
-    }
-    const nextSong = q[nextIndex];
     setCurrentIndex(nextIndex);
-    if (nextSong?.id && !auto) {
-      setProgressBySongId((prev) => {
-        const updated = { ...prev };
-        delete updated[nextSong.id];
-        return updated;
-      });
-    }
+    setIsPlaying(true);
   };
 
   const playSong = (song: Song, newQueue?: Song[]) => {
-    const source = newQueue ?? originalQueue.length ? originalQueue : songs;
-    if (newQueue) setOriginalQueue(newQueue);
-    const normalized = (newQueue ?? source).filter(Boolean);
-    const playOrder = shuffle ? shuffleArray(normalized) : normalized;
-    const idx = playOrder.findIndex((s) => s.id === song.id);
-    let finalQueue = playOrder;
-    let finalIndex = idx;
-    if (idx === -1) {
-      finalQueue = [song, ...playOrder];
-      finalIndex = 0;
-    } else if (shuffle && idx !== 0) {
-      const [selected] = playOrder.splice(idx, 1);
-      finalQueue = [selected, ...playOrder];
-      finalIndex = 0;
+    const source = newQueue ?? (originalQueue.length ? originalQueue : songs);
+    const normalized = source.filter(Boolean);
+    
+    let playOrder = [...normalized];
+    if (shuffle) {
+      const rest = playOrder.filter((s) => s.id !== song.id);
+      playOrder = [song, ...shuffleArray(rest)];
     }
+
+    const idx = playOrder.findIndex((s) => s.id === song.id);
+    const finalIndex = idx >= 0 ? idx : 0;
+    
     setOriginalQueue(normalized);
-    setQueue(finalQueue);
+    setQueue(playOrder);
     setCurrentIndex(finalIndex);
     setIsPlaying(true);
-    if (song.id) {
-      setProgressBySongId((prev) => ({ ...prev, [song.id]: 0 }));
-    }
+    addToast(`Playing "${song.title}"`, "info");
   };
 
   const playQueueIndex = (index: number) => {
@@ -436,12 +432,44 @@ export function PlayerProvider({
     setIsPlaying(true);
   };
 
+  const playNext = (song: Song) => {
+    setQueue((prev) => {
+      const nextQ = [...prev];
+      const insertAt = currentIndex >= 0 ? currentIndex + 1 : 0;
+      nextQ.splice(insertAt, 0, song);
+      return nextQ;
+    });
+    addToast(`"${song.title}" added to play next`, "info");
+  };
+
+  const playLast = (song: Song) => {
+    setQueue((prev) => [...prev, song]);
+    addToast(`"${song.title}" added to queue`, "info");
+  };
+
+  const removeFromQueue = (index: number) => {
+    if (index < 0 || index >= queue.length) return;
+    setQueue((prev) => prev.filter((_, i) => i !== index));
+    if (index < currentIndex) {
+      setCurrentIndex((prev) => prev - 1);
+    }
+    addToast("Removed from queue", "info");
+  };
+
+  const reorderQueue = (fromIndex: number, toIndex: number) => {
+    if (fromIndex < 0 || fromIndex >= queue.length || toIndex < 0 || toIndex >= queue.length) return;
+    setQueue((prev) => {
+      const copy = [...prev];
+      const [moved] = copy.splice(fromIndex, 1);
+      copy.splice(toIndex, 0, moved);
+      return copy;
+    });
+  };
+
   const togglePlay = () => {
     const a = audioRef.current;
     if (!a || !currentSong) {
-      if (queue.length > 0 && currentIndex === -1) {
-        setCurrentIndex(0);
-      }
+      if (queue.length > 0) setCurrentIndex(0);
       return;
     }
     if (a.paused) {
@@ -451,9 +479,8 @@ export function PlayerProvider({
     }
   };
 
-  const next = () => {
-    goNext(false);
-  };
+  const next = () => goNext(false);
+
   const prev = () => {
     const a = audioRef.current;
     if (a && a.currentTime > 3) {
@@ -465,28 +492,17 @@ export function PlayerProvider({
     if (queue.length === 0) return;
     let prevIndex = currentIndex - 1;
     if (prevIndex < 0) prevIndex = queue.length - 1;
-    const nextSong = queue[prevIndex];
     setCurrentIndex(prevIndex);
     setIsPlaying(true);
-    if (nextSong?.id) {
-      setProgressBySongId((prev) => {
-        const updated = { ...prev };
-        delete updated[nextSong.id];
-        return updated;
-      });
-    }
   };
 
   const seek = (ratio: number) => {
     const a = audioRef.current;
     if (!a || !a.duration) return;
-    const next = Math.max(0, Math.min(1, ratio)) * a.duration;
-    a.currentTime = next;
-    setElapsed(next);
-    setProgress(next / a.duration);
-    if (currentSong?.id) {
-      setProgressBySongId((prev) => ({ ...prev, [currentSong.id]: next }));
-    }
+    const nextSec = Math.max(0, Math.min(1, ratio)) * a.duration;
+    a.currentTime = nextSec;
+    setElapsed(nextSec);
+    setProgress(ratio);
   };
 
   const seekToSeconds = (seconds: number) => {
@@ -496,9 +512,6 @@ export function PlayerProvider({
     a.currentTime = clamped;
     setElapsed(clamped);
     setProgress(clamped / a.duration);
-    if (currentSong?.id) {
-      setProgressBySongId((prev) => ({ ...prev, [currentSong.id]: clamped }));
-    }
   };
 
   const setVolume = (v: number) => {
@@ -506,41 +519,141 @@ export function PlayerProvider({
   };
 
   const toggleShuffle = () => {
-    setShuffle((s) => {
-      const turningOn = !s;
-      if (turningOn) {
-        const current = currentSong;
-        const rest = queue.filter((song) => song.id !== current?.id);
-        const shuffled = shuffleArray(rest);
-        const nextQueue = current ? [current, ...shuffled] : shuffled;
-        setQueue(nextQueue);
-        setCurrentIndex(current ? 0 : -1);
-      } else {
-        const current = currentSong;
-        const nextQueue = originalQueue;
-        setQueue(nextQueue);
-        if (current) {
-          const idx = nextQueue.findIndex((song) => song.id === current.id);
-          setCurrentIndex(idx === -1 ? 0 : idx);
+    setShuffle((prevShuffle) => {
+      const nextShuffle = !prevShuffle;
+      if (nextShuffle) {
+        // Turning shuffle ON
+        if (currentSong) {
+          const rest = originalQueue.filter((s) => s.id !== currentSong.id);
+          const shuffledQueue = [currentSong, ...shuffleArray(rest)];
+          setQueue(shuffledQueue);
+          setCurrentIndex(0);
+        } else {
+          setQueue(shuffleArray(originalQueue));
         }
+        addToast("Shuffle enabled", "info");
+      } else {
+        // Turning shuffle OFF
+        setQueue(originalQueue);
+        if (currentSong) {
+          const idx = originalQueue.findIndex((s) => s.id === currentSong.id);
+          setCurrentIndex(idx >= 0 ? idx : 0);
+        }
+        addToast("Shuffle disabled", "info");
       }
-      return turningOn;
+      return nextShuffle;
     });
   };
 
-  const cycleRepeat = () =>
-    setRepeat((r) => (r === "off" ? "all" : r === "all" ? "one" : "off"));
+  const cycleRepeat = () => {
+    setRepeat((r) => {
+      const nextR = r === "off" ? "all" : r === "all" ? "one" : "off";
+      addToast(`Repeat ${nextR}`, "info");
+      return nextR;
+    });
+  };
 
   const toggleLike = (song: Song) => {
     setLikedSongIds((prev) => {
-      if (prev.includes(song.id)) return prev.filter((item) => item !== song.id);
+      const isLiked = prev.includes(song.id);
+      if (isLiked) {
+        addToast(`Removed "${song.title}" from Liked Songs`, "info");
+        return prev.filter((id) => id !== song.id);
+      }
+      addToast(`Added "${song.title}" to Liked Songs`, "success");
       return [...prev, song.id];
     });
   };
 
   const setPlaybackSpeed = (speed: number) => {
-    const nextSpeed = Math.max(0.5, Math.min(2, speed));
-    setPlaybackSpeedState(nextSpeed);
+    setPlaybackSpeedState(speed);
+    addToast(`Speed: ${speed}x`, "info");
+  };
+
+  const setAudioQuality = (q: AudioQuality) => {
+    setAudioQualityState(q);
+    addToast(`Audio Quality: ${q.toUpperCase()}`, "info");
+  };
+
+  const setSleepTimerMinutes = (minutes: number | null) => {
+    if (minutes === null) {
+      setSleepTimerSeconds(null);
+      addToast("Sleep timer off", "info");
+    } else {
+      setSleepTimerSeconds(minutes * 60);
+      addToast(`Sleep timer set for ${minutes} minutes`, "info");
+    }
+  };
+
+  // Playlist management
+  const createPlaylist = (name: string, description = "", isPrivate = false, isCollaborative = false): Playlist => {
+    const newPlaylist: Playlist = {
+      id: `playlist-${Date.now()}`,
+      name: name.trim() || "My Playlist",
+      description,
+      coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80",
+      songIds: [],
+      isPrivate,
+      isCollaborative,
+      isPinned: false,
+    };
+    setCustomPlaylists((prev) => [newPlaylist, ...prev]);
+    addToast(`Created playlist "${newPlaylist.name}"`, "success");
+    return newPlaylist;
+  };
+
+  const renamePlaylist = (id: string, newName: string) => {
+    setCustomPlaylists((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, name: newName } : p))
+    );
+    addToast("Playlist renamed", "info");
+  };
+
+  const deletePlaylist = (id: string) => {
+    setCustomPlaylists((prev) => prev.filter((p) => p.id !== id));
+    addToast("Playlist deleted", "info");
+  };
+
+  const togglePinPlaylist = (id: string) => {
+    setCustomPlaylists((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isPinned: !p.isPinned } : p))
+    );
+  };
+
+  const addSongToPlaylist = (playlistId: string, songId: string) => {
+    setCustomPlaylists((prev) =>
+      prev.map((p) => {
+        if (p.id !== playlistId) return p;
+        if (p.songIds.includes(songId)) return p;
+        return { ...p, songIds: [...p.songIds, songId] };
+      })
+    );
+    addToast("Added track to playlist", "success");
+  };
+
+  const removeSongFromPlaylist = (playlistId: string, songId: string) => {
+    setCustomPlaylists((prev) =>
+      prev.map((p) => {
+        if (p.id !== playlistId) return p;
+        return { ...p, songIds: p.songIds.filter((id) => id !== songId) };
+      })
+    );
+    addToast("Removed track from playlist", "info");
+  };
+
+  // Search history
+  const addSearchHistory = (query: string) => {
+    const q = query.trim();
+    if (!q) return;
+    setSearchHistory((prev) => [q, ...prev.filter((item) => item.toLowerCase() !== q.toLowerCase())].slice(0, 10));
+  };
+
+  const removeSearchHistory = (query: string) => {
+    setSearchHistory((prev) => prev.filter((item) => item !== query));
+  };
+
+  const clearSearchHistory = () => {
+    setSearchHistory([]);
   };
 
   return (
@@ -558,11 +671,21 @@ export function PlayerProvider({
         shuffle,
         repeat,
         playbackSpeed,
+        audioQuality,
+        sleepTimer: sleepTimerSeconds,
         likedSongIds,
         recentlyPlayed,
         upNext,
+        customPlaylists,
+        searchHistory,
+        toasts,
+
         playSong,
         playQueueIndex,
+        playNext,
+        playLast,
+        removeFromQueue,
+        reorderQueue,
         togglePlay,
         next,
         prev,
@@ -573,6 +696,22 @@ export function PlayerProvider({
         cycleRepeat,
         toggleLike,
         setPlaybackSpeed,
+        setAudioQuality,
+        setSleepTimerMinutes,
+
+        createPlaylist,
+        renamePlaylist,
+        deletePlaylist,
+        togglePinPlaylist,
+        addSongToPlaylist,
+        removeSongFromPlaylist,
+
+        addSearchHistory,
+        removeSearchHistory,
+        clearSearchHistory,
+
+        addToast,
+        removeToast,
       }}
     >
       {children}

@@ -3,12 +3,13 @@ export interface Song {
   title: string;
   artist: string;
   album?: string;
-  duration?: string; // optional human-readable, e.g. "3:45"
-  coverUrl: string; // thumbnail link
-  audioUrl: string; // song link (mp3/ogg/wav or streaming url)
+  duration?: string; // e.g. "3:45"
+  coverUrl: string;
+  audioUrl: string;
   genre?: string;
   year?: number;
-  color?: string; // accent color used for the track's gradient
+  color?: string;
+  lyrics?: string;
 }
 
 export interface Playlist {
@@ -18,6 +19,9 @@ export interface Playlist {
   coverUrl: string;
   songIds: string[];
   color?: string;
+  isPrivate?: boolean;
+  isCollaborative?: boolean;
+  isPinned?: boolean;
 }
 
 export interface Artist {
@@ -36,4 +40,12 @@ export interface Album {
   songIds: string[];
   year?: number;
   color?: string;
+}
+
+export type AudioQuality = "normal" | "high" | "lossless";
+
+export interface Toast {
+  id: string;
+  message: string;
+  type?: "info" | "success" | "warning" | "error";
 }

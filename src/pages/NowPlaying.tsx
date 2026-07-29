@@ -1,20 +1,51 @@
 import { useRef, useState } from "react";
 import { usePlayer, formatTime } from "../context/PlayerContext";
-import type { Song } from "../types";
+import type { AudioQuality } from "../types";
 
 export default function NowPlaying({ onClose }: { onClose: () => void }) {
   const p = usePlayer();
   const song = p.currentSong;
-  const [tab, setTab] = useState<"playing" | "upnext">("playing");
+  const [tab, setTab] = useState<"playing" | "lyrics" | "queue">("playing");
+
+  // Touch swipe gesture handling
+  const touchStartY = useRef<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartY.current === null || touchStartX.current === null) return;
+    const diffY = e.changedTouches[0].clientY - touchStartY.current;
+    const diffX = e.changedTouches[0].clientX - touchStartX.current;
+
+    // Swipe down to close player
+    if (diffY > 120 && Math.abs(diffX) < 80) {
+      onClose();
+    }
+    // Swipe left for Next track
+    else if (diffX < -100 && Math.abs(diffY) < 60) {
+      p.next();
+    }
+    // Swipe right for Previous track
+    else if (diffX > 100 && Math.abs(diffY) < 60) {
+      p.prev();
+    }
+
+    touchStartY.current = null;
+    touchStartX.current = null;
+  };
 
   if (!song) {
     return (
-      <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl grid place-items-center text-white/60">
-        <div className="text-center">
-          <p className="mb-4">No song is playing.</p>
+      <div className="fixed inset-0 z-50 bg-[#09090B] grid place-items-center text-white/60">
+        <div className="text-center space-y-4">
+          <p className="text-lg">No song is currently playing.</p>
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20"
+            className="px-6 py-2.5 rounded-full btn-glow-secondary text-white font-bold"
           >
             Close
           </button>
@@ -23,164 +54,204 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
     );
   }
 
+  const sampleLyrics = [
+    `[00:10.00] In the neon glow of the midnight train`,
+    `[00:25.00] Echoes of rhythm washing down like rain`,
+    `[00:40.00] Every single beat syncs right with your heartbeat`,
+    `[01:05.00] High fidelity sounds spinning through the street`,
+    `[01:25.00] Lost inside the melody, infinite and free`,
+    `[01:45.00] Antigravity vibes, you and me...`,
+  ];
+
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="fixed inset-0 z-50 overflow-y-auto animate-slide-up select-none"
       style={{
-        background: `radial-gradient(1200px 800px at 30% 10%, ${
-          song.color ?? "#8b5cf6"
-        }55 0%, #07070b 60%)`,
+        background: `radial-gradient(1000px 700px at 50% 20%, ${
+          song.color ?? "#6D5EF8"
+        }55 0%, #09090B 80%)`,
       }}
     >
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-2xl" />
-      <div className="relative min-h-full flex flex-col items-center p-4 md:p-6">
-        <div className="w-full max-w-5xl">
-          <div className="flex justify-between items-center mb-4 md:mb-6">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-3xl" />
+
+      <div className="relative min-h-full flex flex-col items-center p-4 md:p-8 max-w-5xl mx-auto space-y-6">
+        {/* Header Bar */}
+        <div className="w-full flex items-center justify-between">
+          <button
+            onClick={onClose}
+            className="h-10 w-10 rounded-full glass-card grid place-items-center text-white/80 hover:text-white"
+            aria-label="Collapse"
+            title="Collapse"
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {/* Navigation Tabs */}
+          <div className="flex bg-white/5 border border-white/10 rounded-full p-1">
             <button
-              onClick={onClose}
-              className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 grid place-items-center"
-              aria-label="Close"
+              onClick={() => setTab("playing")}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                tab === "playing" ? "bg-[#18E29A] text-black shadow-lg" : "text-white/60 hover:text-white"
+              }`}
             >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <path d="M6 9l6 6 6-6" />
-              </svg>
+              Playing
             </button>
-            <div className="text-xs uppercase tracking-widest text-white/70">
-              Now playing
-            </div>
-            {/* Up Next toggle — visible on mobile where the queue is a separate tab */}
             <button
-              onClick={() => setTab(tab === "playing" ? "upnext" : "playing")}
-              className="h-10 w-10 md:hidden rounded-full bg-white/10 hover:bg-white/20 grid place-items-center"
-              aria-label="Toggle queue"
+              onClick={() => setTab("lyrics")}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                tab === "lyrics" ? "bg-[#18E29A] text-black shadow-lg" : "text-white/60 hover:text-white"
+              }`}
             >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <path d="M3 6h13M3 12h13M3 18h7M17 15l4 4-4 4" strokeLinejoin="round" />
-              </svg>
+              Lyrics
             </button>
-            <div className="hidden md:block w-10" />
+            <button
+              onClick={() => setTab("queue")}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                tab === "queue" ? "bg-[#18E29A] text-black shadow-lg" : "text-white/60 hover:text-white"
+              }`}
+            >
+              Up Next ({p.upNext.length})
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_360px] gap-8 md:gap-10 items-start">
-            {/* Left: playing panel (hidden on mobile when Up Next tab is active) */}
-            <div className={`${tab === "upnext" ? "hidden md:block" : ""} max-w-md mx-auto md:mx-0 w-full`}>
-              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl mb-8">
+          <div className="w-10" />
+        </div>
+
+        {/* Tab 1: Playing Panel */}
+        {tab === "playing" && (
+          <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_340px] gap-8 items-center flex-1 py-4">
+            {/* Artwork & Info */}
+            <div className="flex flex-col items-center max-w-md mx-auto w-full space-y-6">
+              <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
                 <img
                   src={song.coverUrl}
                   alt={song.title}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
 
-              <div className="text-center mb-6">
-                <h2 className="text-2xl md:text-3xl font-black tracking-tight">
+              <div className="text-center space-y-1 w-full">
+                <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight truncate">
                   {song.title}
                 </h2>
-                <p className="text-white/70 mt-1">{song.artist}</p>
-                {song.album && (
-                  <p className="text-xs text-white/50 mt-1">{song.album}</p>
-                )}
+                <p className="text-base text-white/70 font-semibold truncate">{song.artist}</p>
+                {song.album && <p className="text-xs text-white/40">{song.album}</p>}
               </div>
 
-              {/* Seekable progress — drag or click anywhere to jump to that point */}
-              <SeekBar />
+              {/* Seekbar */}
+              <div className="w-full space-y-2">
+                <SeekBar />
+              </div>
 
               {/* Controls */}
-              <div className="flex items-center justify-center gap-6 mt-6">
+              <div className="flex items-center justify-center gap-6 w-full">
+                {/* GREEN SHUFFLE BUTTON */}
                 <button
                   onClick={p.toggleShuffle}
-                  className={`h-10 w-10 grid place-items-center rounded-full ${
-                    p.shuffle ? "text-emerald-400" : "text-white/70"
+                  className={`h-11 w-11 grid place-items-center rounded-full transition-all ${
+                    p.shuffle
+                      ? "bg-[#18E29A]/20 text-[#18E29A] border border-[#18E29A]/40 shadow-[0_0_15px_rgba(24,226,154,0.4)]"
+                      : "text-white/60 hover:text-white hover:bg-white/10"
                   }`}
                   aria-label="Shuffle"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 3l4 4-4 4M3 17l4 4 4-4M3 7h3l3 3 3-3 3-3h3M3 17h3l3-3 3 3 3 3h3" />
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
                   </svg>
                 </button>
+
                 <button
                   onClick={p.prev}
-                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10"
+                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10 active:scale-95"
                   aria-label="Previous"
                 >
-                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
+                  <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
                     <path d="M6 6h2v12H6zM20 6v12L9 12z" />
                   </svg>
                 </button>
+
                 <button
                   onClick={p.togglePlay}
-                  className="h-16 w-16 rounded-full bg-white text-black grid place-items-center hover:scale-105 transition-transform shadow-2xl"
+                  className="h-16 w-16 rounded-full btn-glow-primary grid place-items-center shrink-0"
                   aria-label="Play/Pause"
                 >
                   {p.isPlaying ? (
-                    <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
-                      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                    <svg viewBox="0 0 24 24" className="h-8 w-8 text-black" fill="currentColor">
+                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                     </svg>
                   ) : (
-                    <svg viewBox="0 0 24 24" className="h-7 w-7 translate-x-[2px]" fill="currentColor">
+                    <svg viewBox="0 0 24 24" className="h-8 w-8 text-black translate-x-[2px]" fill="currentColor">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   )}
                 </button>
+
                 <button
                   onClick={p.next}
-                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10"
+                  className="h-12 w-12 grid place-items-center rounded-full text-white hover:bg-white/10 active:scale-95"
                   aria-label="Next"
                 >
-                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
+                  <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
                     <path d="M16 6h2v12h-2zM4 6v12l11-6z" />
                   </svg>
                 </button>
+
                 <button
                   onClick={p.cycleRepeat}
-                  className={`h-10 w-10 grid place-items-center rounded-full relative ${
-                    p.repeat !== "off" ? "text-emerald-400" : "text-white/70"
+                  className={`h-11 w-11 grid place-items-center rounded-full relative transition-all ${
+                    p.repeat !== "off"
+                      ? "bg-[#18E29A]/20 text-[#18E29A] border border-[#18E29A]/40 shadow-[0_0_15px_rgba(24,226,154,0.4)]"
+                      : "text-white/60 hover:text-white hover:bg-white/10"
                   }`}
                   aria-label="Repeat"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3" />
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 1l4 4-4 4" />
+                    <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                    <path d="M7 23l-4-4 4-4" />
+                    <path d="M21 13v2a4 4 0 0 1-4 4H3" />
                   </svg>
-                  {p.repeat === "one" && (
-                    <span className="absolute -bottom-1 text-[9px] font-bold">1</span>
-                  )}
                 </button>
-              </div>
-
-              {/* Volume */}
-              <div className="flex items-center gap-3 mt-8">
-                <svg viewBox="0 0 24 24" className="h-4 w-4 text-white/60 shrink-0" fill="currentColor">
-                  <path d="M4 10v4h4l5 5V5L8 10H4Zm12.5 2a5 5 0 0 0-2.5-4.33v8.66A5 5 0 0 0 16.5 12Z" />
-                </svg>
-                <div className="relative flex-1 h-1">
-                  <div className="absolute inset-0 bg-white/15 rounded-full" />
-                  <div
-                    className="absolute inset-y-0 left-0 bg-white rounded-full"
-                    style={{ width: `${p.volume * 100}%` }}
-                  />
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={Math.round(p.volume * 100)}
-                    onChange={(e) => p.setVolume(Number(e.target.value) / 100)}
-                    className="wv-range absolute inset-0 h-full"
-                    aria-label="Volume"
-                  />
-                </div>
-                <svg viewBox="0 0 24 24" className="h-5 w-5 text-white/60 shrink-0" fill="currentColor">
-                  <path d="M4 10v4h4l5 5V5L8 10H4Zm12.5 2a5 5 0 0 0-2.5-4.33v8.66A5 5 0 0 0 16.5 12Zm0-7v2.06a8 8 0 0 1 0 13.88V21a10 10 0 0 0 0-18Z" />
-                </svg>
               </div>
             </div>
 
-            {/* Right: Up Next / queue panel — Apple Music style */}
-            <div className={`${tab === "playing" ? "hidden md:flex" : "flex"} flex-col max-h-[70vh] md:max-h-[80vh]`}>
+            {/* Side Queue View on Desktop */}
+            <div className="hidden md:flex flex-col h-[480px] glass-card rounded-3xl p-4 border border-white/10 overflow-hidden">
               <QueuePanel />
             </div>
           </div>
-        </div>
+        )}
+
+        {/* Tab 2: Lyrics View */}
+        {tab === "lyrics" && (
+          <div className="w-full max-w-xl glass-card rounded-3xl p-8 space-y-6 text-center my-auto">
+            <h3 className="text-xl font-black text-[#18E29A] tracking-wider uppercase">Lyrics</h3>
+            <div className="space-y-4 font-bold text-lg leading-relaxed text-white/80">
+              {sampleLyrics.map((line, idx) => (
+                <p
+                  key={idx}
+                  className={`transition-all duration-300 ${
+                    idx === 2 ? "text-2xl text-[#18E29A] font-black scale-105" : "hover:text-white"
+                  }`}
+                >
+                  {line.replace(/\[\d+:\d+\.\d+\]/, "")}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Queue Mobile/Desktop */}
+        {tab === "queue" && (
+          <div className="w-full max-w-xl glass-card rounded-3xl p-4 border border-white/10 h-[500px]">
+            <QueuePanel />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -197,10 +268,10 @@ function SeekBar() {
       : null;
 
   return (
-    <div className="mb-2">
+    <div className="w-full space-y-1">
       <div
         ref={trackRef}
-        className="relative h-1.5 group"
+        className="relative h-2 group cursor-pointer"
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           setHoverX(e.clientX - rect.left);
@@ -209,17 +280,19 @@ function SeekBar() {
       >
         <div className="absolute inset-0 bg-white/15 rounded-full" />
         <div
-          className="absolute inset-y-0 left-0 bg-white rounded-full"
-          style={{ width: `${progress * 100}%` }}
+          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#18E29A] to-[#6D5EF8] rounded-full group-hover:brightness-125"
+          style={{ width: `${(progress * 100).toFixed(2)}%` }}
         />
+
         {hoverRatio !== null && duration > 0 && (
           <div
-            className="pointer-events-none absolute -top-8 -translate-x-1/2 px-1.5 py-0.5 rounded bg-black/90 border border-white/10 text-white text-[10px] shadow-lg"
+            className="pointer-events-none absolute -top-8 -translate-x-1/2 px-2 py-0.5 rounded-md bg-[#141418] border border-white/10 text-white text-[10px] shadow-xl font-bold"
             style={{ left: `${hoverRatio * 100}%` }}
           >
             {formatTime(hoverRatio * duration)}
           </div>
         )}
+
         <input
           type="range"
           min={0}
@@ -227,11 +300,12 @@ function SeekBar() {
           step={1}
           value={Math.round(progress * 1000)}
           onChange={(e) => seek(Number(e.target.value) / 1000)}
-          aria-label="Seek"
+          aria-label="Seek track position"
           className="wv-range absolute inset-0 h-full w-full"
         />
       </div>
-      <div className="flex justify-between text-[11px] text-white/60 tabular-nums mt-2">
+
+      <div className="flex justify-between text-xs text-white/50 font-bold tabular-nums">
         <span>{formatTime(elapsed)}</span>
         <span>{formatTime(duration)}</span>
       </div>
@@ -243,117 +317,66 @@ function QueuePanel() {
   const p = usePlayer();
 
   return (
-    <div className="flex flex-col min-h-0 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
-        <div className="text-sm font-semibold">Up Next</div>
-        <div className="flex items-center gap-1">
-          <button
-            onClick={p.toggleShuffle}
-            className={`h-8 w-8 grid place-items-center rounded-full ${
-              p.shuffle ? "text-emerald-400 bg-emerald-400/10" : "text-white/60 hover:text-white"
-            }`}
-            aria-label="Shuffle"
-            title="Shuffle"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 3l4 4-4 4M3 17l4 4 4-4M3 7h3l3 3 3-3 3-3h3M3 17h3l3-3 3 3 3 3h3" />
-            </svg>
-          </button>
-          <button
-            onClick={p.cycleRepeat}
-            className={`h-8 w-8 grid place-items-center rounded-full relative ${
-              p.repeat !== "off" ? "text-emerald-400 bg-emerald-400/10" : "text-white/60 hover:text-white"
-            }`}
-            aria-label="Repeat"
-            title="Repeat"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3" />
-            </svg>
-            {p.repeat === "one" && (
-              <span className="absolute -bottom-0.5 text-[8px] font-bold">1</span>
-            )}
-          </button>
-        </div>
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="flex items-center justify-between pb-3 border-b border-white/10 shrink-0">
+        <span className="font-extrabold text-sm text-white">Playback Queue</span>
+        <span className="text-xs text-[#18E29A] font-bold">{p.queue.length} tracks</span>
       </div>
 
-      <div className="overflow-y-auto flex-1 min-h-0 py-2">
+      <div className="overflow-y-auto flex-1 py-2 space-y-1 pr-1">
         {p.currentSong && (
-          <>
-            <div className="px-4 pt-1 pb-1.5 text-[10px] uppercase tracking-wider text-white/40">
-              Now playing
+          <div className="space-y-1">
+            <div className="text-[10px] uppercase font-black text-[#18E29A] tracking-wider">Now Playing</div>
+            <div className="glass-card p-2.5 rounded-xl flex items-center justify-between border border-[#18E29A]/30 bg-[#18E29A]/10">
+              <div className="flex items-center gap-3 min-w-0">
+                <img src={p.currentSong.coverUrl} alt="" className="h-10 w-10 rounded-lg object-cover" />
+                <div className="min-w-0">
+                  <div className="truncate text-xs font-bold text-[#18E29A]">{p.currentSong.title}</div>
+                  <div className="truncate text-[11px] text-white/60">{p.currentSong.artist}</div>
+                </div>
+              </div>
+              <div className="flex items-end h-3 text-[#18E29A]">
+                <span className="equalizer-bar" />
+                <span className="equalizer-bar" />
+                <span className="equalizer-bar" />
+              </div>
             </div>
-            <QueueRow
-              song={p.currentSong}
-              active
-              playing={p.isPlaying}
-              onClick={() => {}}
-            />
-          </>
+          </div>
         )}
 
+        <div className="text-[10px] uppercase font-black text-white/40 tracking-wider pt-3">Up Next</div>
+
         {p.upNext.length > 0 ? (
-          <>
-            <div className="px-4 pt-4 pb-1.5 text-[10px] uppercase tracking-wider text-white/40">
-              Next up {p.shuffle && "· Shuffle"}
+          p.upNext.map((song, i) => (
+            <div
+              key={`${song.id}-${i}`}
+              className="group glass-card p-2 rounded-xl flex items-center justify-between hover:bg-white/10 transition-colors cursor-pointer"
+              onClick={() => p.playQueueIndex(p.currentIndex + 1 + i)}
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <img src={song.coverUrl} alt="" className="h-9 w-9 rounded-md object-cover" />
+                <div className="min-w-0">
+                  <div className="truncate text-xs font-bold text-white">{song.title}</div>
+                  <div className="truncate text-[11px] text-white/50">{song.artist}</div>
+                </div>
+              </div>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  p.removeFromQueue(p.currentIndex + 1 + i);
+                }}
+                className="h-7 w-7 rounded-full text-white/40 hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                title="Remove from queue"
+              >
+                ✕
+              </button>
             </div>
-            {p.upNext.map((song, i) => (
-              <QueueRow
-                key={`${song.id}-${i}`}
-                song={song}
-                onClick={() => p.playQueueIndex(p.currentIndex + 1 + i)}
-              />
-            ))}
-          </>
+          ))
         ) : (
-          <div className="px-4 py-6 text-sm text-white/40">
-            No more songs queued. {p.repeat === "off" && "Turn on repeat to keep the music going."}
-          </div>
+          <div className="text-xs text-white/40 text-center py-8">No remaining songs in queue.</div>
         )}
       </div>
     </div>
-  );
-}
-
-function QueueRow({
-  song,
-  active,
-  playing,
-  onClick,
-}: {
-  song: Song;
-  active?: boolean;
-  playing?: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
-        active ? "bg-white/10" : "hover:bg-white/5"
-      }`}
-    >
-      <div className="relative h-10 w-10 rounded overflow-hidden shrink-0">
-        <img src={song.coverUrl} alt="" className="h-full w-full object-cover" />
-        {active && playing && (
-          <div className="absolute inset-0 bg-black/50 grid place-items-center">
-            <div className="flex items-end h-3 text-emerald-400">
-              <span className="eq-bar" />
-              <span className="eq-bar" />
-              <span className="eq-bar" />
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className={`truncate text-sm font-medium ${active ? "text-emerald-400" : "text-white"}`}>
-          {song.title}
-        </div>
-        <div className="truncate text-xs text-white/60">{song.artist}</div>
-      </div>
-      {song.duration && (
-        <div className="text-xs text-white/40 tabular-nums shrink-0">{song.duration}</div>
-      )}
-    </button>
   );
 }
