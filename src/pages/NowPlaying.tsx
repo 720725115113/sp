@@ -137,21 +137,21 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30 pointer-events-none" />
 
-                {/* LIKE HEART BUTTON PERMANENTLY AT PICTURE TOP RIGHT CORNER */}
+                {/* CLEAN DIRECT HEART OPTION ON PICTURE TOP RIGHT CORNER */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     p.toggleLike(song);
                   }}
-                  className={`absolute top-4 right-4 z-30 h-11 w-11 rounded-full bg-black/70 backdrop-blur-xl grid place-items-center icon-btn-smooth transition-all shadow-2xl ${
+                  className={`absolute top-4 right-4 z-30 transition-all transform active:scale-125 hover:scale-110 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] ${
                     isLiked
-                      ? "text-rose-500 bg-rose-500/20 border border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.5)] scale-105"
-                      : "text-white/90 hover:text-white border border-white/20 hover:bg-black/90"
+                      ? "text-rose-500 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]"
+                      : "text-white/80 hover:text-white"
                   }`}
                   aria-label="Like song"
                   title={isLiked ? "Unlike song" : "Like song"}
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <svg viewBox="0 0 24 24" className="h-7 w-7" fill={isLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
                 </button>
