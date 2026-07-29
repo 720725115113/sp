@@ -4,6 +4,15 @@ import { usePlayer } from "../context/PlayerContext";
 import { useCatalog } from "../services/catalog";
 import type { Album, Artist, Playlist, Song } from "../types";
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const copy = [...arr];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+  }
+  return copy;
+}
+
 interface Props {
   onNavigate: (view: string, id?: string) => void;
 }
@@ -24,7 +33,10 @@ export default function Home({ onNavigate }: Props) {
   }, [featuredPlaylist, songs]);
 
   const recent = recentlyPlayed.length ? recentlyPlayed : songs.slice(0, 6);
-  const trending = [...songs].sort(() => 0.5 - Math.random()).slice(0, 8);
+  const trending = useMemo(() => {
+    if (!songs.length) return [];
+    return shuffleArray(songs).slice(0, 8);
+  }, [songs]);
   const recommended = songs.slice(0, 9);
 
   return (

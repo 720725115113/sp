@@ -65,6 +65,19 @@ interface PlayerState {
 
 const PlayerContext = createContext<PlayerState | null>(null);
 const STORAGE_KEY = "wavelength-player-state";
+const LIKED_SONGS_STORAGE_KEY = "wavelength-liked-song-ids";
+
+function readStoredLikedSongIds(): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(LIKED_SONGS_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
   if (typeof window === "undefined") {
@@ -86,6 +99,7 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
+    const storedLikedSongIds = readStoredLikedSongIds();
     if (!raw) {
       return {
         queue: defaultSongs,
@@ -96,7 +110,7 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
         shuffle: false,
         repeat: "off",
         isPlaying: false,
-        likedSongIds: [],
+        likedSongIds: storedLikedSongIds,
         recentlyPlayed: [],
         playbackSpeed: 1,
         progressBySongId: {},
@@ -112,7 +126,7 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
       shuffle: parsed.shuffle ?? false,
       repeat: parsed.repeat ?? "off",
       isPlaying: parsed.isPlaying ?? false,
-      likedSongIds: Array.isArray(parsed.likedSongIds) ? parsed.likedSongIds : [],
+      likedSongIds: Array.isArray(parsed.likedSongIds) ? parsed.likedSongIds : storedLikedSongIds,
       recentlyPlayed: Array.isArray(parsed.recentlyPlayed) ? parsed.recentlyPlayed : [],
       playbackSpeed: parsed.playbackSpeed ?? 1,
       progressBySongId: parsed.progressBySongId ?? {},
@@ -272,6 +286,7 @@ export function PlayerProvider({
       progressBySongId,
     };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(persisted));
+    window.localStorage.setItem(LIKED_SONGS_STORAGE_KEY, JSON.stringify(likedSongIds));
   }, [queue, currentIndex, elapsed, volume, shuffle, repeat, isPlaying, likedSongIds, recentlyPlayed, playbackSpeed, progressBySongId, currentSong?.id]);
 
   useEffect(() => {

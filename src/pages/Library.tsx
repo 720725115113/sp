@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useCatalog } from "../services/catalog";
 import { SongCard } from "../components/SongList";
+import { usePlayer } from "../context/PlayerContext";
 
 export default function Library({ onNavigate }: { onNavigate: (view: string, id?: string) => void }) {
-  const [tab, setTab] = useState<"playlists" | "songs" | "artists">("playlists");
+  const [tab, setTab] = useState<"playlists" | "songs" | "liked" | "artists">("playlists");
   const { songs, playlists, artists } = useCatalog();
+  const { likedSongIds } = usePlayer();
+
+  const likedSongs = useMemo(
+    () => songs.filter((song) => likedSongIds.includes(song.id)),
+    [likedSongIds, songs],
+  );
 
   return (
     <div className="fade-in px-4 md:px-8 py-6 md:py-8 space-y-6">
       <h1 className="text-3xl md:text-5xl font-black tracking-tight">Your Library</h1>
-      <div className="flex gap-2">
-        {(["playlists", "songs", "artists"] as const).map((item) => (
+      <div className="flex flex-wrap gap-2">
+        {(["playlists", "songs", "liked", "artists"] as const).map((item) => (
           <button key={item} onClick={() => setTab(item)} className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize ${tab === item ? "bg-white text-black" : "bg-white/10 text-white hover:bg-white/20"}`}>
-            {item}
+            {item === "liked" ? "liked songs" : item}
           </button>
         ))}
       </div>
@@ -33,6 +40,18 @@ export default function Library({ onNavigate }: { onNavigate: (view: string, id?
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {songs.map((song) => <SongCard key={song.id} song={song} queue={songs} />)}
         </div>
+      )}
+
+      {tab === "liked" && (
+        likedSongs.length ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {likedSongs.map((song) => <SongCard key={song.id} song={song} queue={likedSongs} />)}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-white/70">
+            You have not liked any songs yet. Tap the heart on a track to save it here for quick playback.
+          </div>
+        )
       )}
 
       {tab === "artists" && (
