@@ -18,10 +18,26 @@ export function SongCard({
   const dim =
     size === "lg" ? "w-52" : size === "sm" ? "w-36" : "w-44";
 
+  const handlePrimaryClick = () => {
+    if (onClick) {
+      onClick();
+      return;
+    }
+    playSong(song, queue);
+  };
+
   return (
-    <button
-      onClick={onClick ?? (() => playSong(song, queue))}
-      className={`group relative text-left ${dim} shrink-0 rounded-xl p-3 transition-colors hover:bg-white/5`}
+    <div
+      onClick={handlePrimaryClick}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handlePrimaryClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      className={`group relative text-left ${dim} shrink-0 rounded-xl p-3 transition-colors hover:bg-white/5 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70`}
       style={{
         background:
           "linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
@@ -48,6 +64,7 @@ export function SongCard({
             e.stopPropagation();
             playSong(song, queue);
           }}
+          type="button"
           className="absolute right-2 bottom-2 h-11 w-11 rounded-full bg-emerald-500 text-black grid place-items-center shadow-xl shadow-emerald-500/30 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all hover:scale-105 hover:bg-emerald-400"
           aria-label="Play"
         >
@@ -74,7 +91,7 @@ export function SongCard({
           {song.artist}
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 

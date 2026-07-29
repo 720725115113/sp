@@ -18,11 +18,11 @@ export default function PlayerBar({
   }
 
   return (
-    <div className="h-20 md:h-24 border-t border-white/10 bg-black/90 backdrop-blur-2xl px-3 md:px-4 grid grid-cols-3 items-center gap-2">
+    <div className="sticky bottom-0 z-30 w-full min-h-[88px] border-t border-white/10 bg-black/90 backdrop-blur-2xl px-3 py-2 md:px-4 md:py-3 grid grid-cols-1 sm:grid-cols-[1fr_1.2fr_1fr] items-center gap-2 md:gap-3">
       {/* Left: song info */}
       <button
         onClick={onOpenNowPlaying}
-        className="flex items-center gap-3 min-w-0 text-left"
+        className="flex items-center gap-3 min-w-0 text-left justify-center sm:justify-start"
       >
         <img
           src={song.coverUrl}
@@ -36,8 +36,8 @@ export default function PlayerBar({
       </button>
 
       {/* Center: controls + progress */}
-      <div className="flex flex-col items-center gap-1 min-w-0">
-        <div className="flex items-center gap-3 md:gap-5">
+      <div className="flex flex-col items-center gap-2 min-w-0">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-5">
           <IconBtn
             onClick={p.toggleShuffle}
             active={p.shuffle}
@@ -51,7 +51,7 @@ export default function PlayerBar({
           <button
             onClick={p.togglePlay}
             aria-label="Play/Pause"
-            className="h-10 w-10 md:h-11 md:w-11 rounded-full bg-white text-black grid place-items-center hover:scale-105 transition-transform shadow-lg"
+            className="h-10 w-10 md:h-11 md:w-11 rounded-full bg-white text-black grid place-items-center hover:scale-105 transition-transform shadow-lg flex-shrink-0"
           >
             {p.isPlaying ? (
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
@@ -81,7 +81,7 @@ export default function PlayerBar({
       </div>
 
       {/* Right: volume */}
-      <div className="hidden md:flex items-center justify-end gap-2">
+      <div className="hidden sm:flex items-center justify-end gap-2">
         <button onClick={() => p.toggleLike(song)} className={`h-8 w-8 grid place-items-center rounded-full ${p.likedSongIds.includes(song.id) ? "text-rose-400" : "text-white/70 hover:text-white"}`} aria-label="Like">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill={p.likedSongIds.includes(song.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8">
             <path d="M12 20s-6.5-4.2-8.5-8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 5.6C18.5 15.8 12 20 12 20Z" />
@@ -120,7 +120,7 @@ function IconBtn({
     <button
       aria-label={label}
       onClick={onClick}
-      className={`h-8 w-8 grid place-items-center rounded-full transition-colors ${
+      className={`h-8 w-8 grid place-items-center rounded-full transition-colors flex-shrink-0 ${
         active ? "text-emerald-400" : "text-white/70 hover:text-white"
       }`}
     >

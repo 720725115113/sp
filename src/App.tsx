@@ -62,7 +62,7 @@ export default function App() {
             currentView={currentView}
             playlistIds={catalog.playlists.map((p) => ({ id: p.id, name: p.name }))}
           />
-          <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#121218] via-[#0a0a10] to-[#07070b]">
+          <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#121218] via-[#0a0a10] to-[#07070b] pb-24 md:pb-28">
             <TopBar
               view={view}
               onNavigate={navigate}
