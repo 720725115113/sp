@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Song } from "../types";
 import { usePlayer } from "../context/PlayerContext";
 
@@ -13,9 +12,7 @@ export function SongCard({
   queue?: Song[];
   size?: "sm" | "md" | "lg";
 }) {
-  const { playSong, currentSong, isPlaying, toggleLike, likedSongIds, playNext, playLast, customPlaylists, addSongToPlaylist, addToast } = usePlayer();
-  const [showMenu, setShowMenu] = useState(false);
-  const [showPlaylistSubmenu, setShowPlaylistSubmenu] = useState(false);
+  const { playSong, currentSong, isPlaying, toggleLike, likedSongIds } = usePlayer();
 
   const isCurrent = currentSong?.id === song.id;
   const isThisPlaying = isCurrent && isPlaying;
@@ -30,27 +27,6 @@ export function SongCard({
       return;
     }
     playSong(song, queue);
-  };
-
-  const handleDownload = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowMenu(false);
-    const link = document.createElement("a");
-    link.href = song.audioUrl;
-    link.download = `${song.artist} - ${song.title}.mp3`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    addToast(`Downloading "${song.title}"`, "info");
-  };
-
-  const handleShare = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowMenu(false);
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      addToast("Track link copied to clipboard!", "success");
-    }
   };
 
   return (
@@ -120,101 +96,13 @@ export function SongCard({
         </button>
       </div>
 
-      {/* Info Section OUTSIDE Image (With 3-Dot Options Button Outside) */}
-      <div className="mt-2.5 flex items-start justify-between gap-1.5 relative">
-        <div className="min-w-0 flex-1">
-          <div className={`font-extrabold text-xs sm:text-sm truncate font-heading ${isCurrent ? "text-[#18E29A]" : "text-white group-hover:text-[#18E29A] transition-colors"}`}>
-            {song.title}
-          </div>
-          <div className="text-[11px] text-white/60 truncate font-medium mt-0.5">
-            {song.artist}
-          </div>
+      {/* Info Section OUTSIDE Image */}
+      <div className="mt-2.5 min-w-0">
+        <div className={`font-extrabold text-xs sm:text-sm truncate font-heading ${isCurrent ? "text-[#18E29A]" : "text-white group-hover:text-[#18E29A] transition-colors"}`}>
+          {song.title}
         </div>
-
-        {/* 3-Dot Menu OUTSIDE Image */}
-        <div className="relative shrink-0">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowMenu(!showMenu);
-            }}
-            className="h-7 w-7 rounded-full hover:bg-white/10 grid place-items-center text-white/60 hover:text-white transition-all"
-            aria-label="Track options"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-            </svg>
-          </button>
-
-          {/* Options Dropdown */}
-          {showMenu && (
-            <div className="absolute right-0 top-8 w-44 bg-[#141418] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 flex flex-col gap-1 text-xs backdrop-blur-2xl">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  playNext(song);
-                  setShowMenu(false);
-                }}
-                className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white flex items-center gap-2 font-medium"
-              >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                Play Next
-              </button>
-
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  playLast(song);
-                  setShowMenu(false);
-                }}
-                className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white flex items-center gap-2 font-medium"
-              >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
-                Add to Queue
-              </button>
-
-              {customPlaylists.length > 0 && (
-                <div className="relative">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowPlaylistSubmenu(!showPlaylistSubmenu);
-                    }}
-                    className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white flex items-center justify-between font-medium"
-                  >
-                    <span>Add to Playlist</span>
-                    <span>›</span>
-                  </button>
-
-                  {showPlaylistSubmenu && (
-                    <div className="absolute right-full top-0 mr-1.5 w-40 bg-[#1C1C22] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 flex flex-col gap-1">
-                      {customPlaylists.map((pl) => (
-                        <button
-                          key={pl.id}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addSongToPlaylist(pl.id, song.id);
-                            setShowMenu(false);
-                            setShowPlaylistSubmenu(false);
-                          }}
-                          className="w-full px-2.5 py-1 rounded-xl text-left truncate text-white/80 hover:text-white hover:bg-white/10 font-medium"
-                        >
-                          {pl.name}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <button onClick={handleShare} className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white font-medium">
-                Share Link
-              </button>
-              <button onClick={handleDownload} className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white font-medium">
-                Download MP3
-              </button>
-            </div>
-          )}
+        <div className="text-[11px] text-white/60 truncate font-medium mt-0.5">
+          {song.artist}
         </div>
       </div>
     </div>
@@ -233,9 +121,7 @@ export function SongRow({
   onClick?: () => void;
   queue?: Song[];
 }) {
-  const { playSong, currentSong, isPlaying, togglePlay, toggleLike, likedSongIds, playNext, playLast, customPlaylists, addSongToPlaylist, addToast } = usePlayer();
-  const [showMenu, setShowMenu] = useState(false);
-  const [showPlaylistSubmenu, setShowPlaylistSubmenu] = useState(false);
+  const { playSong, currentSong, isPlaying, togglePlay, toggleLike, likedSongIds } = usePlayer();
 
   const isCurrent = currentSong?.id === song.id;
   const isThisPlaying = isCurrent && isPlaying;
@@ -245,27 +131,6 @@ export function SongRow({
     if (isCurrent) togglePlay();
     else if (onClick) onClick();
     else playSong(song, queue);
-  };
-
-  const handleDownload = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowMenu(false);
-    const link = document.createElement("a");
-    link.href = song.audioUrl;
-    link.download = `${song.artist} - ${song.title}.mp3`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    addToast(`Downloading "${song.title}"`, "info");
-  };
-
-  const handleShare = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowMenu(false);
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      addToast("Track link copied to clipboard!", "success");
-    }
   };
 
   return (
@@ -330,8 +195,8 @@ export function SongRow({
         {song.duration ?? "3:30"}
       </div>
 
-      {/* Actions (Heart & 3-Dot Dropdown) */}
-      <div className="flex items-center gap-1 shrink-0">
+      {/* Actions (Heart Button Only) */}
+      <div className="flex items-center justify-end shrink-0">
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -346,90 +211,6 @@ export function SongRow({
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
         </button>
-
-        <div className="relative">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowMenu(!showMenu);
-            }}
-            className="h-7 w-7 rounded-full hover:bg-white/10 grid place-items-center text-white/60 hover:text-white transition-all"
-            aria-label="Track options"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-            </svg>
-          </button>
-
-          {showMenu && (
-            <div className="absolute right-0 top-8 w-44 bg-[#141418] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 flex flex-col gap-1 text-xs backdrop-blur-2xl">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  playNext(song);
-                  setShowMenu(false);
-                }}
-                className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white flex items-center gap-2 font-medium"
-              >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                Play Next
-              </button>
-
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  playLast(song);
-                  setShowMenu(false);
-                }}
-                className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white flex items-center gap-2 font-medium"
-              >
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
-                Add to Queue
-              </button>
-
-              {customPlaylists.length > 0 && (
-                <div className="relative">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowPlaylistSubmenu(!showPlaylistSubmenu);
-                    }}
-                    className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white flex items-center justify-between font-medium"
-                  >
-                    <span>Add to Playlist</span>
-                    <span>›</span>
-                  </button>
-
-                  {showPlaylistSubmenu && (
-                    <div className="absolute right-full top-0 mr-1.5 w-40 bg-[#1C1C22] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 flex flex-col gap-1">
-                      {customPlaylists.map((pl) => (
-                        <button
-                          key={pl.id}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addSongToPlaylist(pl.id, song.id);
-                            setShowMenu(false);
-                            setShowPlaylistSubmenu(false);
-                          }}
-                          className="w-full px-2.5 py-1 rounded-xl text-left truncate text-white/80 hover:text-white hover:bg-white/10 font-medium"
-                        >
-                          {pl.name}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <button onClick={handleShare} className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white font-medium">
-                Share Link
-              </button>
-              <button onClick={handleDownload} className="w-full px-3 py-1.5 rounded-xl text-left hover:bg-white/10 text-white font-medium">
-                Download MP3
-              </button>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
