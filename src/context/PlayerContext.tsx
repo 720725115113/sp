@@ -136,13 +136,13 @@ function readPersistedState(defaultSongs: Song[]): PersistedPlayerState {
       queue: defaultSongs,
       currentIndex: -1,
       currentSongId: null,
-      elapsed: 0, // NO TRANSIENT PLAYBACK POSITION CACHE
+      elapsed: 0,
       volume: parsed.volume ?? 0.85,
       shuffle: parsed.shuffle ?? false,
       repeat: parsed.repeat ?? "off",
-      isPlaying: false, // DO NOT AUTOPLAY TRANSIENT POSITIONS
-      likedSongIds, // PERMANENT LIKED SONGS CACHE RESTORED
-      recentlyPlayed: [], // NO PLAYED SONGS POSITION CACHE
+      isPlaying: false,
+      likedSongIds,
+      recentlyPlayed: [],
       playbackSpeed: parsed.playbackSpeed ?? 1,
       audioQuality: parsed.audioQuality ?? "high",
       customPlaylists: Array.isArray(parsed.customPlaylists) ? parsed.customPlaylists : [],
@@ -162,6 +162,7 @@ export function PlayerProvider({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
+  const wakeLockRef = useRef<any>(null);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
@@ -191,6 +192,46 @@ export function PlayerProvider({
     stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue };
   }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue]);
 
+  // 24-Hour Continuous Background Playback & WakeLock Engine
+  const requestWakeLock = async () => {
+    if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
+      try {
+        wakeLockRef.current = await (navigator as any).wakeLock.request("screen");
+      } catch {
+        // WakeLock request ignored
+      }
+    }
+  };
+
+  const releaseWakeLock = async () => {
+    if (wakeLockRef.current) {
+      try {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+      } catch {
+        // WakeLock release ignored
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isPlaying) {
+      requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && isPlaying) {
+        requestWakeLock();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [isPlaying]);
+
   // Toasts
   const addToast = (message: string, type: Toast["type"] = "info") => {
     const id = `toast-${Date.now()}-${Math.random()}`;
@@ -204,7 +245,7 @@ export function PlayerProvider({
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Ultra-Fast Audio Engine
+  // Ultra-Fast Low-Latency Audio Engine
   useEffect(() => {
     if (!audioRef.current) {
       const a = new Audio();
@@ -388,25 +429,51 @@ export function PlayerProvider({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [volume, currentSong]);
 
-  // Web Media Session integration
+  // FULL LOCKSCREEN, NOTIFICATION & SYSTEM MEDIA SESSION INTEGRATION
   useEffect(() => {
     if (!navigator.mediaSession || !currentSong) return;
+
     navigator.mediaSession.metadata = new MediaMetadata({
       title: currentSong.title,
       artist: currentSong.artist,
-      album: currentSong.album ?? "Wavelength",
-      artwork: currentSong.coverUrl
-        ? [{ src: currentSong.coverUrl, sizes: "512x512", type: "image/jpeg" }]
-        : [],
+      album: currentSong.album ?? "Wavelength Music",
+      artwork: [
+        { src: currentSong.coverUrl, sizes: "96x96", type: "image/jpeg" },
+        { src: currentSong.coverUrl, sizes: "128x128", type: "image/jpeg" },
+        { src: currentSong.coverUrl, sizes: "192x192", type: "image/jpeg" },
+        { src: currentSong.coverUrl, sizes: "256x256", type: "image/jpeg" },
+        { src: currentSong.coverUrl, sizes: "384x384", type: "image/jpeg" },
+        { src: currentSong.coverUrl, sizes: "512x512", type: "image/jpeg" },
+      ],
     });
+
+    try {
+      navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+      if (duration && isFinite(duration) && duration > 0) {
+        navigator.mediaSession.setPositionState({
+          duration: duration,
+          playbackRate: playbackSpeed,
+          position: Math.min(elapsed, duration),
+        });
+      }
+    } catch {
+      // PositionState fallback
+    }
 
     navigator.mediaSession.setActionHandler("play", () => togglePlay());
     navigator.mediaSession.setActionHandler("pause", () => togglePlay());
     navigator.mediaSession.setActionHandler("previoustrack", () => prev());
     navigator.mediaSession.setActionHandler("nexttrack", () => next());
+    navigator.mediaSession.setActionHandler("seekto", (details) => {
+      if (details.seekTime !== undefined) seekToSeconds(details.seekTime);
+    });
     navigator.mediaSession.setActionHandler("seekbackward", () => seekToSeconds(Math.max(0, elapsed - 10)));
     navigator.mediaSession.setActionHandler("seekforward", () => seekToSeconds(Math.min(duration, elapsed + 10)));
-  }, [currentSong?.id, elapsed, duration]);
+    navigator.mediaSession.setActionHandler("stop", () => {
+      if (audioRef.current) audioRef.current.pause();
+      setIsPlaying(false);
+    });
+  }, [currentSong?.id, isPlaying, elapsed, duration, playbackSpeed]);
 
   const handleEnded = () => {
     const { repeat: r } = stateRef.current;
