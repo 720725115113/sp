@@ -380,13 +380,29 @@ export function PlayerProvider({
       setQueue(nextQueue);
       setCurrentIndex(0);
       if (auto) setIsPlaying(true);
+      const newSong = nextQueue[0];
+      if (newSong?.id && !auto) {
+        setProgressBySongId((prev) => {
+          const updated = { ...prev };
+          delete updated[newSong.id];
+          return updated;
+        });
+      }
       return;
     }
     if (r === "off" && nextIndex >= q.length) {
       if (auto) setIsPlaying(false);
       return;
     }
+    const nextSong = q[nextIndex];
     setCurrentIndex(nextIndex);
+    if (nextSong?.id && !auto) {
+      setProgressBySongId((prev) => {
+        const updated = { ...prev };
+        delete updated[nextSong.id];
+        return updated;
+      });
+    }
   };
 
   const playSong = (song: Song, newQueue?: Song[]) => {
@@ -435,7 +451,9 @@ export function PlayerProvider({
     }
   };
 
-  const next = () => goNext(false);
+  const next = () => {
+    goNext(false);
+  };
   const prev = () => {
     const a = audioRef.current;
     if (a && a.currentTime > 3) {
@@ -447,8 +465,16 @@ export function PlayerProvider({
     if (queue.length === 0) return;
     let prevIndex = currentIndex - 1;
     if (prevIndex < 0) prevIndex = queue.length - 1;
+    const nextSong = queue[prevIndex];
     setCurrentIndex(prevIndex);
     setIsPlaying(true);
+    if (nextSong?.id) {
+      setProgressBySongId((prev) => {
+        const updated = { ...prev };
+        delete updated[nextSong.id];
+        return updated;
+      });
+    }
   };
 
   const seek = (ratio: number) => {
