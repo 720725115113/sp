@@ -5,7 +5,14 @@
   "description": "Next-Generation Music Streaming Experience with Hi-Fi Audio & Dynamic Ambient Design.",
   "start_url": "/",
   "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
   "orientation": "any",
   "background_color": "#09090B",
   "theme_color": "#09090B",
@@ -17,15 +24,83 @@
   "prefer_related_applications": false,
   "related_applications": [],
   "iarc_rating_id": "e58c1741-b68c-444a-a73a-44675712f5a6",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "note_taking": {
+    "new_note_url": "/#/library"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "share_target": {
+    "action": "/#/search",
+    "method": "GET",
+    "params": {
+      "title": "q",
+      "text": "q",
+      "url": "q"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+music",
+      "url": "/#/%s"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search Music",
+      "short_name": "Search",
+      "description": "Search for tracks, artists, and playlists",
+      "url": "/#/search",
+      "icons": [
+        {
+          "src": "/app_icon.png",
+          "sizes": "1024x1024",
+          "type": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "name": "Your Library",
+      "short_name": "Library",
+      "description": "Open your music library and saved tracks",
+      "url": "/#/library",
+      "icons": [
+        {
+          "src": "/app_icon.png",
+          "sizes": "1024x1024",
+          "type": "image/jpeg"
+        }
+      ]
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "audio/*": [
+          ".mp3",
+          ".wav",
+          ".flac",
+          ".m4a",
+          ".ogg"
+        ]
+      }
+    }
+  ],
+  "widgets": [],
+  "scope_extensions": [],
   "icons": [
     {
-      "src": "/app_icon.jpeg",
+      "src": "/app_icon.png",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/app_icon.png",
+      "src": "/app_icon.jpeg",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "any maskable"
@@ -39,14 +114,14 @@
   ],
   "screenshots": [
     {
-      "src": "/app_icon.jpeg",
+      "src": "/app_icon.png",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Wavelength Music Player Mobile View"
     },
     {
-      "src": "/app_icon.jpeg",
+      "src": "/app_icon.png",
       "sizes": "1024x1024",
       "type": "image/jpeg",
       "form_factor": "wide",
