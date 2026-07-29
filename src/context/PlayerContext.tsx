@@ -94,6 +94,7 @@ interface PlayerState {
 const PlayerContext = createContext<PlayerState | null>(null);
 const LIKED_STORAGE_KEY = "wavelength-liked-songs-permanent";
 const SETTINGS_STORAGE_KEY = "wavelength-settings-v1";
+const SILENT_AUDIO_URI = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
 
 function readPersistedLikedSongs(): string[] {
   if (typeof window === "undefined") return [];
@@ -162,6 +163,7 @@ export function PlayerProvider({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const preloadAudioRef = useRef<HTMLAudioElement | null>(null);
+  const silentAudioRef = useRef<HTMLAudioElement | null>(null);
   const wakeLockRef = useRef<any>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
@@ -193,7 +195,7 @@ export function PlayerProvider({
     stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue };
   }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue]);
 
-  // 24-HOUR CONTINUOUS BACKGROUND PLAYBACK & UNTHROTTLED AUDIO CONTEXT KEEP-ALIVE
+  // UNLIMITED SCREEN-OFF & LOCKSCREEN BACKGROUND AUDIO ENGINE
   const requestWakeLock = async () => {
     if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
       try {
@@ -215,7 +217,6 @@ export function PlayerProvider({
     }
   };
 
-  // Anti-Battery Saver Web Audio Context Keep-Alive Node
   const keepAudioActive = () => {
     try {
       if (!audioCtxRef.current) {
@@ -226,6 +227,10 @@ export function PlayerProvider({
       }
       if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
         audioCtxRef.current.resume();
+      }
+      // Play silent background loop to anchor audio process when screen is locked/off
+      if (silentAudioRef.current) {
+        silentAudioRef.current.play().catch(() => {});
       }
     } catch {
       // AudioContext fallback
@@ -238,18 +243,36 @@ export function PlayerProvider({
       keepAudioActive();
     } else {
       releaseWakeLock();
+      if (silentAudioRef.current) silentAudioRef.current.pause();
     }
   }, [isPlaying]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible" && isPlaying) {
+      if (isPlaying) {
         requestWakeLock();
         keepAudioActive();
       }
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pagehide", handleVisibilityChange);
+    window.addEventListener("blur", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pagehide", handleVisibilityChange);
+      window.removeEventListener("blur", handleVisibilityChange);
+    };
+  }, [isPlaying]);
+
+  // Web Lock API to prevent tab discards on lockscreen
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && "locks" in navigator && isPlaying) {
+      (navigator as any).locks.request("wavelength_unlimited_background_audio", { mode: "shared" }, () => {
+        return new Promise(() => {
+          // Keeps background audio process alive indefinitely when screen is off
+        });
+      }).catch(() => {});
+    }
   }, [isPlaying]);
 
   // Toasts
@@ -265,7 +288,7 @@ export function PlayerProvider({
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Ultra-Fast Low-Latency Audio Engine
+  // Low-Latency Audio Engine & Silent Background Audio Anchor
   useEffect(() => {
     if (!audioRef.current) {
       const a = new Audio();
@@ -302,6 +325,13 @@ export function PlayerProvider({
       a.addEventListener("play", () => setIsPlaying(true));
       a.addEventListener("pause", () => setIsPlaying(false));
     }
+
+    if (!silentAudioRef.current) {
+      const silent = new Audio(SILENT_AUDIO_URI);
+      silent.loop = true;
+      silent.volume = 0.01;
+      silentAudioRef.current = silent;
+    }
   }, []);
 
   // Sleep timer countdown
@@ -310,6 +340,7 @@ export function PlayerProvider({
     if (sleepTimerSeconds <= 0) {
       if (audioRef.current && !audioRef.current.paused) {
         audioRef.current.pause();
+        if (silentAudioRef.current) silentAudioRef.current.pause();
         addToast("Sleep timer finished. Music paused.", "info");
       }
       setSleepTimerSeconds(null);
@@ -331,7 +362,7 @@ export function PlayerProvider({
     if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // INSTANT SUB-MILLISECOND PLAYBACK STARTING AT 0:00 SECONDS
+  // INSTANT SUB-MILLISECENT PLAYBACK STARTING AT 0:00 SECONDS
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !currentSong) return;
@@ -492,6 +523,7 @@ export function PlayerProvider({
     navigator.mediaSession.setActionHandler("seekforward", () => seekToSeconds(Math.min(duration, elapsed + 10)));
     navigator.mediaSession.setActionHandler("stop", () => {
       if (audioRef.current) audioRef.current.pause();
+      if (silentAudioRef.current) silentAudioRef.current.pause();
       setIsPlaying(false);
     });
   }, [currentSong?.id, isPlaying, elapsed, duration, playbackSpeed]);
@@ -612,6 +644,7 @@ export function PlayerProvider({
       a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     } else {
       a.pause();
+      if (silentAudioRef.current) silentAudioRef.current.pause();
       setIsPlaying(false);
     }
   };
