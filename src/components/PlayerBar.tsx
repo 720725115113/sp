@@ -91,11 +91,11 @@ export default function PlayerBar({
         <button onClick={() => p.setPlaybackSpeed(p.playbackSpeed === 1 ? 1.25 : p.playbackSpeed === 1.25 ? 1.5 : 1)} className="rounded-full border border-white/20 px-2.5 py-1 text-[11px] font-semibold text-white hover:text-white" aria-label="Playback speed">
           {p.playbackSpeed.toFixed(2).replace(/\.00$/, "") + "x"}
         </button>
-        <IconBtn onClick={() => p.setVolume(p.volume > 0 ? 0 : 0.8)} label="Mute">
+        <IconBtn onClick={() => p.setVolume(p.volume > 0 ? 0 : 0.8)} label="Mute" forceWhite={true}>
           {p.volume === 0 ? (
-            <path d="M4 10v4h4l5 5V5L8 10H4Zm14.5 2-2.5-2.5L13.5 12 16 14.5 18.5 12Z" />
+            <path d="M4 10v4h4l5 5V5L8 10H4Zm14.5 2-2.5-2.5L13.5 12 16 14.5 18.5 12Z" fill="currentColor" />
           ) : (
-            <path d="M4 10v4h4l5 5V5L8 10H4Zm12.5 2a5 5 0 0 0-2.5-4.33v8.66A5 5 0 0 0 16.5 12Zm0-7v2.06a8 8 0 0 1 0 13.88V21a10 10 0 0 0 0-18Z" />
+            <path d="M4 10v4h4l5 5V5L8 10H4Zm12.5 2a5 5 0 0 0-2.5-4.33v8.66A5 5 0 0 0 16.5 12Zm0-7v2.06a8 8 0 0 1 0 13.88V21a10 10 0 0 0 0-18Z" fill="currentColor" />
           )}
         </IconBtn>
         <div className="w-28">
