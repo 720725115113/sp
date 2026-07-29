@@ -166,6 +166,7 @@ export function PlayerProvider({
   const silentAudioRef = useRef<HTMLAudioElement | null>(null);
   const wakeLockRef = useRef<any>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const oscRef = useRef<OscillatorNode | null>(null);
   const persistedState = useMemo(() => readPersistedState(songs), [songs]);
 
   const [queue, setQueue] = useState<Song[]>(() => persistedState.queue);
@@ -195,7 +196,7 @@ export function PlayerProvider({
     stateRef.current = { repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue };
   }, [repeat, queue, currentIndex, shuffle, currentSong, songs, originalQueue]);
 
-  // UNLIMITED SCREEN-OFF & LOCKSCREEN BACKGROUND AUDIO ENGINE
+  // UNLIMITED BACKGROUND AUDIO & EXTREME POWER SAVER BYPASS ENGINE
   const requestWakeLock = async () => {
     if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
       try {
@@ -217,6 +218,7 @@ export function PlayerProvider({
     }
   };
 
+  // Anti-Battery Saver Web Audio Oscillator Node Keep-Alive
   const keepAudioActive = () => {
     try {
       if (!audioCtxRef.current) {
@@ -228,7 +230,17 @@ export function PlayerProvider({
       if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
         audioCtxRef.current.resume();
       }
-      // Play silent background loop to anchor audio process when screen is locked/off
+      if (audioCtxRef.current && !oscRef.current) {
+        const osc = audioCtxRef.current.createOscillator();
+        const gain = audioCtxRef.current.createGain();
+        osc.type = "sine";
+        osc.frequency.value = 20; // 20Hz sub-audible hardware pulse
+        gain.gain.value = 0.00001; // virtually silent
+        osc.connect(gain);
+        gain.connect(audioCtxRef.current.destination);
+        osc.start();
+        oscRef.current = osc;
+      }
       if (silentAudioRef.current) {
         silentAudioRef.current.play().catch(() => {});
       }
@@ -264,7 +276,7 @@ export function PlayerProvider({
     };
   }, [isPlaying]);
 
-  // Web Lock API to prevent tab discards on lockscreen
+  // Web Lock API to prevent tab discards on lockscreen & extreme power saver mode
   useEffect(() => {
     if (typeof navigator !== "undefined" && "locks" in navigator && isPlaying) {
       (navigator as any).locks.request("wavelength_unlimited_background_audio", { mode: "shared" }, () => {
@@ -362,7 +374,7 @@ export function PlayerProvider({
     if (audioRef.current) audioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // INSTANT SUB-MILLISECENT PLAYBACK STARTING AT 0:00 SECONDS
+  // INSTANT SUB-MILLISECOND PLAYBACK STARTING AT 0:00 SECONDS
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !currentSong) return;
@@ -396,12 +408,12 @@ export function PlayerProvider({
     }
   }, [currentSong?.id, currentIndex]);
 
-  // Update recently played
+  // UPDATE RECENTLY PLAYED — STORE 3 PREVIOUS SONGS ONLY IN MEMORY
   useEffect(() => {
     if (!currentSong) return;
     setRecentlyPlayed((prev) => {
       const filtered = prev.filter((s) => s.id !== currentSong.id);
-      return [currentSong, ...filtered].slice(0, 16);
+      return [currentSong, ...filtered].slice(0, 3); // STRICT LIMIT: EXACTLY 3 PREVIOUS SONGS
     });
   }, [currentSong?.id]);
 
