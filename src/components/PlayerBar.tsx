@@ -47,7 +47,7 @@ export default function PlayerBar({
             <path d="M17 3 21 7l-4 4M3 17l4 4 4-4M3 7h3l3 3 3-3 3-3h3M3 17h3l3-3 3 3 3 3h3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
           </IconBtn>
           <IconBtn onClick={p.prev} label="Previous" forceWhite={true}>
-            <path d="M6 6h2v12H6zM20 6v12L9 12z" />
+            <path d="M6 6h2v12H6zM20 6v12L9 12z" fill="currentColor" />
           </IconBtn>
           <button
             onClick={p.togglePlay}
@@ -65,7 +65,7 @@ export default function PlayerBar({
             )}
           </button>
           <IconBtn onClick={p.next} label="Next" forceWhite={true}>
-            <path d="M16 6h2v12h-2zM4 6v12l11-6z" />
+            <path d="M16 6h2v12h-2zM4 6v12l11-6z" fill="currentColor" />
           </IconBtn>
           <IconBtn onClick={p.cycleRepeat} active={p.repeat !== "off"} label="Repeat" forceWhite={true}>
             {p.repeat === "one" ? (
@@ -123,8 +123,8 @@ function IconBtn({
     <button
       aria-label={label}
       onClick={onClick}
-      className={`h-9 w-9 md:h-10 md:w-10 grid place-items-center rounded-full transition-all duration-200 flex-shrink-0 border border-white/15 bg-transparent ${
-        active ? "text-emerald-400 bg-emerald-400/10 shadow-[0_0_0_1px_rgba(52,211,153,0.15)]" : forceWhite ? "text-white hover:text-white hover:bg-white/20 active:bg-white/30" : "text-white hover:text-white hover:bg-white/10"
+      className={`h-9 w-9 md:h-10 md:w-10 grid place-items-center rounded-full transition-all duration-200 flex-shrink-0 border border-white/20 ${
+        active ? "text-emerald-400 bg-emerald-400/10 border-emerald-400/30 shadow-[0_0_0_2px_rgba(52,211,153,0.2)]" : forceWhite ? "text-white bg-white/10 hover:text-white hover:bg-white/25 active:bg-white/35 shadow-sm" : "text-white/70 hover:text-white hover:bg-white/10"
       }`}
     >
       <svg viewBox="0 0 24 24" className="h-4 w-4">
