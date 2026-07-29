@@ -20,6 +20,44 @@ import type { Song, Playlist } from "../types";
 
 export const songs: Song[] = [
  {
+  id: "s45",
+  title: "The Life Of Ram",
+  artist: "Govind Vasantha, Pradeep Kumar",
+  album: "96 Tamil",
+  duration: "05:54",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16960/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/nPOjDpLAi7ThZ8-QVhDA0Rk3PEu6DtmqmODmhlBPuL0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2NlLzE3/L2QwL2NlMTdkMGM5/Y2E0MmMzZGQ2YzJl/MmRiZDdlNDcwNGIw/LmpwZw",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+
+{
+  id: "s46",
+  title: "Vasantha Kaalangal",
+  artist: "Chinmayi Sripaada, Govind Vasantha",
+  album: "96 Tamil",
+  duration: "04:56",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16961/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/kUyN0iXAr6Plk_qixox7jJxZZ5U3Qa228WeaMt_-p3Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDQ1MDAz/OTcuanBn",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+
+{
+  id: "s47",
+  title: "Yean",
+  artist: "Govind Vasantha, Gowri TP",
+  album: "96 Tamil",
+  duration: "02:24",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16962/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/nPOjDpLAi7ThZ8-QVhDA0Rk3PEu6DtmqmODmhlBPuL0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2NlLzE3/L2QwL2NlMTdkMGM5/Y2E0MmMzZGQ2YzJl/MmRiZDdlNDcwNGIw/LmpwZw",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+{
   id: "s18",          // unique slug
   title: "Kadhal Oru Aagayam",        // display title
   artist: "Teejay, Al Rufian",
@@ -31,7 +69,7 @@ export const songs: Song[] = [
   year: 2018,
   color: "#8b5cf6"            // accent color (hex)
  },
-  {
+ {
   id: "s19",          // unique slug
   title: "Kadhalikathey",        // display title
   artist: "Hiphop Tamizha, Kaushik Krish",
@@ -67,7 +105,121 @@ export const songs: Song[] = [
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
  },
- 
+ {
+  id: "s40",
+  title: "Anthaathi",
+  artist: "Chinmayi Sripaada, Govind Vasantha, Bhadra Rajin, M. Nassar",
+  album: "96 Tamil",
+  duration: "07:15",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16955/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/2HeJB-aKb_v7kmneHGX2kHkrwul1eLILS2fIMnAy63M/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk4yVmlORFU1/WTJFdE0yWmhOaTAw/Tm1GbUxXSTBNVGN0/TVRBNFlXUXhPVFU1/WXpNMlhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+
+{
+  id: "s41",
+  title: "Iravingu Theevai",
+  artist: "Chinmayi Sripaada, Govind Vasantha",
+  album: "96 Tamil",
+  duration: "03:41",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16956/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/fSn8Z6aX-nV6La3lbpVUvLA7Hfs-BUExSwoRGM_5NJA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZWNkbi5yYWFnYS5j/b20vcmFhZ2FpbWcv/cl9pbWcvMjUwL3Qv/dDAwMDQ2ODEtMi5q/cGc",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+
+{
+  id: "s42",
+  title: "Kaathalae Kaathalae",
+  artist: "Chinmayi Sripaada, Govind Vasantha",
+  album: "96 Tamil",
+  duration: "03:13",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16958/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/nPOjDpLAi7ThZ8-QVhDA0Rk3PEu6DtmqmODmhlBPuL0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2NlLzE3/L2QwL2NlMTdkMGM5/Y2E0MmMzZGQ2YzJl/MmRiZDdlNDcwNGIw/LmpwZw",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+
+{
+  id: "s43",
+  title: "Kaathalae Kaathalae (Duet Version)",
+  artist: "Kalyani Menon, Govind Vasantha",
+  album: "96 Tamil",
+  duration: "03:14",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16957/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/2HeJB-aKb_v7kmneHGX2kHkrwul1eLILS2fIMnAy63M/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk4yVmlORFU1/WTJFdE0yWmhOaTAw/Tm1GbUxXSTBNVGN0/TVRBNFlXUXhPVFU1/WXpNMlhrRXlYa0Zx/Y0djQC5qcGc",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+
+{
+  id: "s44",
+  title: "Thaabangale",
+  artist: "Chinmayi Sripaada, Pradeep Kumar",
+  album: "96 Tamil",
+  duration: "03:58",
+  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16959/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  coverUrl: "https://imgs.search.brave.com/kUyN0iXAr6Plk_qixox7jJxZZ5U3Qa228WeaMt_-p3Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDQ1MDAz/OTcuanBn",
+  genre: "",
+  year: 2018,
+  color: "#5b5058"
+},
+{
+  id: "s48",
+  title: "Jillendru Oru Kaadhal",
+  artist: "Tanvi Shah, Bhargavi Pillai",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "04:18",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/160/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/6Fb0Vj7UI76Si2mDwqO4GjRcsZhMQJkrXf_JyArEd6o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzliLzhm/LzJkLzliOGYyZGFk/YjQ0M2ZmZmY5Yjg3/ZTM3NDQxODcxMDZj/LmpwZw",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
+
+{
+  id: "s49",
+  title: "Kummi Adi Kummi",
+  artist: "Naresh Iyer, Sular Nathalatha, Dr. Sirkali G. Siva Chidambaram",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "06:55",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/162/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/Cm1zWktSNoD3YPOyqcNH6PFdJHKcB76mcOnJrZrAGiU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzU1LzI4/LzBlLzU1MjgwZTI2/NzIyYmFhOGNjMTlh/YWVkY2E5ZWQxNDBk/LmpwZw",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
+
+{
+  id: "s50",
+  title: "Maaja Maaja Maja",
+  artist: "S.P.B. Charan, Shreya Ghoshal",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "05:42",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/166/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/6Fb0Vj7UI76Si2mDwqO4GjRcsZhMQJkrXf_JyArEd6o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzliLzhm/LzJkLzliOGYyZGFk/YjQ0M2ZmZmY5Yjg3/ZTM3NDQxODcxMDZj/LmpwZw",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
+
+{
+  id: "s51",
+  title: "Maaricham Yatho",
+  artist: "Mohammed Aslam, Korolisa, Krishna",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "06:08",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/164/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/6Fb0Vj7UI76Si2mDwqO4GjRcsZhMQJkrXf_JyArEd6o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzliLzhm/LzJkLzliOGYyZGFk/YjQ0M2ZmZmY5Yjg3/ZTM3NDQxODcxMDZj/LmpwZw",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
 {
   id: "s3",          // unique slug
   title: "Chella Magale",        // display title
@@ -131,6 +283,47 @@ export const songs: Song[] = [
   year: 2002,
   color: "#d6964e"
 },
+ {
+  id: "s52",
+  title: "Machakari Machakari",
+  artist: " Shankar Mahadevan, Vasundhara Das",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "05:31",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/163/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/iA7QxM5x_F2BPjTdc7TE5OIIo4bioJHAxYZOlWnKnis/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwNjA4/NjEuanBn",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
+
+{
+  id: "s53",
+  title: "Munbe Vaa",
+  artist: "Naresh Iyer, Shreya Ghoshal",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "05:57",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/165/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/iA7QxM5x_F2BPjTdc7TE5OIIo4bioJHAxYZOlWnKnis/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwNjA4/NjEuanBn",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
+
+{
+  id: "s54",
+  title: "New York Nagaram",
+  artist: "A.R. Rahman",
+  album: "Sillunu Oru Kadhal 2006 tamil",
+  duration: "06:18",
+  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/161/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  coverUrl: "https://imgs.search.brave.com/iA7QxM5x_F2BPjTdc7TE5OIIo4bioJHAxYZOlWnKnis/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwNjA4/NjEuanBn",
+  genre: "",
+  year: 2006,
+  color: "#1f1f23"
+},
+
+
+
 
 {
   id: "s29",
