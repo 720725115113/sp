@@ -123,8 +123,8 @@ function IconBtn({
     <button
       aria-label={label}
       onClick={onClick}
-      className={`h-9 w-9 md:h-10 md:w-10 grid place-items-center rounded-full transition-all duration-200 flex-shrink-0 border border-white/10 ${
-        active ? "text-emerald-400 bg-emerald-400/10 shadow-[0_0_0_1px_rgba(52,211,153,0.15)]" : forceWhite ? "text-white hover:text-white hover:bg-white/15 active:bg-white/25" : "text-white/70 hover:text-white hover:bg-white/10"
+      className={`h-9 w-9 md:h-10 md:w-10 grid place-items-center rounded-full transition-all duration-200 flex-shrink-0 border border-white/15 bg-transparent ${
+        active ? "text-emerald-400 bg-emerald-400/10 shadow-[0_0_0_1px_rgba(52,211,153,0.15)]" : forceWhite ? "text-white hover:text-white hover:bg-white/20 active:bg-white/30" : "text-white hover:text-white hover:bg-white/10"
       }`}
     >
       <svg viewBox="0 0 24 24" className="h-4 w-4">
