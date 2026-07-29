@@ -26,22 +26,22 @@ export default function Sidebar({
 
   return (
     <aside className="hidden lg:flex w-64 shrink-0 flex-col glass-panel border-r border-white/10 p-5 gap-6 h-full">
-      {/* Brand Header */}
+      {/* Brand Header with App Icon */}
       <button
         onClick={() => onNavigate("home")}
-        className="flex items-center gap-3 px-2 text-left group"
+        className="flex items-center gap-3.5 px-1 text-left group"
       >
-        <div className="h-10 w-10 rounded-2xl btn-glow-primary grid place-items-center shrink-0">
-          <svg viewBox="0 0 24 24" className="h-6 w-6 text-black" fill="currentColor">
-            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm4.5 14.42a.62.62 0 0 1-.86.21c-2.36-1.44-5.33-1.77-8.83-.97a.63.63 0 1 1-.28-1.22c3.83-.87 7.11-.5 9.76 1.12a.62.62 0 0 1 .21.86Zm1.2-2.67a.78.78 0 0 1-1.07.25c-2.7-1.66-6.81-2.14-10-1.17a.78.78 0 1 1-.46-1.49c3.66-1.11 8.2-.57 11.3 1.33a.78.78 0 0 1 .23 1.08Zm.1-2.78C14.55 9 9.37 8.82 6.3 9.75a.93.93 0 1 1-.54-1.78c3.53-1.07 9.25-.86 13.13 1.45a.93.93 0 0 1-1.09 1.55Z" />
-          </svg>
-        </div>
+        <img
+          src="/app_icon.png"
+          alt="Wavelength"
+          className="h-11 w-11 rounded-2xl object-cover shadow-2xl border border-white/20 group-hover:scale-105 transition-transform duration-300"
+        />
         <div>
-          <span className="font-extrabold text-xl tracking-tight text-white group-hover:text-[#18E29A] transition-colors">
+          <span className="font-extrabold text-xl tracking-tight text-white group-hover:text-[#18E29A] transition-colors font-heading block">
             Wavelength
           </span>
-          <span className="block text-[10px] uppercase tracking-widest text-[#18E29A] font-bold">
-            Hi-Fi Audio
+          <span className="block text-[9px] uppercase tracking-widest text-[#18E29A] font-black">
+            FEEL EVERY BEAT
           </span>
         </div>
       </button>
@@ -75,23 +75,23 @@ export default function Sidebar({
       </nav>
 
       {/* Library Quick Access */}
-      <div className="flex flex-col gap-2 pt-2 border-t border-white/10 min-h-0 flex-1">
+      <div className="flex flex-col gap-2.5 pt-3 border-t border-white/10 min-h-0 flex-1">
         <div className="flex items-center justify-between px-2">
           <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-widest text-white/50 font-bold">
+            <span className="text-xs uppercase tracking-widest text-white/50 font-black">
               Playlists
             </span>
-            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white/70">
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white/70">
               {allPlaylists.length}
             </span>
           </div>
           <button
             onClick={onCreatePlaylistModal}
-            className="h-7 w-7 rounded-full bg-white/5 hover:bg-[#18E29A] hover:text-black grid place-items-center text-white/70 transition-all"
+            className="h-7 w-7 rounded-full bg-white/5 hover:bg-[#18E29A] hover:text-black grid place-items-center text-white/70 transition-all icon-btn-smooth"
             aria-label="Create Playlist"
             title="Create Playlist"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M12 5v14M5 12h14" />
             </svg>
           </button>
@@ -100,16 +100,16 @@ export default function Sidebar({
         {/* Liked Songs Quick Shortcut */}
         <button
           onClick={() => onNavigate("library")}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-purple-500/10 to-indigo-500/10 border border-white/5 hover:border-rose-500/30 transition-all text-left group"
+          className="flex items-center gap-3 px-3.5 py-3 rounded-2xl bg-gradient-to-r from-rose-500/10 via-purple-500/10 to-indigo-500/10 border border-white/10 hover:border-rose-500/40 transition-all text-left group"
         >
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-rose-500 to-purple-600 grid place-items-center text-white shadow-md shrink-0">
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-rose-500 to-purple-600 grid place-items-center text-white shadow-lg shrink-0">
+            <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="currentColor">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
           </div>
           <div className="min-w-0 flex-1">
-            <div className="text-sm font-bold text-white group-hover:text-rose-400 transition-colors">Liked Songs</div>
-            <div className="text-[11px] text-white/50">{likedSongIds.length} tracks</div>
+            <div className="text-sm font-extrabold text-white group-hover:text-rose-400 transition-colors font-heading">Liked Songs</div>
+            <div className="text-[11px] text-white/50 font-medium">{likedSongIds.length} tracks</div>
           </div>
         </button>
 
@@ -117,16 +117,16 @@ export default function Sidebar({
         <div className="flex gap-1.5 px-1 py-1">
           <button
             onClick={() => setFilter("all")}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all ${
-              filter === "all" ? "bg-white/15 text-white" : "text-white/40 hover:text-white"
+            className={`px-3 py-1 rounded-xl text-[11px] font-bold transition-all ${
+              filter === "all" ? "bg-white/15 text-white shadow-md" : "text-white/40 hover:text-white"
             }`}
           >
             All
           </button>
           <button
             onClick={() => setFilter("pinned")}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all ${
-              filter === "pinned" ? "bg-white/15 text-white" : "text-white/40 hover:text-white"
+            className={`px-3 py-1 rounded-xl text-[11px] font-bold transition-all ${
+              filter === "pinned" ? "bg-white/15 text-white shadow-md" : "text-white/40 hover:text-white"
             }`}
           >
             Pinned
@@ -139,16 +139,18 @@ export default function Sidebar({
             <button
               key={p.id}
               onClick={() => onNavigate("playlist", p.id)}
-              className={`text-left text-sm px-3 py-2 rounded-xl truncate transition-all flex items-center justify-between group ${
+              className={`text-left text-sm px-3.5 py-2.5 rounded-xl truncate transition-all flex items-center justify-between group font-medium ${
                 currentView === `playlist:${p.id}`
-                  ? "bg-[#18E29A]/15 text-[#18E29A] font-bold border border-[#18E29A]/30"
+                  ? "bg-[#18E29A]/15 text-[#18E29A] font-extrabold border border-[#18E29A]/30 shadow-md"
                   : "text-white/70 hover:text-white hover:bg-white/5"
               }`}
             >
               <span className="truncate">{p.name}</span>
               {(p as any).isPinned && (
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A] shrink-0 opacity-80" fill="currentColor">
-                  <path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z" />
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A] shrink-0 opacity-90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="17" x2="12" y2="22" />
+                  <path d="M5 17h14l-1.5-6H6.5L5 17z" />
+                  <path d="M9 11V4h6v7" />
                 </svg>
               )}
             </button>
@@ -173,9 +175,9 @@ function SideNavItem({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold transition-all ${
+      className={`flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-bold transition-all ${
         active
-          ? "bg-gradient-to-r from-[#18E29A]/20 to-[#6D5EF8]/20 text-[#18E29A] border border-[#18E29A]/30 shadow-lg"
+          ? "bg-gradient-to-r from-[#18E29A]/20 to-[#6D5EF8]/20 text-[#18E29A] border border-[#18E29A]/30 shadow-lg font-heading"
           : "text-white/70 hover:text-white hover:bg-white/5"
       }`}
     >
@@ -232,12 +234,12 @@ export function MiniSidebar({
           onClick={() => onNavigate(item.id)}
           className={`flex flex-col items-center gap-1 py-1.5 px-4 rounded-xl transition-all ${
             currentView === item.id
-              ? "text-[#18E29A] font-bold"
+              ? "text-[#18E29A] font-extrabold"
               : "text-white/60 hover:text-white"
           }`}
         >
           {item.icon}
-          <span className="text-[10px] font-semibold tracking-wide">{item.label}</span>
+          <span className="text-[10px] font-bold tracking-wide">{item.label}</span>
         </button>
       ))}
     </nav>

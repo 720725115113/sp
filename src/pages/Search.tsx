@@ -14,7 +14,7 @@ type FilterChip = "all" | "songs" | "albums" | "artists" | "playlists" | "podcas
 
 export default function Search({ onNavigate, query, onQueryChange }: Props) {
   const { songs, playlists, artists, albums } = useCatalog();
-  const { searchHistory, addSearchHistory, removeSearchHistory, clearSearchHistory, addToast } = usePlayer();
+  const { searchHistory, addSearchHistory, removeSearchHistory, clearSearchHistory } = usePlayer();
   const [activeChip, setActiveChip] = useState<FilterChip>("all");
 
   const trendingTags = ["A.R. Rahman", "Anirudh Ravichander", "Electronic Lo-Fi", "Synthwave 80s", "Taylor Swift", "Instrumental Chill"];
@@ -42,9 +42,9 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
     <div className="animate-fade-in px-4 md:px-8 py-6 space-y-8 pb-16">
       {/* Header & Voice / Input Search */}
       <div className="space-y-4 max-w-3xl">
-        <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight">Search</h1>
+        <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight font-heading">Search</h1>
         
-        <div className="relative glass-input rounded-2xl p-3 flex items-center gap-3 shadow-xl">
+        <div className="relative glass-input-premium rounded-2xl p-3.5 flex items-center gap-3 shadow-xl">
           <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#18E29A] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5">
             <circle cx="11" cy="11" r="7" />
             <path d="m20 20-3.5-3.5" strokeLinecap="round" />
@@ -64,10 +64,10 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
           {query && (
             <button
               onClick={() => onQueryChange("")}
-              className="h-6 w-6 rounded-full bg-white/10 grid place-items-center text-white/70 hover:text-white"
+              className="h-6 w-6 rounded-full bg-white/10 grid place-items-center text-white/70 hover:text-white icon-btn-smooth"
               aria-label="Clear search"
             >
-              ✕
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
           )}
         </div>
@@ -80,7 +80,7 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
             <button
               key={chip}
               onClick={() => setActiveChip(chip)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all ${
                 activeChip === chip
                   ? "bg-[#18E29A] text-black shadow-lg"
                   : "bg-white/5 text-white/70 hover:bg-white/15"
@@ -99,10 +99,10 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
           {searchHistory.length > 0 && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold text-white">Recent Searches</h2>
+                <h2 className="text-lg font-bold text-white font-heading">Recent Searches</h2>
                 <button
                   onClick={clearSearchHistory}
-                  className="text-xs text-white/50 hover:text-[#18E29A] font-semibold"
+                  className="text-xs text-white/50 hover:text-[#18E29A] font-bold"
                 >
                   Clear all
                 </button>
@@ -111,7 +111,7 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
                 {searchHistory.map((item) => (
                   <div
                     key={item}
-                    className="glass-card px-3.5 py-1.5 rounded-full flex items-center gap-2 text-xs font-semibold text-white/80 hover:text-white cursor-pointer"
+                    className="glass-card-premium px-4 py-2 rounded-full flex items-center gap-2.5 text-xs font-bold text-white/80 hover:text-white cursor-pointer border border-white/10"
                   >
                     <span onClick={() => handleSelectQuery(item)}>{item}</span>
                     <button
@@ -121,7 +121,7 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
                       }}
                       className="text-white/40 hover:text-rose-400"
                     >
-                      ✕
+                      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
                     </button>
                   </div>
                 ))}
@@ -131,15 +131,16 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
 
           {/* Trending Searches */}
           <div className="space-y-3">
-            <h2 className="text-lg font-bold text-white">Trending Searches</h2>
+            <h2 className="text-lg font-bold text-white font-heading">Trending Searches</h2>
             <div className="flex flex-wrap gap-2.5">
               {trendingTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => handleSelectQuery(tag)}
-                  className="px-4 py-2 rounded-2xl bg-white/5 border border-white/10 hover:border-[#18E29A]/40 text-xs font-bold text-white hover:text-[#18E29A] transition-all"
+                  className="px-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#18E29A]/40 text-xs font-bold text-white hover:text-[#18E29A] transition-all flex items-center gap-2"
                 >
-                  🔥 {tag}
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#18E29A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
+                  {tag}
                 </button>
               ))}
             </div>
@@ -147,13 +148,13 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
 
           {/* Browse Genres Grid */}
           <div className="space-y-4">
-            <h2 className="text-xl font-extrabold text-white">Browse All Genres</h2>
+            <h2 className="text-xl font-extrabold text-white font-heading">Browse All Genres</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {Array.from(new Set(songs.map((s) => s.genre).filter(Boolean) as string[])).map((genre, idx) => (
                 <button
                   key={genre}
                   onClick={() => handleSelectQuery(genre)}
-                  className="relative aspect-[4/3] rounded-2xl p-5 text-left font-black text-lg text-white overflow-hidden shadow-xl hover:scale-105 transition-transform"
+                  className="relative aspect-[4/3] rounded-3xl p-5 text-left font-black text-lg text-white overflow-hidden shadow-xl hover:scale-105 transition-transform font-heading"
                   style={{
                     background: `linear-gradient(135deg, ${palette[idx % palette.length]} 0%, #141418 100%)`,
                   }}
@@ -171,8 +172,8 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
         <div className="space-y-8">
           {(activeChip === "all" || activeChip === "songs") && results.songs.length > 0 && (
             <section className="space-y-3">
-              <h2 className="text-xl font-extrabold text-white">Songs</h2>
-              <div className="hidden md:block glass-card rounded-2xl overflow-hidden p-2">
+              <h2 className="text-xl font-extrabold text-white font-heading">Songs</h2>
+              <div className="hidden md:block glass-card-premium rounded-3xl overflow-hidden p-2 border border-white/10">
                 {results.songs.map((s, idx) => (
                   <SongRow key={s.id} song={s} index={idx} queue={results.songs} />
                 ))}
@@ -187,17 +188,17 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
 
           {(activeChip === "all" || activeChip === "playlists") && results.playlists.length > 0 && (
             <section className="space-y-3">
-              <h2 className="text-xl font-extrabold text-white">Playlists</h2>
+              <h2 className="text-xl font-extrabold text-white font-heading">Playlists</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {results.playlists.map((pl) => (
                   <button
                     key={pl.id}
                     onClick={() => onNavigate("playlist", pl.id)}
-                    className="glass-card p-3 rounded-2xl text-left transition-all"
+                    className="glass-card-premium p-3.5 rounded-3xl text-left transition-all"
                   >
-                    <img src={pl.coverUrl} alt="" className="w-full aspect-square object-cover rounded-xl shadow-lg" />
-                    <div className="font-bold text-sm text-white truncate mt-3">{pl.name}</div>
-                    <div className="text-xs text-white/50">{pl.songIds.length} tracks</div>
+                    <img src={pl.coverUrl} alt="" className="w-full aspect-square object-cover rounded-2xl shadow-lg border border-white/10" />
+                    <div className="font-extrabold text-sm text-white truncate mt-3 font-heading">{pl.name}</div>
+                    <div className="text-xs text-white/50 font-medium">{pl.songIds.length} tracks</div>
                   </button>
                 ))}
               </div>
@@ -206,16 +207,16 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
 
           {(activeChip === "all" || activeChip === "artists") && results.artists.length > 0 && (
             <section className="space-y-3">
-              <h2 className="text-xl font-extrabold text-white">Artists</h2>
-              <div className="flex gap-4 overflow-x-auto pb-2">
+              <h2 className="text-xl font-extrabold text-white font-heading">Artists</h2>
+              <div className="flex gap-4 overflow-x-auto pb-2 no-scrollbar">
                 {results.artists.map((art) => (
                   <button
                     key={art.id}
                     onClick={() => onNavigate("search")}
-                    className="w-36 shrink-0 glass-card p-3.5 rounded-2xl text-center"
+                    className="w-36 shrink-0 glass-card-premium p-3.5 rounded-3xl text-center"
                   >
-                    <img src={art.coverUrl} alt="" className="w-full aspect-square object-cover rounded-full shadow-lg" />
-                    <div className="font-bold text-sm text-white truncate mt-3">{art.name}</div>
+                    <img src={art.coverUrl} alt="" className="w-full aspect-square object-cover rounded-full shadow-lg border border-white/10" />
+                    <div className="font-extrabold text-sm text-white truncate mt-3 font-heading">{art.name}</div>
                   </button>
                 ))}
               </div>
@@ -224,17 +225,17 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
 
           {(activeChip === "all" || activeChip === "albums") && results.albums.length > 0 && (
             <section className="space-y-3">
-              <h2 className="text-xl font-extrabold text-white">Albums</h2>
-              <div className="flex gap-4 overflow-x-auto pb-2">
+              <h2 className="text-xl font-extrabold text-white font-heading">Albums</h2>
+              <div className="flex gap-4 overflow-x-auto pb-2 no-scrollbar">
                 {results.albums.map((al) => (
                   <button
                     key={al.id}
                     onClick={() => onNavigate("search")}
-                    className="w-36 shrink-0 glass-card p-3.5 rounded-2xl text-left"
+                    className="w-36 shrink-0 glass-card-premium p-3.5 rounded-3xl text-left"
                   >
-                    <img src={al.coverUrl} alt="" className="w-full aspect-square object-cover rounded-xl shadow-lg" />
-                    <div className="font-bold text-sm text-white truncate mt-3">{al.name}</div>
-                    <div className="text-xs text-white/60 truncate">{al.artist}</div>
+                    <img src={al.coverUrl} alt="" className="w-full aspect-square object-cover rounded-2xl shadow-lg border border-white/10" />
+                    <div className="font-extrabold text-sm text-white truncate mt-3 font-heading">{al.name}</div>
+                    <div className="text-xs text-white/60 truncate font-medium">{al.artist}</div>
                   </button>
                 ))}
               </div>
@@ -242,10 +243,10 @@ export default function Search({ onNavigate, query, onQueryChange }: Props) {
           )}
 
           {results.songs.length === 0 && results.playlists.length === 0 && results.artists.length === 0 && results.albums.length === 0 && (
-            <div className="glass-card p-12 text-center rounded-3xl space-y-2">
-              <div className="text-4xl">🔍</div>
-              <h3 className="text-lg font-bold text-white">No results found for "{query}"</h3>
-              <p className="text-xs text-white/50">Try checking spelling or search for another song or artist.</p>
+            <div className="glass-card-premium p-12 text-center rounded-3xl space-y-3 border border-white/10">
+              <svg viewBox="0 0 24 24" className="h-10 w-10 text-white/40 mx-auto" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <h3 className="text-lg font-bold text-white font-heading">No results found for "{query}"</h3>
+              <p className="text-xs text-white/50 font-medium">Try checking spelling or search for another track or artist.</p>
             </div>
           )}
         </div>

@@ -61,32 +61,46 @@ export default function PremiumHeader({
 
   return (
     <header className="sticky top-0 z-30 glass-panel border-b border-white/10 px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
-      {/* Navigation history controls */}
-      <div className="flex items-center gap-2">
+      {/* App Logo on Mobile / Navigation Controls */}
+      <div className="flex items-center gap-3">
         <button
-          onClick={() => history.back()}
-          className="h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/15 grid place-items-center text-white/70 hover:text-white transition-all"
-          aria-label="Go back"
+          onClick={() => onNavigate("home")}
+          className="lg:hidden flex items-center gap-2.5 shrink-0"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
+          <img
+            src="/app_icon.png"
+            alt="Wavelength"
+            className="h-9 w-9 rounded-xl object-cover border border-white/20 shadow-md"
+          />
+          <span className="font-extrabold text-lg text-white font-heading tracking-tight">Wavelength</span>
         </button>
-        <button
-          onClick={() => history.forward()}
-          className="h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/15 grid place-items-center text-white/70 hover:text-white transition-all"
-          aria-label="Go forward"
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
+
+        <div className="hidden sm:flex items-center gap-2">
+          <button
+            onClick={() => history.back()}
+            className="h-9 w-9 rounded-full glass-card grid place-items-center text-white/70 hover:text-white icon-btn-smooth"
+            aria-label="Go back"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            onClick={() => history.forward()}
+            className="h-9 w-9 rounded-full glass-card grid place-items-center text-white/70 hover:text-white icon-btn-smooth"
+            aria-label="Go forward"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Center Search Bar */}
       <div className="flex-1 max-w-xl mx-2">
-        <div className="glass-input rounded-full px-4 py-2 flex items-center gap-3">
-          <svg viewBox="0 0 24 24" className="h-4 w-4 text-white/50 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <div className="glass-input-premium rounded-full px-4 py-2.5 flex items-center gap-3">
+          <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#18E29A] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5">
             <circle cx="11" cy="11" r="7" />
             <path d="m20 20-3.5-3.5" strokeLinecap="round" />
           </svg>
@@ -95,13 +109,13 @@ export default function PremiumHeader({
             value={searchQuery ?? ""}
             onChange={(e) => onSearchChange?.(e.target.value)}
             onFocus={onSearchClick}
-            placeholder="Search songs, artists, albums, playlists... (Ctrl+K)"
-            className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
+            placeholder="Search songs, artists, albums... (Ctrl+K)"
+            className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40 font-medium"
           />
           {/* Voice Search Button */}
           <button
             onClick={startVoiceSearch}
-            className={`h-7 w-7 rounded-full grid place-items-center transition-all ${
+            className={`h-7 w-7 rounded-full grid place-items-center icon-btn-smooth ${
               isListening
                 ? "bg-rose-500 text-white animate-pulse"
                 : "text-white/60 hover:text-[#18E29A] hover:bg-white/10"
@@ -119,13 +133,13 @@ export default function PremiumHeader({
 
       {/* Right User Badge */}
       <div className="flex items-center gap-3 shrink-0">
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#18E29A]/15 to-[#6D5EF8]/15 border border-[#18E29A]/30">
+        <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#18E29A]/15 to-[#6D5EF8]/15 border border-[#18E29A]/30">
           <span className="w-2 h-2 rounded-full bg-[#18E29A] animate-pulse" />
-          <span className="text-xs font-bold text-white tracking-wide">Premium HD</span>
+          <span className="text-xs font-black text-white tracking-wide uppercase">Lossless HD</span>
         </div>
 
-        <div className="h-9 w-9 rounded-full btn-glow-primary grid place-items-center text-black font-extrabold text-xs shadow-md">
-          WV
+        <div className="h-9 w-9 rounded-xl overflow-hidden border border-white/20 shadow-md">
+          <img src="/app_icon.png" alt="Profile" className="w-full h-full object-cover" />
         </div>
       </div>
     </header>
