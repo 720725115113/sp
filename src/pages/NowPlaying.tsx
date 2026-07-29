@@ -1,7 +1,6 @@
 import { useRef, useState, useMemo } from "react";
 import { usePlayer, formatTime } from "../context/PlayerContext";
 import { useCatalog } from "../services/catalog";
-import type { Song } from "../types";
 
 export default function NowPlaying({ onClose }: { onClose: () => void }) {
   const p = usePlayer();
@@ -130,24 +129,24 @@ export default function NowPlaying({ onClose }: { onClose: () => void }) {
             {/* Artwork & Info */}
             <div className="flex flex-col items-center max-w-md mx-auto w-full space-y-6">
               {/* Picture Container with Heart Like Button on Top Right Corner */}
-              <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+              <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                 <img
                   src={song.coverUrl}
                   alt={song.title}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30 pointer-events-none" />
 
-                {/* LIKE HEART BUTTON ON PICTURE TOP RIGHT CORNER (BOTH PC & MOBILE) */}
+                {/* LIKE HEART BUTTON PERMANENTLY AT PICTURE TOP RIGHT CORNER */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     p.toggleLike(song);
                   }}
-                  className={`absolute top-3.5 right-3.5 z-20 h-10 w-10 rounded-full bg-black/60 backdrop-blur-md grid place-items-center icon-btn-smooth transition-all shadow-xl ${
+                  className={`absolute top-4 right-4 z-30 h-11 w-11 rounded-full bg-black/70 backdrop-blur-xl grid place-items-center icon-btn-smooth transition-all shadow-2xl ${
                     isLiked
-                      ? "text-rose-500 bg-rose-500/20 border border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.4)]"
-                      : "text-white/80 hover:text-white hover:bg-black/80 border border-white/20"
+                      ? "text-rose-500 bg-rose-500/20 border border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.5)] scale-105"
+                      : "text-white/90 hover:text-white border border-white/20 hover:bg-black/90"
                   }`}
                   aria-label="Like song"
                   title={isLiked ? "Unlike song" : "Like song"}
