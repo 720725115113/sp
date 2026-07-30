@@ -16,7 +16,7 @@ export interface CatalogState {
 }
 
 const REMOTE_URL = "https://sp.720725115113.workers.dev/";
-const CACHE_KEY = "wavelength-catalog-cache-v3";
+const CACHE_KEY = "wavelength-catalog-cache-v4";
 
 function buildFallbackCatalog(): Omit<CatalogState, "loading" | "error" | "getSongById" | "searchSongs" | "songMap"> {
   const songs = fallbackSongs.map((song) => ({ ...song }));
