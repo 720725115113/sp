@@ -138,7 +138,7 @@ function SongRowComponent({
   return (
     <div
       onClick={handleClick}
-      className={`w-full grid grid-cols-[28px_minmax(0,3fr)_minmax(0,1.5fr)_auto] md:grid-cols-[36px_minmax(0,4fr)_minmax(0,2.5fr)_minmax(0,1fr)_auto_auto] gap-3 items-center px-3.5 py-2.5 rounded-xl text-left group transition-all duration-150 cursor-pointer border ${
+      className={`w-full grid grid-cols-[24px_minmax(0,1fr)_auto_auto] md:grid-cols-[36px_minmax(0,4fr)_minmax(0,2.5fr)_minmax(0,1fr)_auto_auto] gap-2.5 md:gap-4 items-center px-2.5 sm:px-4 py-2.5 rounded-xl text-left group transition-all duration-150 cursor-pointer border ${
         isCurrent
           ? "bg-[#18E29A]/15 border-[#18E29A]/30 shadow-md"
           : "hover:bg-white/5 border-transparent"
@@ -167,33 +167,38 @@ function SongRowComponent({
       </div>
 
       {/* Cover & Title */}
-      <div className="flex items-center gap-3 min-w-0">
+      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
         <img
           src={song.coverUrl}
           alt=""
-          className="h-10 w-10 rounded-lg object-cover shrink-0 shadow-md border border-white/10"
+          className="h-10 w-10 sm:h-11 sm:w-11 rounded-lg object-cover shrink-0 shadow-md border border-white/10"
           loading="lazy"
         />
         <div className="min-w-0">
           <div className={`truncate text-xs sm:text-sm font-extrabold font-heading ${isCurrent ? "text-[#18E29A]" : "text-white group-hover:text-[#18E29A] transition-colors"}`}>
             {song.title}
           </div>
-          <div className="truncate text-[11px] text-white/60 font-medium">{song.artist}</div>
+          <div className="truncate text-[11px] text-white/60 font-medium">
+            {song.artist}
+            <span className="inline md:hidden text-white/40 font-normal">
+              {song.album ? ` • ${song.album}` : ""}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Album */}
+      {/* Album (Desktop / Tablet) */}
       <div className="hidden md:block truncate text-xs text-white/60 font-medium">
         {song.album ?? "Single"}
       </div>
 
-      {/* Year */}
+      {/* Year (Desktop) */}
       <div className="hidden md:block text-xs text-white/40 text-right font-medium">
         {song.year ?? ""}
       </div>
 
       {/* Duration */}
-      <div className="text-xs text-white/50 tabular-nums font-bold text-right shrink-0">
+      <div className="text-[11px] sm:text-xs text-white/50 tabular-nums font-bold text-right shrink-0">
         {song.duration ?? "3:30"}
       </div>
 

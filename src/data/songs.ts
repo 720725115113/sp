@@ -18,7 +18,7 @@ import type { Song, Playlist } from "../types";
  * ============================================================
  */
 
-export const songs: Song[] = [
+export const rawSongsCatalog: Song[] = [
  {
   id: "s45",
   title: "The Life Of Ram",
@@ -693,11 +693,283 @@ export const songs: Song[] = [
   album: "Karuppu Tamil",        // optional
   duration: "4:10",           // optional
   audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44500/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
-  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
+  coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC9",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
   color: "#ffffff"            // accent color (hex)
 },
+
+  // --- MINNALE (2001) ---
+  {
+    id: "s55",
+    title: "Azhagiya Theeye",
+    artist: "Harish Raghavendra, Timmy",
+    album: "Minnale 2001 tamil",
+    duration: "05:56",
+    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8515/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    genre: "Romance",
+    year: 2001,
+    color: "#21e83b"
+  },
+  {
+    id: "s56",
+    title: "Nenjai Poopol",
+    artist: "Harish Raghavendra",
+    album: "Minnale 2001 tamil",
+    duration: "01:01",
+    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d320_cdn/8518/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    genre: "Romance",
+    year: 2001,
+    color: "#21e83b"
+  },
+  {
+    id: "s57",
+    title: "Vaseegara",
+    artist: "Bombay Jayashri",
+    album: "Minnale 2001 tamil",
+    duration: "04:59",
+    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8517/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    genre: "Melody",
+    year: 2001,
+    color: "#21e83b"
+  },
+  {
+    id: "s58",
+    title: "Venmathiye",
+    artist: "Tippu, Roop Kumar Rathod",
+    album: "Minnale 2001 tamil",
+    duration: "05:27",
+    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8516/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    genre: "Melody",
+    year: 2001,
+    color: "#21e83b"
+  },
+  {
+    id: "s59",
+    title: "Verenna Verenna (Ivan Yaro)",
+    artist: "P. Unnikrishnan, Harini",
+    album: "Minnale 2001 tamil",
+    duration: "05:25",
+    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8521/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    genre: "Melody",
+    year: 2001,
+    color: "#21e83b"
+  },
+
+  // --- ALAIPAYUTHEY (2000) ---
+  {
+    id: "s60",
+    title: "Alaipayuthey Kanna",
+    artist: "Kalyani Menon, Harini & Neyveli Ramalakshmi Krishna",
+    album: "Alaipayuthey tamil",
+    duration: "03:41",
+    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8742/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    genre: "Classical Fusion",
+    year: 2000,
+    color: "#b246aa"
+  },
+  {
+    id: "s61",
+    title: "Evano Oruvan Vasikiran",
+    artist: "Swarnalatha",
+    album: "Alaipayuthey tamil",
+    duration: "05:56",
+    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8746/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    genre: "Soulful",
+    year: 2000,
+    color: "#b246aa"
+  },
+  {
+    id: "s62",
+    title: "Kadhal Sadugudu",
+    artist: "S.P.B. Charan & Naveen",
+    album: "Alaipayuthey tamil",
+    duration: "04:35",
+    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8741/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    genre: "Peppy",
+    year: 2000,
+    color: "#b246aa"
+  },
+  {
+    id: "s63",
+    title: "Pachchai Nirame",
+    artist: "Hariharan & Clinton",
+    album: "Alaipayuthey tamil",
+    duration: "05:58",
+    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8748/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    genre: "Melody",
+    year: 2000,
+    color: "#b246aa"
+  },
+  {
+    id: "s64",
+    title: "Snehidhane",
+    artist: "Sadhana Sargam & Srinivas",
+    album: "Alaipayuthey tamil",
+    duration: "04:52",
+    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8745/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    genre: "Romance",
+    year: 2000,
+    color: "#b246aa"
+  },
+  {
+    id: "s65",
+    title: "Yaro Yarodi",
+    artist: "Mahalaxmi Iyer, Vaishali & Richa Sharma",
+    album: "Alaipayuthey tamil",
+    duration: "05:44",
+    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8740/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    genre: "Folk / Festive",
+    year: 2000,
+    color: "#b246aa"
+  },
+
+  // --- VAARANAM AAYIRAM (2008) ---
+  {
+    id: "s66",
+    title: "Vaaranam Aayiram",
+    artist: "Krish, Benny Dayal & Shruti Haasan",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "05:17",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17042/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Rock / Melody",
+    year: 2008,
+    color: "#dca752"
+  },
+  {
+    id: "s67",
+    title: "Annal Maelae",
+    artist: "Bombay Jayashri, Harris Jayaraj",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "05:22",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17046/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Melody",
+    year: 2008,
+    color: "#dca752"
+  },
+  {
+    id: "s68",
+    title: "Ava Enna Enna",
+    artist: "Karthik & V.V.Prasanna",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "05:20",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17043/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Folk Rock",
+    year: 2008,
+    color: "#dca752"
+  },
+  {
+    id: "s69",
+    title: "Mundhinam Parthene",
+    artist: "Naresh Iyer & Prashanthini",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "05:43",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17045/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Romance",
+    year: 2008,
+    color: "#dca752"
+  },
+  {
+    id: "s70",
+    title: "Nenjukkul Peidhidum",
+    artist: "Hariharan, Devan Ekambaram & V.V.Prasanna",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "06:11",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17044/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Acoustic Melody",
+    year: 2008,
+    color: "#dca752"
+  },
+  {
+    id: "s71",
+    title: "Oh Shanthi Shanthi",
+    artist: "Clinton & S. P. B. Charan",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "03:05",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17047/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Pop",
+    year: 2008,
+    color: "#dca752"
+  },
+  {
+    id: "s72",
+    title: "Yethi Yethi",
+    artist: "Benny Dayal, Naresh Iyer & Solar Sai",
+    album: "Vaaranam Aayiram 2008 tamil",
+    duration: "04:55",
+    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17040/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    genre: "Youth Anthems",
+    year: 2008,
+    color: "#dca752"
+  },
+
+  // --- VINNAITHANDI VARUVAYA (2009) ---
+  {
+    id: "s73",
+    title: "Anbil Avan",
+    artist: "Devan Ekambaram, Chinmayi",
+    album: "Vinnaithandi Varuvaya 2009 tamil",
+    duration: "05:32",
+    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/534/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
+    genre: "Wedding Melody",
+    year: 2009,
+    color: "#11bbe7"
+  },
+  {
+    id: "s74",
+    title: "Hosanna",
+    artist: "Vijay Prakash, Suzanne D'Mello, Blaaze",
+    album: "Vinnaithandi Varuvaya 2009 tamil",
+    duration: "05:31",
+    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/535/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
+    genre: "Romantic Pop",
+    year: 2009,
+    color: "#11bbe7"
+  },
+  {
+    id: "s75",
+    title: "Mannipaaya",
+    artist: "A.R. Rahman, Shreya Ghoshal",
+    album: "Vinnaithandi Varuvaya 2009 tamil",
+    duration: "06:58",
+    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/537/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
+    genre: "Classic Melody",
+    year: 2009,
+    color: "#11bbe7"
+  },
+  {
+    id: "s76",
+    title: "Omana Penne",
+    artist: "Benny Dayal, Kalyani Menon",
+    album: "Vinnaithandi Varuvaya 2009 tamil",
+    duration: "05:32",
+    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/536/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
+    genre: "Carnatic Fusion",
+    year: 2009,
+    color: "#11bbe7"
+  },
 
 {
   id: "s17",          // unique slug
@@ -711,12 +983,23 @@ export const songs: Song[] = [
   year: 2000,
   color: "#ffffff"            // accent color (hex)
 },
-  
-  
-
- 
  
 ];
+
+// Fisher-Yates deterministic shuffle helper for catalog shuffling
+function shuffleCatalog<T>(arr: T[]): T[] {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(((i * 9301 + 49297) % 233280) / 233280 * (i + 1));
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+  return shuffled;
+}
+
+// Shuffled export of songs so the library playback & default views feature rich shuffle mix
+export const songs: Song[] = shuffleCatalog(rawSongsCatalog);
 
 /**
  *  Playlists group songs by id. Add as many as you like.
@@ -725,11 +1008,51 @@ export const playlists: Playlist[] = [
   {
     id: "all-songs",
     name: "All Songs",
-    description: "Every track in the library, in one place.",
+    description: "Every track in the library, dynamically shuffled.",
     coverUrl:
       "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
     songIds: songs.map((s) => s.id),
     color: "#8b5cf6",
+  },
+  {
+    id: "shuffled-classics",
+    name: "Shuffled Super Hits Mix",
+    description: "A randomized shuffle mix of top romantic hits and classic album tracks.",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    songIds: ["s57", "s74", "s64", "s58", "s70", "s63", "s75", "s55", "s61", "s69", "s76", "s62", "s66", "s59", "s68", "s60", "s71", "s72", "s73", "s67", "s56"],
+    color: "#21e83b"
+  },
+  {
+    id: "p-minnale",
+    name: "Minnale 2001 Tamil Songs",
+    description: "Azhagiya Theeye, Vaseegara, Venmathiye, Verenna Verenna, Nenjai Poopol",
+    coverUrl: "https://kommodo.ai/i/BtSfXrVSIXzLgBORVFmP",
+    songIds: ["s55", "s56", "s57", "s58", "s59"],
+    color: "#21e83b"
+  },
+  {
+    id: "p-alaipayuthey",
+    name: "Alaipayuthey Tamil Songs",
+    description: "Snehidhane, Pachchai Nirame, Evano Oruvan, Kadhal Sadugudu, Alaipayuthey Kanna, Yaro Yarodi",
+    coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
+    songIds: ["s60", "s61", "s62", "s63", "s64", "s65"],
+    color: "#b246aa"
+  },
+  {
+    id: "p-vaaranam",
+    name: "Vaaranam Aayiram 2008 Tamil Songs",
+    description: "Nenjukkul Peidhidum, Mundhinam Parthene, Annal Maelae, Ava Enna Enna, Vaaranam Aayiram, Yethi Yethi",
+    coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
+    songIds: ["s66", "s67", "s68", "s69", "s70", "s71", "s72"],
+    color: "#dca752"
+  },
+  {
+    id: "p-vtv",
+    name: "Vinnaithandi Varuvaya 2009 Tamil Songs",
+    description: "Hosanna, Mannipaaya, Omana Penne, Anbil Avan",
+    coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
+    songIds: ["s73", "s74", "s75", "s76"],
+    color: "#11bbe7"
   },
 
  {

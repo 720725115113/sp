@@ -16,7 +16,7 @@ export interface CatalogState {
 }
 
 const REMOTE_URL = "https://sp.720725115113.workers.dev/";
-const CACHE_KEY = "wavelength-catalog-cache-v2";
+const CACHE_KEY = "wavelength-catalog-cache-v3";
 
 function buildFallbackCatalog(): Omit<CatalogState, "loading" | "error" | "getSongById" | "searchSongs" | "songMap"> {
   const songs = fallbackSongs.map((song) => ({ ...song }));
@@ -115,11 +115,16 @@ export function useCatalog(): CatalogState {
         if (cached) {
           const parsed = JSON.parse(cached);
           if (Array.isArray(parsed.songs) && parsed.songs.length > 0) {
+            // Merge with local fallback songs to ensure any newly added local songs are present
+            const songMap = new Map<string, Song>();
+            fallbackSongs.forEach(s => songMap.set(s.id, s));
+            parsed.songs.forEach((s: Song) => songMap.set(s.id, s));
+            const mergedSongs = Array.from(songMap.values());
             return {
-              songs: parsed.songs,
+              songs: mergedSongs,
               playlists: Array.isArray(parsed.playlists) ? parsed.playlists : fallbackPlaylists,
-              artists: buildArtists(parsed.songs),
-              albums: buildAlbums(parsed.songs),
+              artists: buildArtists(mergedSongs),
+              albums: buildAlbums(mergedSongs),
               source: "remote",
               loading: false,
               error: null,
@@ -154,9 +159,15 @@ export function useCatalog(): CatalogState {
               : [];
 
         if (rawSongs.length > 0) {
-          const songs = rawSongs.map((s: any, idx: number) =>
+          const remoteSongs = rawSongs.map((s: any, idx: number) =>
             normalizeSong(s, fallbackSongs[idx % fallbackSongs.length])
           );
+          // Merge local fallback songs so local catalog updates are preserved
+          const songMap = new Map<string, Song>();
+          fallbackSongs.forEach((s) => songMap.set(s.id, s));
+          remoteSongs.forEach((s: Song) => songMap.set(s.id, s));
+          const songs = Array.from(songMap.values());
+
           const rawPlaylists = Array.isArray(data.playlists) ? data.playlists : fallbackPlaylists;
           const playlists = rawPlaylists.map((p: any, idx: number) =>
             normalizePlaylist(p, fallbackPlaylists[idx % fallbackPlaylists.length])
