@@ -25,7 +25,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Govind Vasantha, Pradeep Kumar",
   album: "96 Tamil",
   duration: "05:54",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16960/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
   coverUrl: "https://imgs.search.brave.com/nPOjDpLAi7ThZ8-QVhDA0Rk3PEu6DtmqmODmhlBPuL0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2NlLzE3/L2QwL2NlMTdkMGM5/Y2E0MmMzZGQ2YzJl/MmRiZDdlNDcwNGIw/LmpwZw",
   genre: "",
   year: 2018,
@@ -38,7 +38,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Chinmayi Sripaada, Govind Vasantha",
   album: "96 Tamil",
   duration: "04:56",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16961/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
   coverUrl: "https://imgs.search.brave.com/kUyN0iXAr6Plk_qixox7jJxZZ5U3Qa228WeaMt_-p3Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDQ1MDAz/OTcuanBn",
   genre: "",
   year: 2018,
@@ -51,7 +51,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Govind Vasantha, Gowri TP",
   album: "96 Tamil",
   duration: "02:24",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16962/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
   coverUrl: "https://imgs.search.brave.com/nPOjDpLAi7ThZ8-QVhDA0Rk3PEu6DtmqmODmhlBPuL0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2NlLzE3/L2QwL2NlMTdkMGM5/Y2E0MmMzZGQ2YzJl/MmRiZDdlNDcwNGIw/LmpwZw",
   genre: "",
   year: 2018,
@@ -63,7 +63,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Teejay, Al Rufian",
   album: "Imaikkaa Nodigal Tamil",        // optional
   duration: "2:41",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d320_cdn/16758/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2018,
@@ -75,7 +75,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Hiphop Tamizha, Kaushik Krish",
   album: "Imaikkaa Nodigal Tamil",        // optional
   duration: "3:22",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16762/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2018,
@@ -88,7 +88,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Anirudh Ravichander",
   album: "Jana Nayagan Tamil",        // optional
   duration: "1:47",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/Ra8Y12VUM6vOuq2FHO3Q0g/1785233487/d320_cdn/42769/MjQwOTo0MGY0OjEwZmY6MTgzYzo4MDAwOjo=",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg", 
   year: 2026,
   color: "#8b5cf6"            // accent color (hex)
@@ -99,7 +99,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Anirudh Ravichander, Vijay",
   album: "Jana Nayagan Tamil",        // optional
   duration: "3:17",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/40846/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -111,7 +111,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Chinmayi Sripaada, Govind Vasantha, Bhadra Rajin, M. Nassar",
   album: "96 Tamil",
   duration: "07:15",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16955/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
   coverUrl: "https://imgs.search.brave.com/2HeJB-aKb_v7kmneHGX2kHkrwul1eLILS2fIMnAy63M/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk4yVmlORFU1/WTJFdE0yWmhOaTAw/Tm1GbUxXSTBNVGN0/TVRBNFlXUXhPVFU1/WXpNMlhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2018,
@@ -124,7 +124,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Chinmayi Sripaada, Govind Vasantha",
   album: "96 Tamil",
   duration: "03:41",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d128_cdn/16956/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
   coverUrl: "https://imgs.search.brave.com/fSn8Z6aX-nV6La3lbpVUvLA7Hfs-BUExSwoRGM_5NJA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZWNkbi5yYWFnYS5j/b20vcmFhZ2FpbWcv/cl9pbWcvMjUwL3Qv/dDAwMDQ2ODEtMi5q/cGc",
   genre: "",
   year: 2018,
@@ -137,7 +137,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Chinmayi Sripaada, Govind Vasantha",
   album: "96 Tamil",
   duration: "03:13",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16958/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
   coverUrl: "https://imgs.search.brave.com/nPOjDpLAi7ThZ8-QVhDA0Rk3PEu6DtmqmODmhlBPuL0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2NlLzE3/L2QwL2NlMTdkMGM5/Y2E0MmMzZGQ2YzJl/MmRiZDdlNDcwNGIw/LmpwZw",
   genre: "",
   year: 2018,
@@ -150,7 +150,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Kalyani Menon, Govind Vasantha",
   album: "96 Tamil",
   duration: "03:14",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16957/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
   coverUrl: "https://imgs.search.brave.com/2HeJB-aKb_v7kmneHGX2kHkrwul1eLILS2fIMnAy63M/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk4yVmlORFU1/WTJFdE0yWmhOaTAw/Tm1GbUxXSTBNVGN0/TVRBNFlXUXhPVFU1/WXpNMlhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2018,
@@ -163,7 +163,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Chinmayi Sripaada, Pradeep Kumar",
   album: "96 Tamil",
   duration: "03:58",
-  audioUrl: "https://www.masstamilan.dev/downloader/LtwvZ6SMMC51W9HG4fzkeQ/1785435039/d320_cdn/16959/MjQwMTo0OTAwOjYzMzM6NThiNjozMWE5OmUyZDI6ZDIwNDoxMzlm",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
   coverUrl: "https://imgs.search.brave.com/kUyN0iXAr6Plk_qixox7jJxZZ5U3Qa228WeaMt_-p3Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDQ1MDAz/OTcuanBn",
   genre: "",
   year: 2018,
@@ -175,7 +175,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Tanvi Shah, Bhargavi Pillai",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "04:18",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/160/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
   coverUrl: "https://imgs.search.brave.com/6Fb0Vj7UI76Si2mDwqO4GjRcsZhMQJkrXf_JyArEd6o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzliLzhm/LzJkLzliOGYyZGFk/YjQ0M2ZmZmY5Yjg3/ZTM3NDQxODcxMDZj/LmpwZw",
   genre: "",
   year: 2006,
@@ -188,7 +188,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Naresh Iyer, Sular Nathalatha, Dr. Sirkali G. Siva Chidambaram",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "06:55",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/162/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
   coverUrl: "https://imgs.search.brave.com/Cm1zWktSNoD3YPOyqcNH6PFdJHKcB76mcOnJrZrAGiU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzU1LzI4/LzBlLzU1MjgwZTI2/NzIyYmFhOGNjMTlh/YWVkY2E5ZWQxNDBk/LmpwZw",
   genre: "",
   year: 2006,
@@ -201,7 +201,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "S.P.B. Charan, Shreya Ghoshal",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "05:42",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/166/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
   coverUrl: "https://imgs.search.brave.com/6Fb0Vj7UI76Si2mDwqO4GjRcsZhMQJkrXf_JyArEd6o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzliLzhm/LzJkLzliOGYyZGFk/YjQ0M2ZmZmY5Yjg3/ZTM3NDQxODcxMDZj/LmpwZw",
   genre: "",
   year: 2006,
@@ -214,7 +214,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Mohammed Aslam, Korolisa, Krishna",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "06:08",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/164/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   coverUrl: "https://imgs.search.brave.com/6Fb0Vj7UI76Si2mDwqO4GjRcsZhMQJkrXf_JyArEd6o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzliLzhm/LzJkLzliOGYyZGFk/YjQ0M2ZmZmY5Yjg3/ZTM3NDQxODcxMDZj/LmpwZw",
   genre: "",
   year: 2006,
@@ -226,7 +226,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Anirudh Ravichander, Vijay",
   album: "Jana Nayagan Tamil",        // optional
   duration: "3:52",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/42421/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -239,7 +239,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Anirudh Ravichander, Vishal",
   album: "Jana Nayagan Tamil",        // optional
   duration: "3:55",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/41982/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -251,7 +251,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " S. P. Balasubrahmanyam, Sujatha Mohan",
   album: "Youth 2002 tamil",
   duration: "04:41",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8860/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
   coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2002,
@@ -264,7 +264,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Shankar Mahadevan",
   album: "Youth 2002 tamil",
   duration: "04:52",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8862/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
   coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2002,
@@ -277,7 +277,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " Harini, Hariharan",
   album: "Youth 2002 tamil",
   duration: "05:42",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8857/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
   coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2002,
@@ -289,7 +289,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " Shankar Mahadevan, Vasundhara Das",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "05:31",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/163/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
   coverUrl: "https://imgs.search.brave.com/iA7QxM5x_F2BPjTdc7TE5OIIo4bioJHAxYZOlWnKnis/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwNjA4/NjEuanBn",
   genre: "",
   year: 2006,
@@ -302,7 +302,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Naresh Iyer, Shreya Ghoshal",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "05:57",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/165/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
   coverUrl: "https://imgs.search.brave.com/iA7QxM5x_F2BPjTdc7TE5OIIo4bioJHAxYZOlWnKnis/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwNjA4/NjEuanBn",
   genre: "",
   year: 2006,
@@ -315,7 +315,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "A.R. Rahman",
   album: "Sillunu Oru Kadhal 2006 tamil",
   duration: "06:18",
-  audioUrl: "https://www.masstamilan.dev/downloader/dgk0g2b3wr0Ov1RtL4Po-A/1785436627/d128_cdn/161/MjQwMTo0OTAwOmNjYjc6NjcwMTphOGFmOjEyZmY6ZmVlNjpiYmEy",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
   coverUrl: "https://imgs.search.brave.com/iA7QxM5x_F2BPjTdc7TE5OIIo4bioJHAxYZOlWnKnis/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwNjA4/NjEuanBn",
   genre: "",
   year: 2006,
@@ -331,7 +331,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Harish Ragavendra",
   album: "Youth 2002 tamil",
   duration: "05:41",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8861/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
   coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2002,
@@ -344,7 +344,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " S. P. Balasubrahmanyam",
   album: "Youth 2002 tamil",
   duration: "04:24",
-  audioUrl: "https://www.masstamilan.dev/downloader/PWd4KWg1-hYMWrIBpWU0xA/1785347262/d128_cdn/8858/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
   coverUrl: "https://imgs.search.brave.com/flqo2Q22HTmcIEzVer7B5fMNTWm4x71aIgJFTLrpaEU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9ERXhaamMz/T0RJdFlXSTROaTAw/T1dZMkxUZ3daRE10/TkdZellqRXhaV0Zq/WVRJeFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2002,
@@ -358,7 +358,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Anirudh Ravichander",
    album: "Jana Nayagan Tamil",        // optional
   duration: "3:48",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/bKyMG7C4XMYkWHCjIkunug/1785303449/d128_cdn/45007/MjAwMTo0ODYwOjc6NTA1OjplZQ==",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",   // 🔗 SONG LINK
   coverUrl: "https://cdn.phototourl.com/free/2026-07-27-561cfcff-d7b7-4f0c-af83-ab164dd93037.jpg",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -371,7 +371,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "A.R.Rahman, Charulatha Mani",
   album: "Thug Life Tamil",
   duration: "04:37",
-  audioUrl: "https://www.masstamilan.dev/downloader/ioZTtkrP0CrtzZcWer68aw/1785350069/d128_cdn/39505/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
   coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
   genre: "",
   year: 2025,
@@ -384,7 +384,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "A.R.Rahman",
   album: "Thug Life Tamil",
   duration: "04:15",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d320_cdn/39506/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
   coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
   genre: "",
   year: 2025,
@@ -396,7 +396,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Hariharan & MS.Viswanathan",
   album: "Sangamam 1999 tamil",
   duration: "02:18",
-  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d320_cdn/10614/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
   coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
   genre: "",
   year: 1999,
@@ -409,7 +409,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Unnikrishnan & S.Janaki",
   album: "Sangamam 1999 tamil",
   duration: "06:56",
-  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10613/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
   coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
   genre: "",
   year: 1999,
@@ -422,7 +422,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Hariharan & MS.Viswanathan",
   album: "Sangamam 1999 tamil",
   duration: "06:50",
-  audioUrl: "https://www.masstamilan.dev/downloader/_U8OEzd61ZODYnpQIVpPbg/1785348995/d128_cdn/10612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
   genre: "",
   year: 1999,
@@ -435,7 +435,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Shankar Mahadevan",
   album: "Sangamam 1999 tamil",
   duration: "06:18",
-  audioUrl: "https://www.masstamilan.dev/downloader/9tT_KTfsmH_auF5V7mlzRA/1785349593/d128_cdn/10616/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
   coverUrl: "https://imgs.search.brave.com/MNIphEmTZ0WU7ypVpopsp7AYCwOK-Bz_0b13zhxWsGA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50aGVtb3ZpZWRi/Lm9yZy90L3AvdzMw/MF9hbmRfaDQ1MF9m/YWNlLzZGMEVZVUJ6/YmxLa2hqaThFOXlQ/TkFjRWVwSy5qcGc",
   genre: "",
   year: 1999,
@@ -450,7 +450,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "A.R.Rahman, Vaishali Samant, Shakthisree Gopalan, Adithya RK",
   album: "Thug Life Tamil",
   duration: "04:20",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39322/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
   coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
   genre: "",
   year: 2025,
@@ -463,7 +463,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "A.R.Rahman, Dhee",
   album: "Thug Life Tamil",
   duration: "04:01",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39509/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
   coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
   genre: "",
   year: 2025,
@@ -476,7 +476,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "A.R.Rahman, Chinmayi Sripada",
   album: "Thug Life Tamil",
   duration: " 03:46",
-  audioUrl: "https://www.masstamilan.dev/downloader/91jcqgV2slxIGfePdI7KfA/1785348281/d128_cdn/39612/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
   coverUrl: "https://imgs.search.brave.com/N6HY0-21fT-pgMll3TgNwpw2Drqpv2rftQ4JLGXBbDg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL1RodWctTGlm/ZS1jb3ZlciUyMCgx/KS05ZjY2Yzk0MC00/MDQ1LTExZjAtYjQy/Ni1hNTA2NzFhY2Zj/MjQuanBn",
   genre: "",
   year: 2025,
@@ -491,7 +491,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Raghu Dixit, D. Sathyaprakash, Jithin Raj",
   album: "Imaikkaa Nodigal Tamil",        // optional
   duration: "4:45",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/1jIfBp1Rqv_0HeD7yzPsyg/1785337053/d128_cdn/16761/MTE3LjI0My4xMjIuMTAx",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2018,
@@ -504,7 +504,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " Unnikrishnan",
   album: "Kadhalar Dhinam Tamil",        // optional
   duration: "5:47",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8377/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 1999,
@@ -517,7 +517,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "D. Sathyaprakash, Chinmayi",
   album: "Iravukku Aayiram Kangal Tamil",        // optional
   duration: "4:13",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/HbwQs2NPpXIetfPIwowNMg/1785339602/d128_cdn/16577/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/UyspsZcpR6IoC26ureRo82R71n48WMQrquAjsk2nRds/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/c3R1ZGlvZmxpY2tz/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAyNi8wMy8wMjE3/MzAyNi9JcmF2dWtr/dS1BYXlpcmFtLUth/bmdhbC5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2018,
@@ -530,7 +530,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Unnimenon, Sree Kumar, Kavitha Krishnamoorthy",
   album: "Kadhalar Dhinam Tamil",        // optional
   duration: "7:48",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8379/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 1999,
@@ -543,7 +543,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Unnimenon",
   album: "Kadhalar Dhinam Tamil",        // optional
   duration: "5:55",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8378/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 1999,
@@ -556,7 +556,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "S.P.Bala, Swarnalatha",
   album: "Kadhalar Dhinam Tamil",        // optional
   duration: "6:43",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8376/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 1999,
@@ -568,7 +568,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Sree Kumar, Srinivas",
   album: "Kadhalar Dhinam Tamil ",        // optional
   duration: "7:45",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/eRrURx5RdRYLvZms7ZUmWQ/1785305962/d128_cdn/8380/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/DOwWfIaGtcK3K9Wl7QTYKUK4cBlfBZ_tpJBSMuWYaSc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0/cy9pbWFnZXMvY2lu/ZW1hL0thZGhhbGFy/LURoaW5hbV9Db3Zl/ci0wZjQ0YjhjMC0w/NzBjLTExZjEtYTFh/Zi1kM2RmNWI2MmNj/YzcuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 1999,
@@ -580,7 +580,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Ilaiyaraaja, Ananya Bhat",
   album: "Viduthalai Tamil",
   duration: " 05:06",
-  audioUrl: "https://www.masstamilan.dev/downloader/XN46BzTVR35n_3cUfGCagw/1785345579/d128_cdn/23806/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
   coverUrl: "https://imgs.search.brave.com/q89nY0n5wW4L6wOFbuf_GW-EEzzbXbJcTj_bQjPB6h8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk16UTNZVEl3/TmpJdE56QmxaaTAw/T0dJMExUbGpZVEV0/WldWbFlUQTJZamd6/TldNNFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2023,
@@ -593,7 +593,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " Ilaiyaraaja, Dhanush, Ananya Bhat",
   album: "Viduthalai Tamil ",
   duration: "05:15",
-  audioUrl: "https://www.masstamilan.dev/downloader/JcDrTLsumGagoqSqEa0U_w/1785345920/d128_cdn/23807/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
   coverUrl: "https://imgs.search.brave.com/q89nY0n5wW4L6wOFbuf_GW-EEzzbXbJcTj_bQjPB6h8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk16UTNZVEl3/TmpJdE56QmxaaTAw/T0dJMExUbGpZVEV0/WldWbFlUQTJZamd6/TldNNFhrRXlYa0Zx/Y0djQC5qcGc",
   genre: "",
   year: 2023,
@@ -605,7 +605,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Pradeep Kumar, Dhee, Ananthu",
   album: "Kaala ",        // optional
   duration: "4:49",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/_4tRtDblqZcnvRoGLaebHA/1785311908/d128_cdn/18588/MjQwMTo0OTAwOjkyNTQ6MzY3Yzo5MGM0OmUwZjE6YzQwODplNzA0",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/62v2BGQS_-yA4KhY90Zo8a40gfAomVTXX0HewyhS9i8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvNDI2/NTY4OS5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2018,
@@ -618,7 +618,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Sooraj Santhosh, Chinmayi Sripada, Justin Prabhakaran, Sarathi",
   album: "Sirai Tamil ",        // optional
   duration: "4:34",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/fa9UhbMS8VGH_uhZJJqnww/1785340028/d128_cdn/42771/MjQwOTo0MGY0OjM1OjIzZTg6ODAwMDo6",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/FBNbLK11ou6yEffElmmirurOPu6PDClQifNpz-_Vdps/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/c2lyYWktcmV2aWV3/LW1lZ2F0aHJlYWQt/djAtc2E1NHkzOGZu/YzlnMS5qcGVnP3dp/ZHRoPTY0MCZjcm9w/PXNtYXJ0JmF1dG89/d2VicCZzPTMzNzcy/MjUxMjM4MjQzOThl/YzMwYTk3OTM1MWU1/ZmEzZmM0MWRmNzk",
   genre: "",
   year: 2025,
@@ -631,7 +631,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " Sean Roldan, Saindhavi",
   album: "Gatta Kusthi 2",        // optional
   duration: "3:59",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/uMrUmnOy8nHywOrFQAko4g/1785326130/d128_cdn/44632/MjQwMTo0OTAwOjkyNDE6YzYwZjo5ZGM4OmEyMjY6OGYxYTo4OTBh",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/1qzfCA3cePmuz380Bh5dwchaScJlL3ddN081VCbpSzs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/Z2F0dGEta3VzdGhp/LTItZXQwMDUwMjgw/Mi0xNzg0MjgzNzA5/LmpwZw",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -643,7 +643,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Sai Abhyankkar, Gana Muthu",
   album: "Karuppu Tamil",        // optional
   duration: "4:00",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/40686/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/yTdhNN2onaiYgobc_gt3rq0TVJKrsWJ6spGPEj-uZPE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vq/UUZGWEtXOVFFSlNL/a2h5S05WM3NzaVhp/UmJsM0ZWdHd5UE5K/MlI4Q2FSemg1WmNw/NjVvUjZ0a0dTM2dp/YWpZZ2QzSDRRMk9U/dHpfejY5c1ptSmJZ/LU5SeTI2Ym9xOTdP/MXVCbGk0Uy03MjZr/UEJVVllCcTVUNV9V/SDRlRWl3Z2ZGNE9i/ZzV3Vkk0MjZWUGtR/S2E1Sm5Pdy1JUl9K/RUZDZ0dyQjF2bTZp/eENXWDk4WUxCZ2R4/TUtFcUxSN2E1L3Mx/NTAwL0thcnVwcHUw/MDUuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -656,7 +656,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Christopher Stanley, Sudharshan Ashok, Srinisha Jayaseelan, Hiphop Tamizhaj",
   album: "Imaikkaa Nodigal Tamil",        // optional
   duration: "4:33",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/KHn18eOXuCMYGUobnT4UmA/1785338041/d128_cdn/16760/MjQwMTo0OTAwOjkyNmI6YTk5MjpiZGM0OmZlN2U6YmRhNjpmZGYw",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/rpQUKP8QCO4xaulWOLDW6ZlxZO6C7Tyed0tEvam-PnU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZmlsbWliZWF0/LmNvbS9pbWcvcG9w/Y29ybi9mYW5faW1h/Z2VzL21vdmllLzE1/NDUxL2ltYWlra2Fh/LW5vZGlnYWwtcGhv/dG9zLWltYWdlcy02/MTk4NS5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2018,
@@ -668,7 +668,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Sai Abhyankkar, V.M. Mahalingam, Paal Dabba",
   album: "Karuppu Tamil",        // optional
   duration: "3:15",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44419/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -680,7 +680,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Sai Abhyankkar, Silambarasan Tr",
   album: "Karuppu Tamil",        // optional
   duration: "3:17",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44263/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC94bGFyZ2Uv/a2FydXBwdS1ldDAw/NDUwNTczLTE3NTMy/NTM1MTAuanBn",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -692,7 +692,7 @@ export const rawSongsCatalog: Song[] = [
   artist: " Sai Abhyankkar, V.M. Mahalingam",
   album: "Karuppu Tamil",        // optional
   duration: "4:10",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/dGbk2kd5fKl2SPGO51OVqQ/1785326533/d128_cdn/44500/MjQwMTo0OTAwOjI2MWE6YzVhMDo1OWRlOjkyYTA6NTNjOjNlOWI=",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/aP5Fz6hdHJeZxUZIuGN--bjvl8iy9vS_UvZfppjizAs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtaW4uYm1zY2Ru/LmNvbS9pZWRiL21v/dmllcy9pbWFnZXMv/bW9iaWxlL3RodW1i/bmFpbC9",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2026,
@@ -706,7 +706,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Harish Raghavendra, Timmy",
     album: "Minnale 2001 tamil",
     duration: "05:56",
-    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8515/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
     coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Romance",
     year: 2001,
@@ -718,7 +718,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Harish Raghavendra",
     album: "Minnale 2001 tamil",
     duration: "01:01",
-    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d320_cdn/8518/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
     coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Romance",
     year: 2001,
@@ -730,7 +730,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Bombay Jayashri",
     album: "Minnale 2001 tamil",
     duration: "04:59",
-    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8517/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
     coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Melody",
     year: 2001,
@@ -742,7 +742,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Tippu, Roop Kumar Rathod",
     album: "Minnale 2001 tamil",
     duration: "05:27",
-    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8516/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
     coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Melody",
     year: 2001,
@@ -754,7 +754,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "P. Unnikrishnan, Harini",
     album: "Minnale 2001 tamil",
     duration: "05:25",
-    audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8521/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
     coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Melody",
     year: 2001,
@@ -768,7 +768,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Kalyani Menon, Harini & Neyveli Ramalakshmi Krishna",
     album: "Alaipayuthey tamil",
     duration: "03:41",
-    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8742/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
     coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
     genre: "Classical Fusion",
     year: 2000,
@@ -780,7 +780,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Swarnalatha",
     album: "Alaipayuthey tamil",
     duration: "05:56",
-    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8746/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
     coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
     genre: "Soulful",
     year: 2000,
@@ -792,7 +792,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "S.P.B. Charan & Naveen",
     album: "Alaipayuthey tamil",
     duration: "04:35",
-    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8741/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
     coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
     genre: "Peppy",
     year: 2000,
@@ -804,7 +804,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Hariharan & Clinton",
     album: "Alaipayuthey tamil",
     duration: "05:58",
-    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8748/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
     coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
     genre: "Melody",
     year: 2000,
@@ -816,7 +816,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Sadhana Sargam & Srinivas",
     album: "Alaipayuthey tamil",
     duration: "04:52",
-    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8745/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
     coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
     genre: "Romance",
     year: 2000,
@@ -828,7 +828,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Mahalaxmi Iyer, Vaishali & Richa Sharma",
     album: "Alaipayuthey tamil",
     duration: "05:44",
-    audioUrl: "https://www.masstamilan.dev/downloader/Jp3EmveEHTgYmZeoKm5NjQ/1785500798/d128_cdn/8740/MjQwMTo0OTAwOjg5MDA6OTg1ZTo2NGI5OjZjNDk6YmFjOTpmYWFj",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     coverUrl: "https://imgs.search.brave.com/sKGgYrA3gqVndZnnxQCNOUhJvI8yTXWKjy33cYzVESo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLnNh/cmVnYW1hLnRlY2gv/aW1hZ2UvYy9md180/ODUvNy9jMS83ZC9h/bGFpcGF5dXRoZXlf/dGFtaWxfMTY4NjEz/ODQyOS5qcGc",
     genre: "Folk / Festive",
     year: 2000,
@@ -842,7 +842,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Krish, Benny Dayal & Shruti Haasan",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "05:17",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17042/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Rock / Melody",
     year: 2008,
@@ -854,7 +854,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Bombay Jayashri, Harris Jayaraj",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "05:22",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17046/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Melody",
     year: 2008,
@@ -866,7 +866,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Karthik & V.V.Prasanna",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "05:20",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17043/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Folk Rock",
     year: 2008,
@@ -878,7 +878,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Naresh Iyer & Prashanthini",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "05:43",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17045/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Romance",
     year: 2008,
@@ -890,7 +890,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Hariharan, Devan Ekambaram & V.V.Prasanna",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "06:11",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17044/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Acoustic Melody",
     year: 2008,
@@ -902,7 +902,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Clinton & S. P. B. Charan",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "03:05",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17047/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Pop",
     year: 2008,
@@ -914,7 +914,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Benny Dayal, Naresh Iyer & Solar Sai",
     album: "Vaaranam Aayiram 2008 tamil",
     duration: "04:55",
-    audioUrl: "https://www.masstamilan.dev/downloader/uVoQUFlWn2LjoQLBNsm3eg/1785501893/d128_cdn/17040/MjQwMTo0OTAwOmNhZGE6NTZlNDo0YzAxOmNmZmY6ZmVlZDo4YTRi",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
     coverUrl: "https://imgs.search.brave.com/brPJrJpvX9pMMWb-1bEqY56iMIseTm1CQZppnzQ7pp4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS82/MzUvVmFhcmFuYW0t/QWF5aXJhbS1UYW1p/bC0yMDA4LTIwMTkw/NjI5MTQxMTI4LTUw/MHg1MDAuanBn",
     genre: "Youth Anthems",
     year: 2008,
@@ -928,7 +928,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Devan Ekambaram, Chinmayi",
     album: "Vinnaithandi Varuvaya 2009 tamil",
     duration: "05:32",
-    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/534/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
     coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
     genre: "Wedding Melody",
     year: 2009,
@@ -940,7 +940,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Vijay Prakash, Suzanne D'Mello, Blaaze",
     album: "Vinnaithandi Varuvaya 2009 tamil",
     duration: "05:31",
-    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/535/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
     coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
     genre: "Romantic Pop",
     year: 2009,
@@ -952,7 +952,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "A.R. Rahman, Shreya Ghoshal",
     album: "Vinnaithandi Varuvaya 2009 tamil",
     duration: "06:58",
-    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/537/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
     coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
     genre: "Classic Melody",
     year: 2009,
@@ -964,7 +964,7 @@ export const rawSongsCatalog: Song[] = [
     artist: "Benny Dayal, Kalyani Menon",
     album: "Vinnaithandi Varuvaya 2009 tamil",
     duration: "05:32",
-    audioUrl: "https://www.masstamilan.dev/downloader/5JZIpGynvQ8bqcI7gToROg/1785502868/d128_cdn/536/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
     coverUrl: "https://imgs.search.brave.com/achiprrH0qgmI9gkjfceSWasexujrPpQne4C3P6pEA4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8y/NTMvVmlubmF0aGFh/bmRpLVZhcnV2YWF5/YWEtVGFtaWwtMjAx/MC0yMDE5MDczMTEz/NDEyMy01MDB4NTAw/LmpwZw",
     genre: "Carnatic Fusion",
     year: 2009,
@@ -977,7 +977,7 @@ export const rawSongsCatalog: Song[] = [
   artist: "Unni Menon",
   album: "Rhythm Tamil ",        // optional
   duration: "6:51",           // optional
-  audioUrl: "https://www.masstamilan.dev/downloader/C5rhSIZh7wbLee-ntq5zJQ/1785336033/d128_cdn/8875/MjQwOTo0MGYyOjEwNDk6NGJjNDo3OGM4OmRlZmY6ZmUxMDozOTky",   // 🔗 SONG LINK
+  audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",   // 🔗 SONG LINK
   coverUrl: "https://imgs.search.brave.com/JCKduBd5V7fK60jLjMhaC_fZGdtzdrQtx1P9seai5HU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jLnNh/YXZuY2RuLmNvbS8w/MjIvUmh5dGhtLVRh/bWlsLTIwMDAtNTAw/eDUwMC5qcGc",  // 🖼️ THUMBNAIL LINK
   genre: "",
   year: 2000,

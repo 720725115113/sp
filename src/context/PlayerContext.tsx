@@ -428,13 +428,18 @@ export function PlayerProvider({
       });
 
       a.addEventListener("error", () => {
-        if (a === audioRef.current && a.src) {
-          setTimeout(() => {
+        if (a === audioRef.current && stateRef.current.currentSong) {
+          const s = stateRef.current.currentSong;
+          let hash = 0;
+          for (let i = 0; i < s.id.length; i++) hash = (hash * 31 + s.id.charCodeAt(i)) >>> 0;
+          const fallbackNum = (hash % 16) + 1;
+          const fallbackUrl = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${fallbackNum}.mp3`;
+
+          if (a.src !== fallbackUrl) {
+            a.src = fallbackUrl;
             a.load();
-            if (stateRef.current.currentSong) {
-              a.play().catch(() => {});
-            }
-          }, 300);
+            a.play().then(() => setIsPlaying(true)).catch(() => {});
+          }
         }
       });
 
