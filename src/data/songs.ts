@@ -707,7 +707,7 @@ export const rawSongsCatalog: Song[] = [
     album: "Minnale 2001 tamil",
     duration: "05:56",
     audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8515/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Romance",
     year: 2001,
     color: "#21e83b"
@@ -719,7 +719,7 @@ export const rawSongsCatalog: Song[] = [
     album: "Minnale 2001 tamil",
     duration: "01:01",
     audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d320_cdn/8518/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Romance",
     year: 2001,
     color: "#21e83b"
@@ -731,7 +731,7 @@ export const rawSongsCatalog: Song[] = [
     album: "Minnale 2001 tamil",
     duration: "04:59",
     audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8517/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Melody",
     year: 2001,
     color: "#21e83b"
@@ -743,7 +743,7 @@ export const rawSongsCatalog: Song[] = [
     album: "Minnale 2001 tamil",
     duration: "05:27",
     audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8516/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Melody",
     year: 2001,
     color: "#21e83b"
@@ -755,7 +755,7 @@ export const rawSongsCatalog: Song[] = [
     album: "Minnale 2001 tamil",
     duration: "05:25",
     audioUrl: "https://www.masstamilan.dev/downloader/TunPRBbJ9HG5MpmJYh8eyg/1785499679/d128_cdn/8521/MjQwMTo0OTAwOmNhNzI6YTRiNjo5MDFiOjFjZjpjMzU0OjNjMTc=",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     genre: "Melody",
     year: 2001,
     color: "#21e83b"
@@ -1018,7 +1018,7 @@ export const playlists: Playlist[] = [
     id: "shuffled-classics",
     name: "Shuffled Super Hits Mix",
     description: "A randomized shuffle mix of top romantic hits and classic album tracks.",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     songIds: ["s57", "s74", "s64", "s58", "s70", "s63", "s75", "s55", "s61", "s69", "s76", "s62", "s66", "s59", "s68", "s60", "s71", "s72", "s73", "s67", "s56"],
     color: "#21e83b"
   },
@@ -1026,7 +1026,7 @@ export const playlists: Playlist[] = [
     id: "p-minnale",
     name: "Minnale 2001 Tamil Songs",
     description: "Azhagiya Theeye, Vaseegara, Venmathiye, Verenna Verenna, Nenjai Poopol",
-    coverUrl: "https://imgs.search.brave.com/9UgxjtjEf5nkRsrIXX3LNW94h7h17sbkbKH7KaSX8bQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/ZGlzdHJpY3QuaW4v/bW92aWVzLWFzc2V0cy9pbWFnZXMvY2lu/ZW1hL01pbm5hbGUt/NjA4eDgwMC0zZGEy/MDUzMC04Yzc2LTEx/ZWItOWI1MC05OWU5/ZjExOTg5ZjYuanBn",
+    coverUrl: "https://imgs.search.brave.com/QZGWRzXvLvQo7rpa6S4qY0loYd8NEOXIEGbH9G4OQYw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGlnaXQuaW4v/T1RUL3YyL2ltYWdl/cy90cjpuLW90dF9o/b21lX2Nyb3VzZWwv/bWlubmFsZS04NDky/NzMuanBn",
     songIds: ["s55", "s56", "s57", "s58", "s59"],
     color: "#21e83b"
   },
