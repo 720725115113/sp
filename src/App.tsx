@@ -43,6 +43,34 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
+  // Lock mobile screen orientation to portrait mode
+  useEffect(() => {
+    const lockScreenOrientation = async () => {
+      try {
+        if (window.screen && window.screen.orientation && typeof (window.screen.orientation as any).lock === "function") {
+          await (window.screen.orientation as any).lock("portrait-primary").catch(() => {
+            (window.screen.orientation as any).lock("portrait").catch(() => {});
+          });
+        }
+      } catch {
+        // Browser restrictions without explicit user gesture
+      }
+    };
+
+    lockScreenOrientation();
+
+    const onTouchOrInteraction = () => lockScreenOrientation();
+    window.addEventListener("touchstart", onTouchOrInteraction, { passive: true });
+    window.addEventListener("click", onTouchOrInteraction, { passive: true });
+    window.addEventListener("orientationchange", lockScreenOrientation);
+
+    return () => {
+      window.removeEventListener("touchstart", onTouchOrInteraction);
+      window.removeEventListener("click", onTouchOrInteraction);
+      window.removeEventListener("orientationchange", lockScreenOrientation);
+    };
+  }, []);
+
   const navigate = (name: string, id?: string) => {
     let next: View;
     if (name === "playlist" && id) next = { name: "playlist", id };
@@ -101,6 +129,27 @@ function AppContent({
   const [newPlDesc, setNewPlDesc] = useState("");
   const [isPrivate, setIsPrivate] = useState(false);
   const [isCollab, setIsCollab] = useState(false);
+  const [showLandscapeWarning, setShowLandscapeWarning] = useState(false);
+
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isMobileSize = window.innerWidth <= 960 || window.innerHeight <= 540;
+      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+      if (isMobileSize && isLandscape) {
+        setShowLandscapeWarning(true);
+      } else {
+        setShowLandscapeWarning(false);
+      }
+    };
+
+    checkOrientation();
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("orientationchange", checkOrientation);
+    return () => {
+      window.removeEventListener("resize", checkOrientation);
+      window.removeEventListener("orientationchange", checkOrientation);
+    };
+  }, []);
 
   const handleCreatePlaylistSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -268,6 +317,29 @@ function AppContent({
               </button>
             </div>
           </form>
+        </div>
+      )}
+
+      {/* Mobile Landscape Orientation Locked Overlay */}
+      {showLandscapeWarning && (
+        <div className="fixed inset-0 z-[100] bg-[#09090B]/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+          <div className="w-16 h-16 rounded-2xl bg-[#18E29A]/15 border border-[#18E29A]/40 flex items-center justify-center mb-5 shadow-[0_0_35px_rgba(24,226,154,0.35)] animate-pulse">
+            <svg className="w-8 h-8 text-[#18E29A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-black font-heading text-white tracking-tight mb-2">
+            Portrait Orientation Locked
+          </h2>
+          <p className="text-xs text-white/70 max-w-xs leading-relaxed mb-6">
+            Auto-rotate is disabled on mobile devices to provide a stable, consistent view. Please rotate your phone upright to portrait mode.
+          </p>
+          <button
+            onClick={() => setShowLandscapeWarning(false)}
+            className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold text-white transition-all active:scale-95 shadow-lg"
+          >
+            Dismiss & Continue
+          </button>
         </div>
       )}
     </div>
