@@ -503,6 +503,67 @@ export function PlayerProvider({
     if (secondaryAudioRef.current) secondaryAudioRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
+  // Preload next 2 upcoming tracks & warm up initial 2-second audio chunks
+  const preloadAudio1Ref = useRef<HTMLAudioElement | null>(null);
+  const preloadAudio2Ref = useRef<HTMLAudioElement | null>(null);
+
+  const warmAudioCache = (url: string) => {
+    if (typeof fetch === "undefined" || !url) return;
+    try {
+      fetch(url, { headers: { Range: "bytes=0-65536" } }).catch(() => {});
+    } catch {}
+  };
+
+  const preloadNextTwoSongs = (q: Song[], idx: number, repeatMode: string) => {
+    if (!q.length || idx < 0) return;
+
+    const getTargetIndex = (offset: number) => {
+      let target = idx + offset;
+      if (target >= q.length) {
+        if (repeatMode === "all" || repeatMode === "off") {
+          target = target % q.length;
+        } else {
+          return null;
+        }
+      }
+      return target;
+    };
+
+    const idx1 = getTargetIndex(1);
+    const idx2 = getTargetIndex(2);
+
+    const song1 = idx1 !== null && idx1 >= 0 && idx1 < q.length ? q[idx1] : null;
+    const song2 = idx2 !== null && idx2 >= 0 && idx2 < q.length ? q[idx2] : null;
+
+    if (song1) {
+      warmAudioCache(song1.audioUrl);
+      if (!preloadAudio1Ref.current) {
+        const a = new Audio();
+        a.preload = "auto";
+        (a as any).playsInline = true;
+        preloadAudio1Ref.current = a;
+      }
+      if (preloadAudio1Ref.current.src !== song1.audioUrl) {
+        preloadAudio1Ref.current.src = song1.audioUrl;
+        preloadAudio1Ref.current.load();
+      }
+    }
+
+    if (song2) {
+      warmAudioCache(song2.audioUrl);
+      if (!preloadAudio2Ref.current) {
+        const a = new Audio();
+        a.preload = "auto";
+        (a as any).playsInline = true;
+        preloadAudio2Ref.current = a;
+      }
+      if (preloadAudio2Ref.current.src !== song2.audioUrl) {
+        preloadAudio2Ref.current.src = song2.audioUrl;
+        preloadAudio2Ref.current.load();
+      }
+    }
+  };
+
   // Playback execution when track changes
   useEffect(() => {
     const a = audioRef.current;
@@ -511,6 +572,7 @@ export function PlayerProvider({
     // Check if crossfade is currently running for this track
     if (crossfadeRef.current?.isCrossfading) {
       // Live UI update triggered during crossfade: let crossfade engine continue
+      preloadNextTwoSongs(queue, currentIndex, repeat);
       return;
     }
 
@@ -530,17 +592,9 @@ export function PlayerProvider({
     keepAudioActive();
     a.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
 
-    // Preload upcoming track
-    const nextSong = queue[currentIndex + 1];
-    if (nextSong) {
-      if (!preloadAudioRef.current) {
-        preloadAudioRef.current = new Audio();
-        preloadAudioRef.current.preload = "auto";
-      }
-      preloadAudioRef.current.src = nextSong.audioUrl;
-      preloadAudioRef.current.load();
-    }
-  }, [currentSong?.id, currentIndex]);
+    // Preload next 2 upcoming tracks in queue
+    preloadNextTwoSongs(queue, currentIndex, repeat);
+  }, [currentSong?.id, currentIndex, queue, repeat]);
 
   // UPDATE RECENTLY PLAYED — STORE 3 PREVIOUS SONGS ONLY IN MEMORY
   useEffect(() => {
